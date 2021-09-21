@@ -20,10 +20,11 @@ namespace ft
 			typedef size_t size_type;
 			typedef T value_type;
 			typedef Allocator allocator_type;
-			typedef reference T &;
-			typedef const_reference T const &;
-			typedef pointer Allocator::pointer;
-			typedef const_pointer Allocator::const_pointer;
+			typedef T & reference;
+			typedef T const & const_reference;
+			typedef typename Allocator::pointer pointer;
+			typedef typename Allocator::const_pointer const_pointer;
+			typedef std::ptrdiff_t difference_type;
 			
 		private:
 			Allocator _allocator;
@@ -53,10 +54,14 @@ namespace ft
 			{
 			}
 
-			vector(size_type n): _allocator(Allocator()), _capacity(n * 2), _data(_allocator.allocate(_capacity)), _length(n)
+			explicit vector(
+				size_type count,
+				T const & value = T(),
+				Allocator const & alloc = Allocator()
+			): _allocator(alloc), _capacity(count * 2), _data(_allocator.allocate(_capacity)), _length(count)
 			{
 				for (size_type i = 0; i != _length; ++i) {
-					_data[i] = T();
+					_data[i] = value;
 				}
 			}
 
@@ -95,7 +100,7 @@ namespace ft
 
 			// operators
 			
-			T & operator[](size_type index)
+			reference operator[](size_type index)
 			{
 				return _data[index];
 			}
