@@ -1,10 +1,12 @@
 #include <iostream>
+#include <string>
 #include <memory>
 #include "vector.hpp"
 #include "map.hpp"
 #include "stack.hpp"
 
 using std::cout;
+using std::string;
 using ft::vector;
 
 int main(void)
@@ -33,6 +35,16 @@ int main(void)
 		for (vector<int>::size_type i = 0; i != v4.size(); ++i) {
 			cout << v4[i] << "\n";
 		}
+	}
+
+	{
+		vector<string> vs(1, "hello");
+
+		for (unsigned i = 0; i != 100; ++i) {
+			vs.push_back("42");
+		}
+
+		cout << "vs size: " << vs.size() << "\n";
 	}
 
 	return 0;

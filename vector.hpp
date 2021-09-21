@@ -39,7 +39,7 @@ namespace ft
 				T * newData = _allocator.allocate(newCapacity);
 				
 				for (size_type i = 0; i != newCapacity; ++i) {
-					newData[i] = i < _length ? _data[i] : T();
+					_allocator.construct(newData + i, i < _length ? _data[i] : T());
 				}
 
 				_allocator.deallocate(_data, _capacity);
@@ -61,7 +61,7 @@ namespace ft
 			): _allocator(alloc), _capacity(count * 2), _data(_allocator.allocate(_capacity)), _length(count)
 			{
 				for (size_type i = 0; i != _length; ++i) {
-					_data[i] = value;
+					_allocator.construct(_data + i, value);
 				}
 			}
 
@@ -95,7 +95,7 @@ namespace ft
 					_grow();
 				}
 
-				_data[_length++] = value;
+				_allocator.construct(_data + _length++, value);
 			}
 
 			// operators
