@@ -64,7 +64,7 @@ namespace ft
 				}
 			}
 
-			vector(vector & rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
+			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
 				for (size_type i = 0; i != size(); ++i) {
 					_allocator.construct(_data + i, rhs._data[i]);
@@ -121,7 +121,7 @@ namespace ft
 				return _capacity;
 			}
 
-			void push_back(T const & value)
+			void push_back(value_type const & value)
 			{
 				if (_length == _capacity) {
 					_grow(capacity() * vectorGrowthFactor);
