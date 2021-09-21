@@ -9,7 +9,7 @@ TARGET		:= demo
 
 OBJS		:= $(SRCS:%.cpp=%.o)
 
-$(TARGET): $(HEADERS) $(OBJS)
+$(TARGET): $(OBJS)
 	$(LD) -o $(TARGET) $(OBJS)
 
 clean:
@@ -20,5 +20,5 @@ fclean: clean
 
 re: fclean
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	$(CC) $(CPP_FLAGS) -c $< -o $@
