@@ -1,6 +1,7 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 # include <memory>
+# include <iostream>
 
 namespace ft
 {
@@ -20,8 +21,8 @@ namespace ft
 			typedef size_t size_type;
 			typedef T value_type;
 			typedef Allocator allocator_type;
-			typedef T & reference;
-			typedef T const & const_reference;
+			typedef vector<T> & reference;
+			typedef vector<T> const & const_reference;
 			typedef typename Allocator::pointer pointer;
 			typedef typename Allocator::const_pointer const_pointer;
 			typedef std::ptrdiff_t difference_type;
@@ -32,10 +33,8 @@ namespace ft
 			T * _data;
 			size_type _length;
 
-			void _grow(void)
+			void _grow(size_type newCapacity)
 			{
-				size_type newCapacity = _capacity * vectorGrowthFactor;
-
 				T * newData = _allocator.allocate(newCapacity);
 				
 				for (size_type i = 0; i != newCapacity; ++i) {
@@ -65,6 +64,39 @@ namespace ft
 				}
 			}
 
+			vector(vector & rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
+			{
+				for (size_type i = 0; i != size(); ++i) {
+					_allocator.construct(_data + i, rhs._data[i]);
+				}
+			}
+
+			reference operator=(const_reference rhs)
+			{
+				if (this != &rhs) {
+					for (size_type i = 0; i != capacity() && i != rhs.size(); ++i) {
+						if (i >= size()) {
+							_allocator.construct(_data + i, rhs._data[i]);
+						} else {
+							_data[i] = rhs._data[i];
+						}
+					}
+
+					if (size() < rhs.size()) {
+						if (capacity() < rhs.size()) {
+							_grow(rhs.size() * 2);
+						}
+						for (size_type i = size(); i != rhs.size(); ++i) {
+							_allocator.construct(_data + i, rhs._data[i]);
+						}
+					}
+
+					_length = rhs._length;
+				}
+
+				return *this;
+			}
+
 			// DTOR
 
 			~vector(void)
@@ -92,7 +124,7 @@ namespace ft
 			void push_back(T const & value)
 			{
 				if (_length == _capacity) {
-					_grow();
+					_grow(capacity() * vectorGrowthFactor);
 				}
 
 				_allocator.construct(_data + _length++, value);
@@ -100,7 +132,7 @@ namespace ft
 
 			// operators
 			
-			reference operator[](size_type index)
+			value_type & operator[](size_type index)
 			{
 				return _data[index];
 			}
