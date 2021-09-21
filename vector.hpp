@@ -20,6 +20,10 @@ namespace ft
 			typedef size_t size_type;
 			typedef T value_type;
 			typedef Allocator allocator_type;
+			typedef reference T &;
+			typedef const_reference T const &;
+			typedef pointer Allocator::pointer;
+			typedef const_pointer Allocator::const_pointer;
 			
 		private:
 			Allocator _allocator;
