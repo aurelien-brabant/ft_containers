@@ -9,7 +9,7 @@ using ft::vector;
 int main(void)
 {
 	{
-		vector<int> eiv;
+		vector<int> eiv, eiv2(10);
 
 		cout << "empty vector's length: " << eiv.size() << "\n";
 		cout << "empty vector's cap: " << eiv.capacity() << "\n";
@@ -19,6 +19,10 @@ int main(void)
 
 		for (vector<int>::size_type i = 0; i != eiv.size(); ++i) {
 			cout << eiv[i] << "\n";
+		}
+
+		for (vector<int>::size_type i = 0; i != eiv2.size(); ++i) {
+			cout << eiv2[i] << "\n";
 		}
 	}
 
