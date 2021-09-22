@@ -14,7 +14,7 @@ namespace ft
 		typedef typename Iter::iterator_category	iterator_category;
 	};
 
-	template <typename Category, typename T>
+	template <typename T, typename Category, bool IsConst = false>
 	class iterator
 	{
 		T * _p;
@@ -30,11 +30,8 @@ namespace ft
 			{
 			}
 
-			// COPY MANAGEMENT
-
-			iterator(iterator const & rhs)
+			iterator(iterator<T, Category, false> & rhs): _p(rhs._p)
 			{
-				*this = rhs;
 			}
 
 			iterator & operator=(iterator const & rhs)
@@ -42,16 +39,18 @@ namespace ft
 				if (this != &rhs) {
 					_p = rhs._p;
 				}
+
+				return *this;
 			}
 
-			reference operator++()
+			iterator & operator++()
 			{
-				++_p;
+				_p++;
 				
 				return *this;
 			}
 
-			value_type operator+=(int)
+			value_type operator++(int)
 			{
 				iterator it(*this);
 
@@ -60,14 +59,14 @@ namespace ft
 				return it;
 			}
 
-			reference operator--()
+			iterator & operator--(void)
 			{
 				--_p;
 
 				return *this;
 			}
 
-			reference operator--(int)
+			iterator & operator--(int)
 			{
 				iterator it(*this);
 
@@ -78,12 +77,17 @@ namespace ft
 
 			// ACCESS
 
-			reference operator*(pointer p)
+			reference operator*(void)
 			{
-				return *p;
+				return *_p;
 			}
 
-			iterator & operator+=(difference_type n)
+			const T & operator*(void) const
+			{
+				return  *_p;
+			}
+
+			iterator & operator+=(difference_type const n) 
 			{
 				if (n < 0) {
 					_p -= n;
@@ -94,7 +98,7 @@ namespace ft
 				return *this;
 			}
 
-			iterator operator+(difference_type n)
+			iterator operator+(difference_type const n)
 			{
 				iterator tmp(*this);
 
@@ -103,7 +107,7 @@ namespace ft
 				return tmp;
 			}
 
-			iterator & operator-=(difference_type n)
+			iterator & operator-=(difference_type const n)
 			{
 				if (n < 0) {
 					_p += n;
@@ -114,7 +118,7 @@ namespace ft
 				return *this;
 			}
 
-			iterator operator-(difference_type n)
+			iterator operator-(difference_type const n)
 			{
 				iterator tmp(*this);
 
@@ -125,32 +129,32 @@ namespace ft
 
 			// COMPARISON OPERATORS
 
-			bool operator==(iterator & rhs)
+			bool operator==(iterator rhs) const
 			{
 				return _p == rhs._p;
 			}
 
-			bool operator<=(iterator & rhs)
+			bool operator<=(iterator rhs) const
 			{
 				return _p <= rhs._p;
 			}
 
-			bool operator>=(iterator & rhs)
+			bool operator>=(iterator rhs) const
 			{
 				return _p >= rhs._p;
 			}
 
-			bool operator!=(iterator & rhs)
+			bool operator!=(iterator rhs) const
 			{
 				return _p != rhs._p;
 			}
 
-			bool operator<(iterator & rhs)
+			bool operator<(iterator rhs) const
 			{
 				return _p < rhs._p;
 			}
 
-			bool operator>(iterator & rhs)
+			bool operator>(iterator rhs) const
 			{
 				return _p > rhs._p;
 			}

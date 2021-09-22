@@ -3,6 +3,7 @@
 # include <memory>
 # include <iostream>
 # include <stdexcept>
+# include "iterator.hpp"
 
 namespace ft
 {
@@ -27,6 +28,8 @@ namespace ft
 			typedef typename Allocator::pointer pointer;
 			typedef typename Allocator::const_pointer const_pointer;
 			typedef std::ptrdiff_t difference_type;
+			typedef ft::iterator<T, std::random_access_iterator_tag> iterator;
+			typedef ft::iterator<T const, std::random_access_iterator_tag, true> const_iterator;
 			
 		private:
 			Allocator _allocator;
@@ -34,9 +37,7 @@ namespace ft
 			T * _data;
 			size_type _length;
 
-
 		public:
-
 			// CTORS
 			vector(void): _allocator(Allocator()), _capacity(vectorBaseCapacity), _data(_allocator.allocate(_capacity)), _length(0)
 			{
@@ -160,6 +161,36 @@ namespace ft
 				}
 
 				return operator[](index);
+			}
+
+			// ITERATORS
+			
+			iterator begin(void)
+			{
+				iterator tmp(_data);
+
+				return tmp;
+			}
+
+			const_iterator begin(void) const
+			{
+				const_iterator tmp(_data);
+
+				return tmp;
+			}
+
+			iterator end(void)
+			{
+				iterator tmp(_data + size());
+
+				return tmp;
+			}
+
+			const_iterator end(void) const
+			{
+				const_iterator tmp(_data + size());
+
+				return tmp;
 			}
 	};
 }

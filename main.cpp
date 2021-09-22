@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <vector>
 #include "vector.hpp"
 #include "map.hpp"
 #include "stack.hpp"
@@ -59,9 +60,14 @@ int main(void)
 
 		vector<unsigned> v3(v1);
 
-		for (vector<unsigned>::size_type i = 0; i != v3.size(); ++i) {
-			cout << v3[i] << "\n";
-		}
+		vector<unsigned>::const_iterator cit(v3.begin());
+
+		(void)cit;
+
+
+	//		for (vector<unsigned>::const_iterator it = v3.begin(); it != v3.end(); ++it) {
+	//		cout << *it << "\n";
+	//	}
 	}
 
 	return 0;
