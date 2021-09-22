@@ -30,6 +30,8 @@ namespace ft
 			{
 			}
 
+			// COPY MANAGEMENT
+
 			iterator(iterator const & rhs)
 			{
 				*this = rhs;
@@ -40,6 +42,117 @@ namespace ft
 				if (this != &rhs) {
 					_p = rhs._p;
 				}
+			}
+
+			reference operator++()
+			{
+				++_p;
+				
+				return *this;
+			}
+
+			value_type operator+=(int)
+			{
+				iterator it(*this);
+
+				operator++();
+
+				return it;
+			}
+
+			reference operator--()
+			{
+				--_p;
+
+				return *this;
+			}
+
+			reference operator--(int)
+			{
+				iterator it(*this);
+
+				operator--();
+
+				return *this;
+			}
+
+			// ACCESS
+
+			reference operator*(pointer p)
+			{
+				return *p;
+			}
+
+			iterator & operator+=(difference_type n)
+			{
+				if (n < 0) {
+					_p -= n;
+				} else {
+					_p += n;
+				}
+
+				return *this;
+			}
+
+			iterator operator+(difference_type n)
+			{
+				iterator tmp(*this);
+
+				operator+=(n);
+
+				return tmp;
+			}
+
+			iterator & operator-=(difference_type n)
+			{
+				if (n < 0) {
+					_p += n;
+				} else {
+					_p -= n;
+				}
+
+				return *this;
+			}
+
+			iterator operator-(difference_type n)
+			{
+				iterator tmp(*this);
+
+				operator-=(n);
+
+				return tmp;
+			}
+
+			// COMPARISON OPERATORS
+
+			bool operator==(iterator & rhs)
+			{
+				return _p == rhs._p;
+			}
+
+			bool operator<=(iterator & rhs)
+			{
+				return _p <= rhs._p;
+			}
+
+			bool operator>=(iterator & rhs)
+			{
+				return _p >= rhs._p;
+			}
+
+			bool operator!=(iterator & rhs)
+			{
+				return _p != rhs._p;
+			}
+
+			bool operator<(iterator & rhs)
+			{
+				return _p < rhs._p;
+			}
+
+			bool operator>(iterator & rhs)
+			{
+				return _p > rhs._p;
 			}
 	};
 }
