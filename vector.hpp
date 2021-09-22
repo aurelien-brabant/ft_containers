@@ -2,6 +2,7 @@
 # define VECTOR_HPP
 # include <memory>
 # include <iostream>
+# include <stdexcept>
 
 namespace ft
 {
@@ -33,18 +34,6 @@ namespace ft
 			T * _data;
 			size_type _length;
 
-			void _grow(size_type newCapacity)
-			{
-				T * newData = _allocator.allocate(newCapacity);
-				
-				for (size_type i = 0; i != newCapacity; ++i) {
-					_allocator.construct(newData + i, i < _length ? _data[i] : T());
-				}
-
-				_allocator.deallocate(_data, _capacity);
-				_data = newData;
-				_capacity = newCapacity;
-			}
 
 		public:
 
@@ -84,7 +73,7 @@ namespace ft
 
 					if (size() < rhs.size()) {
 						if (capacity() < rhs.size()) {
-							_grow(rhs.size() * 2);
+							reserve(rhs.size() * 2);
 						}
 						for (size_type i = size(); i != rhs.size(); ++i) {
 							_allocator.construct(_data + i, rhs._data[i]);
@@ -121,10 +110,37 @@ namespace ft
 				return _capacity;
 			}
 
+			size_type max_size(void) const
+			{
+				return _allocator.max_size();
+			}
+
+			bool empty(void) const
+			{
+				return size() == 0;
+			}
+
+			void reserve(size_type newCapacity)
+			{
+				if (capacity() >= newCapacity) {
+					throw std::length_error("newCapacity is greater than max_size");
+				}
+
+				T * newData = _allocator.allocate(newCapacity);
+				
+				for (size_type i = 0; i != newCapacity; ++i) {
+					_allocator.construct(newData + i, i < _length ? _data[i] : T());
+				}
+
+				_allocator.deallocate(_data, _capacity);
+				_data = newData;
+				_capacity = newCapacity;
+			}	
+
 			void push_back(value_type const & value)
 			{
 				if (_length == _capacity) {
-					_grow(capacity() * vectorGrowthFactor);
+					reserve(capacity() * vectorGrowthFactor);
 				}
 
 				_allocator.construct(_data + _length++, value);
