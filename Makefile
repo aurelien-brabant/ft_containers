@@ -3,7 +3,7 @@ CPP_FLAGS	:= -g -Wall -Wextra -Werror
 LD			:= $(CC)
 RM			:= rm -rf
 
-HEADERS		:= vector.hpp map.hpp stack.hpp
+HEADERS		:= vector.hpp map.hpp stack.hpp iterator.hpp
 SRCS		:= main.cpp
 TARGET		:= demo
 
