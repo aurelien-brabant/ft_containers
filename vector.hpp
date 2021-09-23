@@ -174,6 +174,8 @@ namespace ft
 			}
 
 			// assign
+			// TODO: fix template overload issue. assign(size_type, T const &) tries
+			// to use the template which is definitely not to be expected.
 
 			template <typename InputIt>
 			void assign(InputIt begin, InputIt end)
@@ -222,6 +224,35 @@ namespace ft
 				const_iterator tmp(_data + size());
 
 				return tmp;
+			}
+
+			// MANIPULATORS
+			
+			void clear(void)
+			{
+				_length = 0;
+			}
+
+			/**
+			 * Insert value before pos, triggering a resize if size() + 1 >= capacity()
+			 */
+
+			iterator insert(iterator pos, T const & value)
+			{
+				size_type ipos = pos - begin();
+
+				push_back(0);
+
+				std::cout << "size: " << size() << "\n";
+				std::cout << "ipos: " << ipos << "\n";
+
+				for (size_type i = end() - begin() - 1; i != ipos; --i) {
+					_data[i] = _data[i - 1];
+				}
+				
+				_data[ipos] = value;
+
+				return pos;
 			}
 	};
 }
