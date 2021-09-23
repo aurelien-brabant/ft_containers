@@ -102,11 +102,7 @@ namespace ft
 
 			iterator operator+(difference_type const n)
 			{
-				iterator tmp(*this);
-
-				operator+=(n);
-
-				return tmp;
+				return operator+=(n);
 			}
 
 			iterator & operator-=(difference_type const n)
