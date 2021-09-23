@@ -233,6 +233,27 @@ namespace ft
 				_length = 0;
 			}
 
+			template <class InputIt>
+			iterator insert(iterator pos, InputIt begin, InputIt end)
+			{
+				size_type n = end - begin;
+				size_type ipos = pos - begin();
+
+				// not enough space, reallocate
+				if (n + size() > capacity()) {
+					reserve((n + size()) * vectorGrowthFactor);
+				}
+
+				for (size_type i = end() - begin() - 1; i != ipos; --i) {
+					_data[i + n] = _data[i];
+				}
+
+				for (size_type i = ipos; i != n; ++i, ++begin) {
+					_data[i] = *begin;
+				}
+			}
+
+
 			/**
 			 * Insert value before pos, triggering a resize if size() + 1 >= capacity()
 			 */
@@ -252,7 +273,7 @@ namespace ft
 				
 				_data[ipos] = value;
 
-				return pos;
+				return begin() + ipos;
 			}
 	};
 }
