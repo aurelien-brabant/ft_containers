@@ -58,12 +58,14 @@ int main(void)
 
 		v1 = v2;
 
-		vector<unsigned> v3(v1);
+		vector<string> vs(10, "42");
 
-		vector<unsigned>::const_iterator cit(v3.begin());
+		vector<string>::const_iterator cit(vs.begin());
 
-		(void)cit;
-
+		while (cit != vs.end()) {
+			cout << *cit << "\n";
+			++cit;
+		}
 
 	//		for (vector<unsigned>::const_iterator it = v3.begin(); it != v3.end(); ++it) {
 	//		cout << *it << "\n";

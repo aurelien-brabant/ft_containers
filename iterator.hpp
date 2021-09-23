@@ -30,10 +30,6 @@ namespace ft
 			{
 			}
 
-			iterator(iterator<T, Category, false> & rhs): _p(rhs._p)
-			{
-			}
-
 			iterator & operator=(iterator const & rhs)
 			{
 				if (this != &rhs) {
@@ -43,14 +39,20 @@ namespace ft
 				return *this;
 			}
 
-			iterator & operator++()
+			// allow conversion to const_iterator
+			operator iterator<const T, Category, true>() const
+			{
+				return iterator<const T, Category, true>(_p);
+			}
+
+			iterator operator++()
 			{
 				_p++;
 				
 				return *this;
 			}
 
-			value_type operator++(int)
+			iterator operator++(int)
 			{
 				iterator it(*this);
 
@@ -59,14 +61,14 @@ namespace ft
 				return it;
 			}
 
-			iterator & operator--(void)
+			iterator operator--(void)
 			{
 				--_p;
 
 				return *this;
 			}
 
-			iterator & operator--(int)
+			iterator operator--(int)
 			{
 				iterator it(*this);
 
