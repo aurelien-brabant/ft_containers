@@ -67,6 +67,12 @@ int main(void)
 			++cit;
 		}
 
+		vs[0] = "first wan";
+		vs[9] = "last wan";
+
+		cout << vs.front() << "\n";
+		cout << vs.back() << "\n";
+
 	//		for (vector<unsigned>::const_iterator it = v3.begin(); it != v3.end(); ++it) {
 	//		cout << *it << "\n";
 	//	}

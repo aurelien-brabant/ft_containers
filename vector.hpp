@@ -163,6 +163,16 @@ namespace ft
 				return operator[](index);
 			}
 
+			value_type & front(void)
+			{
+				return *begin();
+			}
+
+			value_type & back(void)
+			{
+				return *(end() - 1);
+			}
+
 			// ITERATORS
 			
 			iterator begin(void)
