@@ -121,6 +121,11 @@ namespace ft
 				return operator-=(n);
 			}
 
+			difference_type operator-(const iterator & rhs)
+			{
+				return _p - rhs._p;
+			}
+
 			// COMPARISON OPERATORS
 
 			bool operator==(iterator rhs) const

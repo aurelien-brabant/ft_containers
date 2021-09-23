@@ -173,6 +173,27 @@ namespace ft
 				return *(end() - 1);
 			}
 
+			// assign
+
+			template <typename InputIt>
+			void assign(InputIt begin, InputIt end)
+			{
+				_length = 0;
+				
+				while (begin != end) {
+					push_back(*begin++);
+				}
+			}
+			
+			void assign(size_type count, T const & value)
+			{
+				_length = 0;
+
+				for (size_type i = 0; i != count; ++i) {
+					push_back(value);
+				}
+			}
+
 			// ITERATORS
 			
 			iterator begin(void)
