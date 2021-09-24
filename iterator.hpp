@@ -30,6 +30,11 @@ namespace ft
 			{
 			}
 
+			iterator(const iterator & rhs)
+			{
+				*this = rhs;
+			}
+
 			iterator & operator=(iterator const & rhs)
 			{
 				if (this != &rhs) {
