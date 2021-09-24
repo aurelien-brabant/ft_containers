@@ -245,20 +245,25 @@ namespace ft
 			iterator insert(iterator pos, InputIt begin, InputIt end)
 			{
 				size_type n = end - begin;
-				size_type ipos = pos - begin();
+				size_type ipos = pos - this->begin();
 
 				// not enough space, reallocate
 				if (n + size() > capacity()) {
 					reserve((n + size()) * vectorGrowthFactor);
 				}
 
-				for (size_type i = end() - begin() - 1; i != ipos; --i) {
+				for (size_type i = size(); i != ipos;) {
+					--i;
 					_data[i + n] = _data[i];
 				}
 
-				for (size_type i = ipos; i != n; ++i, ++begin) {
+				for (size_type i = ipos; i != ipos + n; ++i, ++begin) {
 					_data[i] = *begin;
 				}
+
+				_length += n;
+
+				return this->begin() + ipos;
 			}
 
 
