@@ -1,6 +1,6 @@
 # ft_containers
 
-- [-] iterator_traits
+- [x] iterator_traits
 - [ ] reverse_iterator
 - [ ] enable_if
 - [ ] pair
