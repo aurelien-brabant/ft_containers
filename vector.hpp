@@ -54,30 +54,33 @@ namespace ft
 				}
 			}
 
+			/**
+			 * Construct a vector from another one, by coping rhs's elements into the constructed one.
+			 * All the RESERVED memory is *constructed*.
+			 */
+
 			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
-				for (size_type i = 0; i != size(); ++i) {
-					_allocator.construct(_data + i, rhs._data[i]);
+				for (size_type i = 0; i != capacity(); ++i) {
+					_allocator.construct(_data + i, i < size() ? rhs._data[i] : T());
 				}
 			}
 
 			reference operator=(const_reference rhs)
 			{
 				if (this != &rhs) {
+					/* Copy elements from rhs to *this up to its capacity */
 					for (size_type i = 0; i != capacity() && i != rhs.size(); ++i) {
-						if (i >= size()) {
-							_allocator.construct(_data + i, rhs._data[i]);
-						} else {
-							_data[i] = rhs._data[i];
-						}
+						_data[i] = rhs._data[i];
 					}
 
+					/* if *this has less elements than rhs, that means we could not copy everything, due to a lack of capacity */
 					if (size() < rhs.size()) {
 						if (capacity() < rhs.size()) {
 							reserve(rhs.size() * 2);
 						}
 						for (size_type i = size(); i != rhs.size(); ++i) {
-							_allocator.construct(_data + i, rhs._data[i]);
+							_data[i] = rhs._data[i];
 						}
 					}
 
@@ -121,6 +124,12 @@ namespace ft
 				return size() == 0;
 			}
 
+			/**
+			 * Reserve memory to reach the passed newCapacity.
+			 * Nothing is done if newCapacity <= oldCapacity.
+			 * All the memory is constructed by value.
+			 */
+
 			void reserve(size_type newCapacity)
 			{
 				if (capacity() >= newCapacity) {
@@ -148,7 +157,6 @@ namespace ft
 			}
 
 			// element access
-			
 			value_type & operator[](size_type index)
 			{
 				return _data[index];
