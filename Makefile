@@ -1,36 +1,38 @@
+CASTORNO_PATH	:= test/castorno
+CASTORNO		:= test/castorno/libcastorno.a
+
 CC			:= clang++
-CPP_FLAGS	:= -g -Wall -Wextra -Werror -Itest/cpptester -I.
+CPP_FLAGS	:= -g -Wall -Wextra -Werror -I$(CASTORNO_PATH) -I. -DTEST_VECTOR="ft::vector"
 LD			:= $(CC)
-LD_FLAGS	:= -Ltest/cpptester -lcpptester
+LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno
 RM			:= rm -rf
 
 HEADERS		:= vector.hpp map.hpp stack.hpp iterator.hpp
-SRCS		:= test/tester.cpp
-TARGET		:= demo
-
-CPPTESTER_PATH	:= test/cpptester
-CPPTESTER		:= test/cpptester/libcpptester.a
+SRCS		:= test/tests.cpp $(wildcard test/*/*test.cpp)
+TARGET		:= tester
 
 OBJS		:= $(SRCS:%.cpp=%.o)
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(LD) -o $(TARGET) $(OBJS)
+$(TARGET): $(CASTORNO) $(OBJS)
+	@$(LD) -o $(TARGET) $(OBJS) $(LD_FLAGS)
+	@printf "LD\t$(TARGET)\n"
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(TARGET)
+	@$(RM) $(TARGET)
 
 re: fclean all
 
-tester: $(CPPTESTER) $(OBJS)
-	$(LD) -o tester $(OBJS) $(LD_FLAGS)
+$(CASTORNO_PATH):
+	git clone https://github.com/aurelien-brabant/castorno $(CASTORNO_PATH)
 
-$(CPPTESTER):
-	make re -C $(CPPTESTER_PATH)
+$(CASTORNO): $(CASTORNO_PATH)
+	@make re -C $(CASTORNO_PATH)
 
 %.o: %.cpp $(HEADERS)
-	$(CC) $(CPP_FLAGS) -c $< -o $@
+	@$(CC) $(CPP_FLAGS) -c $< -o $@
+	@printf "CC\t$<\n"

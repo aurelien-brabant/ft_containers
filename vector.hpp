@@ -164,7 +164,7 @@ namespace ft
 
 			value_type & at(size_type index)
 			{
-				if (index < size()) {
+				if (index >= size()) {
 					throw std::out_of_range("vector: index out of range");
 				}
 
