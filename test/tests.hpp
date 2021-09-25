@@ -28,4 +28,10 @@ int test_vector_assignement_operator_to_empty(Tester& tester);
 
 int test_vector_empty(Tester& tester);
 
+int test_vector_front_value(Tester& tester);
+int test_vector_front_same_than_begin(Tester& tester);
+
+int test_vector_back_value(Tester& tester);
+int test_vector_back_same_than_end_minus_one(Tester& tester);
+
 # endif

@@ -39,6 +39,12 @@ int main(void)
 	tester.registerTest(vectorSuiteName, "push_back()", test_vector_push_back);
 
 	tester.registerTest(vectorSuiteName, "empty()", test_vector_empty);
+	
+	tester.registerTest(vectorSuiteName, "front()", test_vector_front_value);
+	tester.registerTest(vectorSuiteName, "&front() == &(*begin())", test_vector_front_same_than_begin);
+
+	tester.registerTest(vectorSuiteName, "back()", test_vector_back_value);
+	tester.registerTest(vectorSuiteName, "&back() == &(*(end() - 1))", test_vector_back_same_than_end_minus_one);
 
 	tester.runAllSuites();
 
