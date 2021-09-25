@@ -50,6 +50,8 @@ int main(void)
 
 	tester.registerTest(vectorSuiteName, "insert front", test_vector_insert_front);
 	tester.registerTest(vectorSuiteName, "insert back", test_vector_insert_back);
+	tester.registerTest(vectorSuiteName, "insert before each odd nb", test_vector_insert_odd);
+	tester.registerTest(vectorSuiteName, "insert range", test_vector_insert_range);
 
 	tester.runAllSuites();
 

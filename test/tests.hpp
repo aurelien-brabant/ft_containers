@@ -1,5 +1,6 @@
 #ifndef TESTS_HPP
 # define TESTS_HPP
+# include "Tester.hpp"
 
 /////////////////////////////////////////////////
 // VECTOR
@@ -42,5 +43,7 @@ int test_vector_clear(Tester& tester);
 
 int test_vector_insert_front(Tester& tester);
 int test_vector_insert_back(Tester& tester);
+int test_vector_insert_odd(Tester& tester);
+int test_vector_insert_range(Tester& tester);
 
 # endif
