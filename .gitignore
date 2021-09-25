@@ -2,3 +2,6 @@ tester
 *.o
 test/castorno
 *.swp
+.cache
+ft
+std

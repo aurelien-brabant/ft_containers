@@ -3,8 +3,6 @@
 #include "assert.hpp"
 #include "tests.hpp"
 
-using TEST_VECTOR;
-
 int main(void)
 {
 
