@@ -46,6 +46,11 @@ int main(void)
 	tester.registerTest(vectorSuiteName, "back()", test_vector_back_value);
 	tester.registerTest(vectorSuiteName, "&back() == &(*(end() - 1))", test_vector_back_same_than_end_minus_one);
 
+	tester.registerTest(vectorSuiteName,"clear()", test_vector_clear);
+
+	tester.registerTest(vectorSuiteName, "insert front", test_vector_insert_front);
+	tester.registerTest(vectorSuiteName, "insert back", test_vector_insert_back);
+
 	tester.runAllSuites();
 
 	return 0;

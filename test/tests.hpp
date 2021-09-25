@@ -1,6 +1,10 @@
 #ifndef TESTS_HPP
 # define TESTS_HPP
 
+/////////////////////////////////////////////////
+// VECTOR
+////////////////////////////////////////////////
+
 int test_vector_construct(Tester& tester);
 
 int	test_vector_size(Tester& tester);
@@ -33,5 +37,10 @@ int test_vector_front_same_than_begin(Tester& tester);
 
 int test_vector_back_value(Tester& tester);
 int test_vector_back_same_than_end_minus_one(Tester& tester);
+
+int test_vector_clear(Tester& tester);
+
+int test_vector_insert_front(Tester& tester);
+int test_vector_insert_back(Tester& tester);
 
 # endif
