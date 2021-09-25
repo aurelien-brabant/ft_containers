@@ -281,9 +281,6 @@ namespace ft
 
 				push_back(0);
 
-				std::cout << "size: " << size() << "\n";
-				std::cout << "ipos: " << ipos << "\n";
-
 				for (size_type i = end() - begin() - 1; i != ipos; --i) {
 					_data[i] = _data[i - 1];
 				}
