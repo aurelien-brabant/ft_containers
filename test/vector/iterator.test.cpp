@@ -40,7 +40,7 @@ int test_vector_iterator_difference(Tester& tester)
 
 	vector<int>::difference_type diff = v.end() - v.begin();
 
-	p_assert_eq(diff + 1, static_cast<vector<int>::difference_type>(v.size()));
+	p_assert_eq(diff, static_cast<vector<int>::difference_type>(v.size()));
 
 	return 0;
 }
