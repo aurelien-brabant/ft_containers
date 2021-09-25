@@ -132,6 +132,10 @@ namespace ft
 				return _p - rhs._p;
 			}
 
+			/**
+			 * operator* is used on rhs to get the internal pointer as rhs
+			 * is not of the same type than *this in that case.
+			 */
 			difference_type operator-(const iterator<const T, Category, true> & rhs)
 			{
 				return _p - &(*rhs);
