@@ -14,6 +14,12 @@ int main(void)
 
 	tester.registerTest(vectorSuiteName, "constructors", test_vector_construct);
 
+	tester.registerTest(vectorSuiteName, "copy constructor", test_vector_copy_constructor);
+
+	tester.registerTest(vectorSuiteName, "operator= (growth)", test_vector_assignment_operator_grow);
+	tester.registerTest(vectorSuiteName, "operator= (shrink)", test_vector_assignment_operator_shrink);
+	tester.registerTest(vectorSuiteName, "operator= (to empty)", test_vector_assignement_operator_to_empty);
+
 	tester.registerTest(vectorSuiteName, "size()", test_vector_size);
 
 	tester.registerTest(vectorSuiteName, "operator[]", test_vector_subscript);
@@ -31,6 +37,8 @@ int main(void)
 	tester.registerTest(vectorSuiteName, "reserve(n) (n <= capacity())", test_vector_smaller_capacity_reservation);
 
 	tester.registerTest(vectorSuiteName, "push_back()", test_vector_push_back);
+
+	tester.registerTest(vectorSuiteName, "empty()", test_vector_empty);
 
 	tester.runAllSuites();
 

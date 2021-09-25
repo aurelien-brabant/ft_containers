@@ -21,4 +21,11 @@ int test_vector_smaller_capacity_reservation(Tester& tester);
 
 int test_vector_push_back(Tester& tester);
 
+int test_vector_copy_constructor(Tester& tester);
+int test_vector_assignment_operator_grow(Tester& tester);
+int test_vector_assignment_operator_shrink(Tester& tester);
+int test_vector_assignement_operator_to_empty(Tester& tester);
+
+int test_vector_empty(Tester& tester);
+
 # endif
