@@ -10,4 +10,9 @@ int test_vector_subscript(Tester& tester);
 int test_vector_at_valid(Tester& tester);
 int test_vector_at_throws(Tester& tester);
 
+int test_vector_iterator_read_loop(Tester& tester);
+int test_vector_iterator_read_write_loop(Tester& tester);
+int test_vector_iterator_difference(Tester& tester);
+int test_vector_const_iterator_read_only(Tester& tester);
+
 # endif
