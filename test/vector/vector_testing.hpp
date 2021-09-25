@@ -5,6 +5,6 @@
 # include "Tester.hpp"
 # include "assert.hpp"
 
-using TEST_VECTOR;
+using FT_CONTAINER::vector;
 
 #endif
