@@ -133,6 +133,10 @@ namespace ft
 			void reserve(size_type newCapacity)
 			{
 				if (capacity() >= newCapacity) {
+					return ;
+				}
+
+				if (newCapacity >= max_size()) {
 					throw std::length_error("newCapacity is greater than max_size");
 				}
 
