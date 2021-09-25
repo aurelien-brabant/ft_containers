@@ -13,6 +13,7 @@ namespace ft
 		typedef typename Iter::reference			reference;
 		typedef typename Iter::iterator_category	iterator_category;
 	};
+	
 
 	template <typename T, typename Category, bool IsConst = false>
 	class iterator
@@ -126,9 +127,14 @@ namespace ft
 				return operator-=(n);
 			}
 
-			difference_type operator-(const iterator & rhs)
+			difference_type operator-(const iterator<T, Category, false> & rhs)
 			{
 				return _p - rhs._p;
+			}
+
+			difference_type operator-(const iterator<const T, Category, true> & rhs)
+			{
+				return _p - &(*rhs);
 			}
 
 			// COMPARISON OPERATORS
