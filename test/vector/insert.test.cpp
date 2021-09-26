@@ -1,3 +1,4 @@
+#include <string>
 #include "vector_testing.hpp"
 
 /**
@@ -9,18 +10,18 @@
 int test_vector_insert_front(Tester& tester)
 {
 	const size_t nbToInsert = 4242, baseN = 42;
-	int baseNumberValue = 42;
-	vector<int> v(baseN, baseNumberValue);
+	std::string baseStringValue("42");
+	vector<std::string> v(baseN, baseStringValue);
 
 	for (int i = 0; i != nbToInsert; ++i) {
-		v.insert(v.begin(), i);
+		v.insert(v.begin(), "21");
 	}
 
-	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+	for (vector<std::string>::size_type i = 0; i != v.size(); ++i) {
 		if (i < v.size() - baseN) {
-			p_assert_eq(v[i], static_cast<int>(nbToInsert - i - 1));
+			p_assert_eq(v[i], "21");
 		} else {
-			p_assert_eq(v[i], baseNumberValue);
+			p_assert_eq(v[i], baseStringValue);
 		}
 	}
 

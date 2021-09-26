@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 #include "Tester.hpp"
 #include "vector.hpp"
 #include "assert.hpp"
@@ -56,6 +57,7 @@ int main(int argc, char **argv)
 	try {
 		tester.runAllSuites();
 	} catch (std::exception &e) {
+		std::cerr << e.what() << "\n";
 	}
 
 	return 0;

@@ -56,13 +56,13 @@ namespace ft
 
 			/**
 			 * Construct a vector from another one, by coping rhs's elements into the constructed one.
-			 * All the RESERVED memory is *constructed*.
+			 * Only the actually occupied memory is constructed.
 			 */
 
 			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
-				for (size_type i = 0; i != capacity(); ++i) {
-					_allocator.construct(_data + i, i < size() ? rhs._data[i] : T());
+				for (size_type i = 0; i != size(); ++i) {
+					_allocator.construct(_data + i, rhs._data[i]);
 				}
 			}
 
@@ -80,7 +80,7 @@ namespace ft
 							reserve(rhs.size() * 2);
 						}
 						for (size_type i = size(); i != rhs.size(); ++i) {
-							_data[i] = rhs._data[i];
+							_allocator.construct(_data + i, rhs._data[i]);
 						}
 					}
 
@@ -142,8 +142,8 @@ namespace ft
 
 				T * newData = _allocator.allocate(newCapacity);
 				
-				for (size_type i = 0; i != newCapacity; ++i) {
-					_allocator.construct(newData + i, i < _length ? _data[i] : T());
+				for (size_type i = 0; i != size(); ++i) {
+					_allocator.construct(newData + i, _data[i]);
 				}
 
 				_allocator.deallocate(_data, _capacity);
@@ -245,20 +245,29 @@ namespace ft
 				_length = 0;
 			}
 
+			/**
+			 * Insert a range of items delimited by two input iterators.
+			 * Resize is triggered if (size() + end - begin) > capacity().
+			 */
+
 			template <class InputIt>
 			iterator insert(iterator pos, InputIt begin, InputIt end)
 			{
 				size_type n = end - begin;
 				size_type ipos = pos - this->begin();
+				size_type old_size = size();
 
-				// not enough space, reallocate
 				if (n + size() > capacity()) {
 					reserve((n + size()) * vectorGrowthFactor);
 				}
 
 				for (size_type i = size(); i != ipos;) {
 					--i;
-					_data[i + n] = _data[i];
+					if (i + n > old_size) {
+						_allocator.construct(_data + i + n, _data[i]);
+					} else {
+						_data[i + n] = _data[i];
+					}
 				}
 
 				for (size_type i = ipos; i != ipos + n; ++i, ++begin) {
@@ -272,14 +281,16 @@ namespace ft
 
 
 			/**
-			 * Insert value before pos, triggering a resize if size() + 1 >= capacity()
+			 * Insert value before pos, triggering a resize if size() + 1 >= capacity().
+			 * push_back is used to push a new element in the vector and resize it if
+			 * necessary, as this overload only adds one element to the vector.
 			 */
 
 			iterator insert(iterator pos, T const & value)
 			{
 				size_type ipos = pos - begin();
 
-				push_back(0);
+				push_back(T());
 
 				for (size_type i = end() - begin() - 1; i != ipos; --i) {
 					_data[i] = _data[i - 1];

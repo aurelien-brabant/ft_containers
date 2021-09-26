@@ -2,7 +2,7 @@ CASTORNO_PATH	:= test/castorno
 CASTORNO		:= test/castorno/libcastorno.a
 
 CC			:= clang++
-CPP_FLAGS	:= -Wall -Wextra -Werror -I$(CASTORNO_PATH) -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
+CPP_FLAGS	:= -g -Wall -Wextra -Werror -I$(CASTORNO_PATH) -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
 LD			:= $(CC)
 LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno
 RM			:= rm -rf
