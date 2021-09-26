@@ -8,116 +8,9 @@
             "-Wextra",
             "-Werror",
             "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/front.test.o",
-            "test/vector/front.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/front.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/capacity.test.o",
-            "test/vector/capacity.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/capacity.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/at.test.o",
-            "test/vector/at.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/at.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/insert.test.o",
-            "test/vector/insert.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/insert.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/back.test.o",
-            "test/vector/back.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/back.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/clear.test.o",
-            "test/vector/clear.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/clear.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
             "-o",
             "test/vector/size.test.o",
             "test/vector/size.test.cpp"
@@ -134,14 +27,15 @@
             "-Wextra",
             "-Werror",
             "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
             "-o",
-            "test/vector/iterator.test.o",
-            "test/vector/iterator.test.cpp"
+            "test/tests.o",
+            "test/tests.cpp"
         ],
         "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/iterator.test.cpp"
+        "file": "test/tests.cpp"
     },
     {
         "arguments": [
@@ -152,80 +46,9 @@
             "-Wextra",
             "-Werror",
             "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/copy.test.o",
-            "test/vector/copy.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/copy.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/push_back.test.o",
-            "test/vector/push_back.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/push_back.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/construct.test.o",
-            "test/vector/construct.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/construct.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
-            "-o",
-            "test/vector/subscript_operator.test.o",
-            "test/vector/subscript_operator.test.cpp"
-        ],
-        "directory": "/home/abrabant/Prog/ft_containers",
-        "file": "test/vector/subscript_operator.test.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-g",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
             "-o",
             "test/vector/empty.test.o",
             "test/vector/empty.test.cpp"
@@ -242,13 +65,498 @@
             "-Wextra",
             "-Werror",
             "-Itest/castorno",
-            "-I.",
-            "-DTEST_VECTOR=ft::vector",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/insert.test.o",
+            "test/vector/insert.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/insert.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/capacity.test.o",
+            "test/vector/capacity.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/capacity.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/iterator.test.o",
+            "test/vector/iterator.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/iterator.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "Tester.o",
+            "Tester.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers/test/castorno",
+        "file": "Tester.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/capacity.test.o",
+            "test/vector/capacity.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/capacity.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/empty.test.o",
+            "test/vector/empty.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/empty.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/back.test.o",
+            "test/vector/back.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/back.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
             "-o",
             "test/tests.o",
             "test/tests.cpp"
         ],
         "directory": "/home/abrabant/Prog/ft_containers",
         "file": "test/tests.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/at.test.o",
+            "test/vector/at.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/at.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/subscript_operator.test.o",
+            "test/vector/subscript_operator.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/subscript_operator.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/subscript_operator.test.o",
+            "test/vector/subscript_operator.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/subscript_operator.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/at.test.o",
+            "test/vector/at.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/at.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/construct.test.o",
+            "test/vector/construct.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/construct.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/front.test.o",
+            "test/vector/front.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/front.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/clear.test.o",
+            "test/vector/clear.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/clear.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/push_back.test.o",
+            "test/vector/push_back.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/push_back.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/insert.test.o",
+            "test/vector/insert.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/insert.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/front.test.o",
+            "test/vector/front.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/front.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/construct.test.o",
+            "test/vector/construct.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/construct.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/back.test.o",
+            "test/vector/back.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/back.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/iterator.test.o",
+            "test/vector/iterator.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/iterator.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=std",
+            "-std=c++98",
+            "-o",
+            "test/vector/copy.test.o",
+            "test/vector/copy.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/copy.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/size.test.o",
+            "test/vector/size.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/size.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/clear.test.o",
+            "test/vector/clear.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/clear.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "Timer.o",
+            "Timer.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers/test/castorno",
+        "file": "Timer.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/copy.test.o",
+            "test/vector/copy.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/copy.test.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-Itest/castorno",
+            "-I./src",
+            "-DFT_CONTAINER=ft",
+            "-std=c++98",
+            "-o",
+            "test/vector/push_back.test.o",
+            "test/vector/push_back.test.cpp"
+        ],
+        "directory": "/home/abrabant/Prog/ft_containers",
+        "file": "test/vector/push_back.test.cpp"
     }
 ]

@@ -1,5 +1,9 @@
 #include <string>
+#include <sstream>
 #include "vector_testing.hpp"
+
+using std::ostringstream;
+using std::string;
 
 /**
  * Inserting at the front of a vector is an expensive operation.
@@ -10,16 +14,21 @@
 int test_vector_insert_front(Tester& tester)
 {
 	const size_t nbToInsert = 4242, baseN = 42;
-	std::string baseStringValue("42");
-	vector<std::string> v(baseN, baseStringValue);
+	string baseStringValue("42");
+	vector<string> v(baseN, baseStringValue);
+	ostringstream oss;
 
 	for (int i = 0; i != nbToInsert; ++i) {
-		v.insert(v.begin(), "21");
+		oss << i;
+		v.insert(v.begin(), oss.str());
+		oss.str("");
 	}
 
-	for (vector<std::string>::size_type i = 0; i != v.size(); ++i) {
+	for (vector<string>::size_type i = 0; i != v.size(); ++i) {
 		if (i < v.size() - baseN) {
-			p_assert_eq(v[i], "21");
+			oss << nbToInsert - i - 1;
+			p_assert_eq(v[i], oss.str());
+			oss.str("");
 		} else {
 			p_assert_eq(v[i], baseStringValue);
 		}
@@ -31,18 +40,23 @@ int test_vector_insert_front(Tester& tester)
 int test_vector_insert_back(Tester& tester)
 {
 	const size_t nbToInsert = 424242, baseN = 42;
-	int baseNumberValue = 42;
-	vector<int> v(baseN, baseNumberValue);
+	string baseStringValue = "42";
+	vector<string> v(baseN, baseStringValue);
+	ostringstream oss;
 
 	for (int i = 0; i != nbToInsert; ++i) {
-		v.insert(v.end(), i);
+		oss << i;
+		v.insert(v.end(), oss.str());
+		oss.str("");
 	}
 
-	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+	for (vector<string>::size_type i = 0; i != v.size(); ++i) {
 		if (i < baseN) {
-			p_assert_eq(v[i], baseNumberValue);
+			p_assert_eq(v[i], baseStringValue);
 		} else {
-			p_assert_eq(v[i], static_cast<int>(i - baseN));
+			oss << (i - baseN);
+			p_assert_eq(v[i], oss.str());
+			oss.str("");
 		}
 	}
 
@@ -52,44 +66,48 @@ int test_vector_insert_back(Tester& tester)
 int test_vector_insert_odd(Tester& tester)
 {
 	const size_t baseN = 4242;
-	int baseNumberValue = 42, insertedNumberValue = 21;
-	vector<int> v(baseN, baseNumberValue);
+	string baseStringValue = "42", insertedStringValue = "21";
+	vector<string> v(baseN, baseStringValue);
 
-	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+	for (vector<string>::size_type i = 0; i != v.size(); ++i) {
 		if (i % 2) {
-			v.insert(v.begin() + i, insertedNumberValue);
+			v.insert(v.begin() + i, insertedStringValue);
 		}
 	}
 
-	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+	for (vector<string>::size_type i = 0; i != v.size(); ++i) {
 		if (i % 2) {
-			p_assert_eq(v[i], insertedNumberValue);
+			p_assert_eq(v[i], insertedStringValue);
 		}
 	}
-	
+
 	return 0;
 }
 
 int test_vector_insert_range(Tester& tester)
 {
 	const size_t rangeSize = 424242, baseN = 42, insertPos = 3;
-	int baseNumberValue = 42;
+	string baseStringValue;
+	ostringstream oss;
+	vector<string> range;
 
-	vector<int> range;
-
-	for (vector<int>::size_type i = 0; i != rangeSize; ++i) {
-		range.push_back(i);
+	for (vector<string>::size_type i = 0; i != rangeSize; ++i) {
+		oss << i;
+		range.push_back(oss.str());
+		oss.str("");
 	}
 
-	vector<int> base(baseN, baseNumberValue);
+	vector<string> base(baseN, baseStringValue);
 
 	base.insert(base.begin() + insertPos, range.begin(), range.end());
 
-	for (vector<int>::size_type i = 0; i != base.size(); ++i) {
+	for (vector<string>::size_type i = 0; i != base.size(); ++i) {
 		if (i >= insertPos && i < insertPos + rangeSize) {
-			p_assert_eq(base[i], static_cast<int>(i - insertPos));
+			oss << i - insertPos;
+			p_assert_eq(base[i], oss.str());
+			oss.str("");
 		} else {
-			p_assert_eq(base[i], baseNumberValue);
+			p_assert_eq(base[i], baseStringValue);
 		}
 	}
 
