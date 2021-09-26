@@ -3,12 +3,13 @@
 #include "assert.hpp"
 #include "tests.hpp"
 
-int main(void)
+int main(int argc, char **argv)
 {
+	(void)argc;
 
 	const std::string vectorSuiteName("vector");
 
-	Tester tester;
+	Tester tester(*argv);
 
 	tester.registerTest(vectorSuiteName, "constructors", test_vector_construct);
 
