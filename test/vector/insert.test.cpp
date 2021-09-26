@@ -13,8 +13,7 @@ int test_vector_insert_front(Tester& tester)
 	vector<int> v(baseN, baseNumberValue);
 
 	for (int i = 0; i != nbToInsert; ++i) {
-		vector<int>::iterator it = v.insert(v.begin(), i);
-		assert_eq(it, v.begin());
+		v.insert(v.begin(), i);
 	}
 
 	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
@@ -35,8 +34,7 @@ int test_vector_insert_back(Tester& tester)
 	vector<int> v(baseN, baseNumberValue);
 
 	for (int i = 0; i != nbToInsert; ++i) {
-		vector<int>::iterator it = v.insert(v.end(), i);
-		assert_eq(it, v.end() - 1);
+		v.insert(v.end(), i);
 	}
 
 	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
@@ -58,8 +56,7 @@ int test_vector_insert_odd(Tester& tester)
 
 	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
 		if (i % 2) {
-			vector<int>::iterator it = v.insert(v.begin() + i, insertedNumberValue);
-			assert_eq(it, v.begin() + i);
+			v.insert(v.begin() + i, insertedNumberValue);
 		}
 	}
 
@@ -85,8 +82,7 @@ int test_vector_insert_range(Tester& tester)
 
 	vector<int> base(baseN, baseNumberValue);
 
-	vector<int>::iterator it = base.insert(base.begin() + insertPos, range.begin(), range.end());
-	assert_eq(it, base.begin() + insertPos);
+	base.insert(base.begin() + insertPos, range.begin(), range.end());
 
 	for (vector<int>::size_type i = 0; i != base.size(); ++i) {
 		if (i >= insertPos && i < insertPos + rangeSize) {

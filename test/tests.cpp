@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "Tester.hpp"
 #include "vector.hpp"
 #include "assert.hpp"
@@ -52,7 +53,10 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "insert before each odd nb", test_vector_insert_odd);
 	tester.registerTest(vectorSuiteName, "insert range", test_vector_insert_range);
 
-	tester.runAllSuites();
+	try {
+		tester.runAllSuites();
+	} catch (std::exception &e) {
+	}
 
 	return 0;
 }
