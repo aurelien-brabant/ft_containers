@@ -18,8 +18,10 @@ clean:
 fclean:
 	@make fclean -s -f $(TEST_MAKE) FT_CONTAINER=std
 	@make fclean -s -f $(TEST_MAKE) FT_CONTAINER=ft
+	@make fclean -s -C $(CASTORNO_PATH)
 
 re: fclean all
+	@make re -s -C $(CASTORNO_PATH)
 
 .PHONY: all clean fclean re
 
