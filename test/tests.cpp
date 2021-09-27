@@ -34,6 +34,8 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "iterator difference", test_vector_iterator_difference);
 	tester.registerTest(vectorSuiteName, "const_iterator loop", test_vector_const_iterator_read_only);
 
+	tester.registerTest(vectorSuiteName, "reverse_iterator loop", test_vector_reverse_iterator_loop);
+
 	tester.registerTest(vectorSuiteName, "capacity()", test_vector_capacity);
 	tester.registerTest(vectorSuiteName, "reserve(n) (n > capacity())", test_vector_greater_capacity_reservation);
 	tester.registerTest(vectorSuiteName, "reserve(n) (n <= capacity())", test_vector_smaller_capacity_reservation);

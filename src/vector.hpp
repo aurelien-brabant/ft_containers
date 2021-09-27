@@ -30,6 +30,8 @@ namespace ft
 			typedef std::ptrdiff_t difference_type;
 			typedef ft::iterator<T, std::random_access_iterator_tag> iterator;
 			typedef ft::iterator<T const, std::random_access_iterator_tag, true> const_iterator;
+			typedef ft::reverse_iterator<iterator> reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 			
 		private:
 			Allocator _allocator;
@@ -236,6 +238,28 @@ namespace ft
 				const_iterator tmp(_data + size());
 
 				return tmp;
+			}
+
+			// reverse iterators
+			
+			reverse_iterator rbegin()
+			{
+				return reverse_iterator(end() - 1);
+			}
+
+			reverse_iterator rend()
+			{
+				return reverse_iterator(begin() + 1);
+			}
+
+			const_reverse_iterator rbegin() const
+			{
+				return const_reverse_iterator(end() - 1);
+			}
+
+			const_reverse_iterator rend() const
+			{
+				return const_reverse_iterator(begin() + 1);
 			}
 
 			// MANIPULATORS

@@ -13,6 +13,45 @@ namespace ft
 		typedef typename Iter::reference			reference;
 		typedef typename Iter::iterator_category	iterator_category;
 	};
+
+	template <class Iter>
+	class reverse_iterator
+	{
+		Iter _iter;
+
+		public:
+		explicit reverse_iterator(Iter iter): _iter(iter) {}
+
+		reverse_iterator(const reverse_iterator& rhs): _iter(rhs._iter) {}
+
+		reverse_iterator& operator=(const reverse_iterator& rhs)
+		{
+			if (this != &rhs) {
+				_iter = rhs._iter;
+			}
+		}
+
+		/* operator* */
+
+		typename ft::iterator_traits<Iter>::value_type operator*()
+		{
+			return *_iter;
+		}
+
+		/* operator++ */
+
+		reverse_iterator& operator++(void) { --_iter; return *this; };
+		reverse_iterator operator++(int) { return reverse_iterator(_iter--); };
+
+		/* operator-- */
+
+		reverse_iterator& operator--(void) { ++_iter; return *this; };
+		reverse_iterator operator--(int) { return reverse_iterator(_iter++); };
+
+		/* logical operators */
+		bool operator!=(const reverse_iterator& rhs) { return _iter != rhs._iter; }
+		bool operator==(const reverse_iterator& rhs) { return _iter == rhs._iter; }
+	};
 	
 
 	template <typename T, typename Category, bool IsConst = false>

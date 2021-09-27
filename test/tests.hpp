@@ -21,6 +21,8 @@ int test_vector_iterator_read_write_loop(Tester& tester);
 int test_vector_iterator_difference(Tester& tester);
 int test_vector_const_iterator_read_only(Tester& tester);
 
+int test_vector_reverse_iterator_loop(Tester& tester);
+
 int test_vector_capacity(Tester& tester);
 int test_vector_greater_capacity_reservation(Tester& tester);
 int test_vector_smaller_capacity_reservation(Tester& tester);
