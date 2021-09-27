@@ -3,6 +3,7 @@
 # include <memory>
 # include <iostream>
 # include <stdexcept>
+# include <iostream>
 # include "iterator.hpp"
 
 namespace ft
@@ -143,10 +144,11 @@ namespace ft
 				}
 
 				T * newData = _allocator.allocate(newCapacity);
-				
+
 				for (size_type i = 0; i != size(); ++i) {
 					_allocator.construct(newData + i, _data[i]);
 				}
+
 
 				_allocator.deallocate(_data, _capacity);
 				_data = newData;
@@ -279,7 +281,6 @@ namespace ft
 			{
 				size_type n = end - begin;
 				size_type ipos = pos - this->begin();
-				size_type old_size = size();
 
 				if (n + size() > capacity()) {
 					reserve((n + size()) * vectorGrowthFactor);
@@ -287,15 +288,20 @@ namespace ft
 
 				for (size_type i = size(); i != ipos;) {
 					--i;
-					if (i + n > old_size) {
+					if (i + n >= size()) {
 						_allocator.construct(_data + i + n, _data[i]);
 					} else {
 						_data[i + n] = _data[i];
 					}
 				}
+				_data[ipos + n] = _data[ipos];
 
 				for (size_type i = ipos; i != ipos + n; ++i, ++begin) {
-					_data[i] = *begin;
+					if (i >= size()) {
+						_allocator.construct(_data + i, *begin);
+					} else {
+						_data[i] = *begin;
+					}
 				}
 
 				_length += n;
@@ -316,7 +322,8 @@ namespace ft
 
 				push_back(T());
 
-				for (size_type i = end() - begin() - 1; i != ipos; --i) {
+				for (size_type i = end() - begin(); i > ipos;) {
+					--i;
 					_data[i] = _data[i - 1];
 				}
 				

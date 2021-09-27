@@ -28,6 +28,6 @@ $(CASTORNO_PATH):
 $(CASTORNO): $(CASTORNO_PATH)
 	@make re -C $(CASTORNO_PATH)
 
-castorno-check-update:
+castorno-check-update: $(CASTORNO_PATH)
 	@printf "Castorno: checking for updates...\n"
 	@cd $(CASTORNO_PATH) && git pull origin HEAD

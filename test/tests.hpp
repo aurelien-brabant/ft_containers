@@ -48,5 +48,6 @@ int test_vector_insert_front(Tester& tester);
 int test_vector_insert_back(Tester& tester);
 int test_vector_insert_odd(Tester& tester);
 int test_vector_insert_range(Tester& tester);
+int test_vector_insert_empty(Tester& tester);
 
 # endif

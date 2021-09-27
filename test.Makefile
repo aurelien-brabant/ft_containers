@@ -2,7 +2,7 @@ CASTORNO_PATH	:= test/castorno
 CASTORNO		:= test/castorno/libcastorno.a
 FILTER_OUT = $(foreach v,$(2),$(if $(findstring $(1),$(v)),,$(v)))
 
-CC			:= clang++
+CC			:= g++
 CPP_FLAGS	:= -g -Wall -Wextra -Werror -I$(CASTORNO_PATH) -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
 LD			:= $(CC)
 LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno

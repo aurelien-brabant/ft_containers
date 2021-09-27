@@ -113,3 +113,14 @@ int test_vector_insert_range(Tester& tester)
 
 	return 0;
 }
+
+int test_vector_insert_empty(Tester& tester)
+{
+	vector<int> v;
+
+	v.insert(v.begin(), 42);
+
+	p_assert_eq(*v.begin(), 42);
+
+	return 0;
+}
