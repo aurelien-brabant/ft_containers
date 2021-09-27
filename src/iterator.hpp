@@ -1,6 +1,7 @@
 #ifndef ITERATOR_TRAITS
 # define ITERATOR_TRAITS
 # include <iterator>
+# include <iostream>
 
 namespace ft
 {
@@ -20,6 +21,11 @@ namespace ft
 		Iter _iter;
 
 		public:
+
+	//hhj	typedef iterator_type      Iter;
+//		typedef iterator_category  ft::iterator_traits<Iter>::iterator_category;
+//		typedef value_type         ft::iterator_traits<Iter>::value_type;
+
 		explicit reverse_iterator(Iter iter): _iter(iter) {}
 
 		reverse_iterator(const reverse_iterator& rhs): _iter(rhs._iter) {}
@@ -33,24 +39,50 @@ namespace ft
 
 		/* operator* */
 
-		typename ft::iterator_traits<Iter>::value_type operator*()
+	    typename Iter::value_type& operator*()
 		{
 			return *_iter;
 		}
 
-		/* operator++ */
+		/* ++, +=, + */
 
 		reverse_iterator& operator++(void) { --_iter; return *this; };
-		reverse_iterator operator++(int) { return reverse_iterator(_iter--); };
+		reverse_iterator operator++(int) {
+			Iter tmp = _iter--;
+		
+			return reverse_iterator(tmp);
+		}
+		reverse_iterator operator+(typename ft::iterator_traits<Iter>::difference_type n)
+		{
+			return reverse_iterator(_iter - n);
+		}
+		reverse_iterator operator+=(typename ft::iterator_traits<Iter>::difference_type n)
+		{
+			_iter -= n;
+			return *this;
+		}
 
-		/* operator-- */
+		/* --, -=, - */
 
 		reverse_iterator& operator--(void) { ++_iter; return *this; };
 		reverse_iterator operator--(int) { return reverse_iterator(_iter++); };
+		reverse_iterator operator-(typename ft::iterator_traits<Iter>::difference_type n)
+		{
+			return reverse_iterator(_iter + n);
+		}
+		reverse_iterator operator-=(typename ft::iterator_traits<Iter>::difference_type n)
+		{
+			_iter += n;
+			return *this;
+		}
 
-		/* logical operators */
+		/* logical operators - basically <, <=, >, >= are doing the opposite of what they're normally doing */
 		bool operator!=(const reverse_iterator& rhs) { return _iter != rhs._iter; }
-		bool operator==(const reverse_iterator& rhs) { return _iter == rhs._iter; }
+		bool operator==(const reverse_iterator& rhs) { return _iter != rhs._iter; }
+		bool operator>=(const reverse_iterator& rhs) { return _iter <= rhs._iter; }
+		bool operator<=(const reverse_iterator& rhs) { return _iter >= rhs._iter; }
+		bool operator>(const reverse_iterator& rhs) { return _iter < rhs._iter; }
+		bool operator<(const reverse_iterator& rhs) { return _iter > rhs._iter; }
 	};
 	
 
@@ -90,14 +122,14 @@ namespace ft
 				return iterator<const T, Category, true>(_p);
 			}
 
-			iterator operator++()
+			iterator& operator++()
 			{
 				_p++;
 				
 				return *this;
 			}
 
-			iterator operator++(int)
+			iterator& operator++(int)
 			{
 				iterator it(*this);
 
@@ -106,7 +138,7 @@ namespace ft
 				return it;
 			}
 
-			iterator operator--(void)
+			iterator& operator--(void)
 			{
 				--_p;
 
@@ -119,7 +151,7 @@ namespace ft
 
 				operator--();
 
-				return *this;
+				return it;
 			}
 
 			// ACCESS
@@ -129,7 +161,7 @@ namespace ft
 				return *_p;
 			}
 
-			const T & operator*(void) const
+			const T& operator*(void) const
 			{
 				return  *_p;
 			}
