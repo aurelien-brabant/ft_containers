@@ -2,8 +2,8 @@
 
 int test_vector_at_valid(Tester& tester)
 {
-	(void)tester;
-	vector<long> v(10);
+	const size_t baseN = 424242;
+	vector<long> v(baseN);
 
 	for (vector<long>::size_type i = 0; i != v.size(); ++i) {
 		v.at(i) = i;
@@ -18,11 +18,10 @@ int test_vector_at_valid(Tester& tester)
 
 int test_vector_at_throws(Tester& tester)
 {
-	vector<long> v(10);
+	vector<long> v, v2(10);
 
-	v.at(2);
-	v.at(5);
-	assert_throw(std::out_of_range, v.at(v.size()));
+	assert_throw(std::out_of_range, v.at(0));
+	assert_throw(std::out_of_range, v.at(10));
 
 	return 0;
 }

@@ -13,7 +13,8 @@ int main(int argc, char **argv)
 
 	Tester tester(*argv);
 
-	tester.registerTest(vectorSuiteName, "constructors", test_vector_construct);
+	tester.registerTest(vectorSuiteName, "construct n by value", test_vector_construct_n_by_value);
+	tester.registerTest(vectorSuiteName, "construct n with value", test_vector_construct_n_with_value);
 
 	tester.registerTest(vectorSuiteName, "copy constructor", test_vector_copy_constructor);
 

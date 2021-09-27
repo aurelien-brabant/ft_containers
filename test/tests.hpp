@@ -6,7 +6,8 @@
 // VECTOR
 ////////////////////////////////////////////////
 
-int test_vector_construct(Tester& tester);
+int test_vector_construct_n_by_value(Tester& tester);
+int test_vector_construct_n_with_value(Tester& tester);
 
 int	test_vector_size(Tester& tester);
 

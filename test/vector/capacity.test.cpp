@@ -1,8 +1,10 @@
 #include "vector_testing.hpp"
 
+const size_t baseN = 424242;
+
 int test_vector_capacity(Tester& tester)
 {
-	vector<int> v(1000);
+	vector<int> v(baseN);
 
 	assert_expr(v.size() <= v.capacity());
 
@@ -11,11 +13,11 @@ int test_vector_capacity(Tester& tester)
 
 int test_vector_greater_capacity_reservation(Tester& tester)
 {
-	vector<int> v(42);
+	vector<int> v(baseN);
 
-	v.reserve(1000);
+	v.reserve(v.size() * 2);
 
-	assert_expr(v.capacity() >= 1000);
+	assert_expr(v.capacity() >= v.size() * 2);
 
 	return 0;
 }
@@ -26,14 +28,14 @@ int test_vector_greater_capacity_reservation(Tester& tester)
 
 int test_vector_smaller_capacity_reservation(Tester& tester)
 {
-	vector<int> v(42);
+	vector<int> v(baseN);
 	
 	vector<int>::size_type oldCap = v.capacity();
 
-	v.reserve(41);
+	v.reserve(v.size());
 	assert_expr(v.capacity() == oldCap);
 
-	v.reserve(42);
+	v.reserve(v.size() - 1);
 	assert_expr(v.capacity() == oldCap);
 
 	return 0;

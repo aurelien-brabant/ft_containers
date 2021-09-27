@@ -1,8 +1,14 @@
+#include <string>
 #include "vector_testing.hpp"
+
+using std::string;
+
+static const size_t baseN = 424242;
+static const string baseStringValue = "42";
 
 int test_vector_copy_constructor(Tester& tester)
 {
-	vector<int> v(424242, 42), v2(v);
+	vector<string> v(baseN, baseStringValue), v2(v);
 
 	assert_range_eq(v.begin(), v.end(), v2.begin(), v2.end());
 
@@ -11,7 +17,8 @@ int test_vector_copy_constructor(Tester& tester)
 
 int test_vector_assignment_operator_grow(Tester& tester)
 {
-	vector<int> v(424242, 42), v2(42, 21);
+	const string distinctStringValue = "21";
+	vector<string> v(baseN, baseStringValue), v2(baseN / 42, distinctStringValue);
 
 	v2 = v;
 
@@ -22,7 +29,8 @@ int test_vector_assignment_operator_grow(Tester& tester)
 
 int test_vector_assignment_operator_shrink(Tester& tester)
 {
-	vector<int> v(424242, 42), v2(42, 21);
+	const string distinctStringValue = "21";
+	vector<string> v(baseN, baseStringValue), v2(baseN / 42, distinctStringValue);
 
 	v = v2;
 
@@ -33,7 +41,7 @@ int test_vector_assignment_operator_shrink(Tester& tester)
 
 int test_vector_assignement_operator_to_empty(Tester& tester)
 {
-	vector<int> v(424242, 42), v2;
+	vector<string> v(baseN, baseStringValue), v2;
 
 	v = v2;
 
