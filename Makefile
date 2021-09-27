@@ -3,13 +3,11 @@ CASTORNO		:= test/castorno/libcastorno.a
 TARGET_FT	:= ft
 TEST_MAKE	:= test.Makefile
 
-all: $(TARGET_FT)
-
-$(TARGET_FT): $(CASTORNO)
+all: $(CASTORNO)
 	@printf "\033[1mSTD VERSION\033[0m\n"
 	@make -s -f $(TEST_MAKE) FT_CONTAINER=std
 	@printf "\033[1mFT VERSION\033[0m\n"
-	@make re -s -f $(TEST_MAKE) FT_CONTAINER=ft
+	@make -s -f $(TEST_MAKE) FT_CONTAINER=ft
 
 clean:
 	@make clean -s -f $(TEST_MAKE) FT_CONTAINER=std
