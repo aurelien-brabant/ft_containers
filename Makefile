@@ -3,10 +3,9 @@ CASTORNO		:= test/castorno/libcastorno.a
 TARGET_FT	:= ft
 TEST_MAKE	:= test.Makefile
 
-all: $(CASTORNO)
-	@printf "\033[1mSTD VERSION\033[0m\n"
+all: castorno-check-update
+	@make -s -C $(CASTORNO_PATH)
 	@make -s -f $(TEST_MAKE) FT_CONTAINER=std
-	@printf "\033[1mFT VERSION\033[0m\n"
 	@make -s -f $(TEST_MAKE) FT_CONTAINER=ft
 
 clean:
@@ -21,10 +20,14 @@ fclean:
 re: fclean all
 	@make re -s -C $(CASTORNO_PATH)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re castorno-check-update
 
 $(CASTORNO_PATH):
 	git clone https://github.com/aurelien-brabant/castorno $(CASTORNO_PATH)
 
 $(CASTORNO): $(CASTORNO_PATH)
 	@make re -C $(CASTORNO_PATH)
+
+castorno-check-update:
+	@printf "Castorno: checking for updates...\n"
+	@cd $(CASTORNO_PATH) && git pull origin HEAD
