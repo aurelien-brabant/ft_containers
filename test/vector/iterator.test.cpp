@@ -61,3 +61,100 @@ int test_vector_const_iterator_read_only(Tester& tester)
 
 	return 0;
 }
+
+int test_vector_iterator_subscript(Tester& tester)
+{
+	vector<int> v;
+
+	for (int i = 0; i != 10; ++i) {
+		v.push_back(i);
+	}
+
+	vector<int>::iterator it = v.begin();
+
+	for (int i = 0; i != 10; ++i) {
+		p_assert_eq(it[i], i);
+	}
+
+	return 0;
+}
+
+int test_vector_iterator_negative_subscript(Tester& tester)
+{
+	vector<int> v;
+
+	for (int i = 0; i != 10; ++i) {
+		v.push_back(i);
+	}
+
+	vector<int>::iterator it = v.end();
+
+	for (int i = 0; i != 10; ++i) {
+		p_assert_eq(it[-10 + i], i);
+	}
+
+	return 0;
+}
+
+int test_vector_iterator_arrow(Tester& tester)
+{
+	vector<string> vs;
+	
+	vs.push_back("");
+
+	assert_expr(vs.begin()->empty() == true);
+
+	return 0;
+}
+
+int test_vector_iterator_greater_operator(Tester& tester)
+{
+	vector<int> v(10);
+
+	assert_expr((v.end() > v.begin()) == true);
+	assert_expr((v.begin() > v.end()) == false);
+
+	return 0;
+}
+
+int test_vector_iterator_greater_or_equal_operator(Tester& tester)
+{
+	vector<int> v(10);
+
+	assert_expr((v.end() >= v.begin()) == true);
+	assert_expr((v.begin() + v.size() >= v.end()) == true);
+	assert_expr((v.begin() + v.size() - 1 >= v.end()) == false);
+
+	return 0;
+}
+
+int test_vector_iterator_less_operator(Tester& tester)
+{
+	vector<int> v(10);
+
+	assert_expr((v.begin() < v.end()) == true);
+	assert_expr((v.end() < v.begin()) == false);
+
+	return 0;
+}
+
+int test_vector_iterator_less_or_equal_operator(Tester& tester)
+{
+	vector<int> v(10);
+
+	assert_expr((v.begin() <= v.end()) == true);
+	assert_expr((v.begin() + v.size() <= v.end()) == true);
+	assert_expr((v.begin() + v.size() + 1 <= v.end()) == false);
+
+	return 0;
+}
+
+int test_vector_iterator_equality_operator(Tester& tester)
+{
+	vector<int> v(10);
+
+	assert_expr(v.end() - v.size() == v.begin());
+	assert_expr(!(v.begin() + v.size() + 1 == v.end()));
+
+	return 0;
+}

@@ -16,10 +16,22 @@ int test_vector_subscript(Tester& tester);
 int test_vector_at_valid(Tester& tester);
 int test_vector_at_throws(Tester& tester);
 
+// vector<T>::iterator
+
 int test_vector_iterator_read_loop(Tester& tester);
 int test_vector_iterator_read_write_loop(Tester& tester);
 int test_vector_iterator_difference(Tester& tester);
 int test_vector_const_iterator_read_only(Tester& tester);
+int test_vector_iterator_subscript(Tester& tester);
+int test_vector_iterator_negative_subscript(Tester& tester);
+int test_vector_iterator_arrow(Tester& tester);
+int test_vector_iterator_greater_operator(Tester& tester);
+int test_vector_iterator_greater_or_equal_operator(Tester& tester);
+int test_vector_iterator_less_operator(Tester& tester);
+int test_vector_iterator_less_or_equal_operator(Tester& tester);
+int test_vector_iterator_equality_operator(Tester& tester);
+
+// vector<T>::reverse_iterator
 
 int test_vector_reverse_iterator_loop(Tester& tester);
 

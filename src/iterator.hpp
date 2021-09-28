@@ -125,6 +125,16 @@ namespace ft
 				return iterator<const T, Category, true>(_p);
 			}
 
+			reference operator[](int i)
+			{
+				return _p[i];
+			}
+
+			pointer operator->(void)
+			{
+				return _p;
+			}
+
 			iterator& operator++()
 			{
 				_p++;

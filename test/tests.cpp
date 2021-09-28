@@ -34,8 +34,16 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "iterator write loop", test_vector_iterator_read_write_loop);
 	tester.registerTest(vectorSuiteName, "iterator difference", test_vector_iterator_difference);
 	tester.registerTest(vectorSuiteName, "const_iterator loop", test_vector_const_iterator_read_only);
+	tester.registerTest(vectorSuiteName, "iterator [n] operator (n >= 0)", test_vector_iterator_subscript);
+	tester.registerTest(vectorSuiteName, "iterator [n] operator (n < 0)", test_vector_iterator_negative_subscript);
+	tester.registerTest(vectorSuiteName, "iterator -> operator", test_vector_iterator_arrow);
+	tester.registerTest(vectorSuiteName, "iterator > operator", test_vector_iterator_greater_operator);
+	tester.registerTest(vectorSuiteName, "iterator >= operator", test_vector_iterator_greater_or_equal_operator);
+	tester.registerTest(vectorSuiteName, "iterator < operator", test_vector_iterator_less_operator);
+	tester.registerTest(vectorSuiteName, "iterator <= operator", test_vector_iterator_less_or_equal_operator);
+	tester.registerTest(vectorSuiteName, "iterator == operator", test_vector_iterator_equality_operator);
 
-	tester.registerTest(vectorSuiteName, "const_iterator loop", test_vector_reverse_iterator_loop);
+	tester.registerTest(vectorSuiteName, "reverse iterator loop", test_vector_reverse_iterator_loop);
 
 	tester.registerTest(vectorSuiteName, "capacity()", test_vector_capacity);
 	tester.registerTest(vectorSuiteName, "reserve(n) (n > capacity())", test_vector_greater_capacity_reservation);
