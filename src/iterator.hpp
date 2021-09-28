@@ -226,36 +226,22 @@ namespace ft
 			}
 
 			// COMPARISON OPERATORS
+			
+			// compare iterator to an iterator of the exact same type
 
-			bool operator==(iterator rhs) const
-			{
-				return _p == rhs._p;
-			}
+			bool operator==(iterator<T, Category, false> rhs) const { return _p == &(*rhs); }
+			bool operator!=(iterator<T, Category, false> rhs) const { return _p != &(*rhs); }
+			bool operator<=(iterator<T, Category, false> rhs) const { return _p <= &(*rhs); }
+			bool operator>=(iterator<T, Category, false> rhs) const { return _p >= &(*rhs); }
+			bool operator<(iterator<T, Category, false> rhs) const { return _p < &(*rhs); }
+			bool operator>(iterator<T, Category, false> rhs) const { return _p > &(*rhs); }
 
-			bool operator<=(iterator rhs) const
-			{
-				return _p <= rhs._p;
-			}
-
-			bool operator>=(iterator rhs) const
-			{
-				return _p >= rhs._p;
-			}
-
-			bool operator!=(iterator rhs) const
-			{
-				return _p != rhs._p;
-			}
-
-			bool operator<(iterator rhs) const
-			{
-				return _p < rhs._p;
-			}
-
-			bool operator>(iterator rhs) const
-			{
-				return _p > rhs._p;
-			}
+			bool operator==(iterator<const T, Category, true> rhs) const { return _p == &(*rhs); }
+			bool operator!=(iterator<const T, Category, true> rhs) const { return _p != &(*rhs); }
+			bool operator<=(iterator<const T, Category, true> rhs) const { return _p <= &(*rhs); }
+			bool operator>=(iterator<const T, Category, true> rhs) const { return _p >= &(*rhs); }
+			bool operator<(iterator<const T, Category, true> rhs) const { return _p < &(*rhs); }
+			bool operator>(iterator<const T, Category, true> rhs) const { return _p > &(*rhs); }
 	};
 }
 

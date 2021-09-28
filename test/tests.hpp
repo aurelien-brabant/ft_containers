@@ -30,6 +30,7 @@ int test_vector_iterator_greater_or_equal_operator(Tester& tester);
 int test_vector_iterator_less_operator(Tester& tester);
 int test_vector_iterator_less_or_equal_operator(Tester& tester);
 int test_vector_iterator_equality_operator(Tester& tester);
+int test_vector_iterator_const_compare_to_non_const(Tester& tester);
 
 // vector<T>::reverse_iterator
 

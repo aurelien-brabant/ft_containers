@@ -158,3 +158,33 @@ int test_vector_iterator_equality_operator(Tester& tester)
 
 	return 0;
 }
+
+// This test does not actually assert many things, but the sole fact that it compiled must indicate that
+// this is handled correctly.
+
+int test_vector_iterator_const_compare_to_non_const(Tester& tester)
+{
+	vector<int> v;
+	vector<int>::iterator it = v.begin();
+	vector<int>::const_iterator cit = v.begin();
+
+	if (it == cit) {}
+	if (it <= cit) {}
+	if (it >= cit) {}
+	if (it < cit) {}
+	if (it > cit) {}
+	if (it != cit) {}
+
+	// now, the other way around
+
+	if (cit == it) {}
+	if (cit <= it) {}
+	if (cit >= it) {}
+	if (cit < it) {}
+	if (cit > it) {}
+	if (cit != it) {}
+
+	assert_expr(it == cit);
+
+	return 0;
+}

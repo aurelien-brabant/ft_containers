@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "iterator < operator", test_vector_iterator_less_operator);
 	tester.registerTest(vectorSuiteName, "iterator <= operator", test_vector_iterator_less_or_equal_operator);
 	tester.registerTest(vectorSuiteName, "iterator == operator", test_vector_iterator_equality_operator);
+	tester.registerTest(vectorSuiteName, "compare const and non-const iterator", test_vector_iterator_const_compare_to_non_const);
 
 	tester.registerTest(vectorSuiteName, "reverse iterator loop", test_vector_reverse_iterator_loop);
 
