@@ -35,6 +35,8 @@ int test_vector_iterator_const_compare_to_non_const(Tester& tester);
 // vector<T>::reverse_iterator
 
 int test_vector_reverse_iterator_loop(Tester& tester);
+int test_vector_reviter_write(Tester& tester);
+int test_vector_reviter_to_const_reviter(Tester& tester);
 
 int test_vector_capacity(Tester& tester);
 int test_vector_greater_capacity_reservation(Tester& tester);

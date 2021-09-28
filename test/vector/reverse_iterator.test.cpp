@@ -18,3 +18,41 @@ int test_vector_reverse_iterator_loop(Tester& tester)
 
 	return 0;
 }
+
+int test_vector_reviter_write(Tester& tester)
+{
+	vector<int> v;
+
+	for (size_t i = 0; i != rangeSize; ++i) {
+		v.push_back(i);
+	}
+
+	for (vector<int>::reverse_iterator rit = v.rbegin(); rit != v.rend(); ++rit) {
+		*rit *= 2;
+	}
+
+	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+		p_assert_eq(v[i], static_cast<int>(i * 2));
+	}
+
+	return 0;
+}
+
+/* ensures reverse_iterator can be converted to const_reverse_iterator */
+
+int test_vector_reviter_to_const_reviter(Tester& tester)
+{
+	vector<int> v;
+
+	for (size_t i = 0; i != rangeSize; ++i) {
+		v.push_back(i);
+	}
+
+	size_t i = 0;
+	for (vector<int>::const_reverse_iterator crit = v.rbegin(); crit != v.rend(); ++crit) {
+		p_assert_eq(v[i], static_cast<int>(i));
+		++i;
+	}
+
+	return 0;
+}

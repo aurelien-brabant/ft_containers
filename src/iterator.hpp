@@ -15,79 +15,6 @@ namespace ft
 		typedef typename Iter::iterator_category	iterator_category;
 	};
 
-	template <class Iter>
-	class reverse_iterator
-	{
-		Iter _iter;
-
-		public:
-			typedef          Iter                                          iterator_type;
-			typedef typename ft::iterator_traits<Iter>::difference_type    difference_type;
-			typedef typename ft::iterator_traits<Iter>::value_type         value_type;
-			typedef typename ft::iterator_traits<Iter>::pointer            pointer;
-			typedef typename ft::iterator_traits<Iter>::reference          reference;
-			typedef typename ft::iterator_traits<Iter>::iterator_category  iterator_category;
-
-			explicit reverse_iterator(Iter iter): _iter(iter) {}
-
-			reverse_iterator(const reverse_iterator& rhs): _iter(rhs._iter) {}
-
-			reverse_iterator& operator=(const reverse_iterator& rhs)
-			{
-				if (this != &rhs) {
-					_iter = rhs._iter;
-				}
-			}
-
-			/* operator* */
-
-			typename Iter::value_type& operator*()
-			{
-				return *_iter;
-			}
-
-			/* ++, +=, + */
-
-			reverse_iterator& operator++(void) { --_iter; return *this; };
-			reverse_iterator operator++(int) {
-				Iter tmp = _iter--;
-			
-				return reverse_iterator(tmp);
-			}
-			reverse_iterator operator+(typename ft::iterator_traits<Iter>::difference_type n)
-			{
-				return reverse_iterator(_iter - n);
-			}
-			reverse_iterator operator+=(typename ft::iterator_traits<Iter>::difference_type n)
-			{
-				_iter -= n;
-				return *this;
-			}
-
-			/* --, -=, - */
-
-			reverse_iterator& operator--(void) { ++_iter; return *this; };
-			reverse_iterator operator--(int) { return reverse_iterator(_iter++); };
-			reverse_iterator operator-(typename ft::iterator_traits<Iter>::difference_type n)
-			{
-				return reverse_iterator(_iter + n);
-			}
-			reverse_iterator operator-=(typename ft::iterator_traits<Iter>::difference_type n)
-			{
-				_iter += n;
-				return *this;
-			}
-
-			/* logical operators - basically <, <=, >, >= are doing the opposite of what they're normally doing */
-			bool operator!=(const reverse_iterator& rhs) { return _iter != rhs._iter; }
-			bool operator==(const reverse_iterator& rhs) { return _iter != rhs._iter; }
-			bool operator>=(const reverse_iterator& rhs) { return _iter <= rhs._iter; }
-			bool operator<=(const reverse_iterator& rhs) { return _iter >= rhs._iter; }
-			bool operator>(const reverse_iterator& rhs) { return _iter < rhs._iter; }
-			bool operator<(const reverse_iterator& rhs) { return _iter > rhs._iter; }
-	};
-	
-
 	template <typename T, typename Category, bool IsConst = false>
 	class iterator
 	{
@@ -233,6 +160,90 @@ namespace ft
 			bool operator>=(iterator<const T, Category, true> rhs) const { return _p >= &(*rhs); }
 			bool operator<(iterator<const T, Category, true> rhs) const { return _p < &(*rhs); }
 			bool operator>(iterator<const T, Category, true> rhs) const { return _p > &(*rhs); }
+	};
+
+	template <class Iter>
+	class reverse_iterator
+	{
+		Iter _iter;
+
+		public:
+			typedef          Iter                                          iterator_type;
+			typedef typename ft::iterator_traits<Iter>::difference_type    difference_type;
+			typedef typename ft::iterator_traits<Iter>::value_type         value_type;
+			typedef typename ft::iterator_traits<Iter>::pointer            pointer;
+			typedef typename ft::iterator_traits<Iter>::reference          reference;
+			typedef typename ft::iterator_traits<Iter>::iterator_category  iterator_category;
+
+			explicit reverse_iterator(Iter iter): _iter(iter) {}
+
+			reverse_iterator(const reverse_iterator& rhs): _iter(rhs._iter) {}
+
+			reverse_iterator& operator=(const reverse_iterator& rhs)
+			{
+				if (this != &rhs) {
+					_iter = rhs._iter;
+				}
+			}
+
+			template <typename T, typename Category>
+			operator reverse_iterator<ft::iterator<const T, Category, true> >() const
+			{
+				return reverse_iterator<ft::iterator<const T, Category, true> >(_iter);
+			}
+
+			/* operator* */
+
+			typename Iter::value_type& operator*()
+			{
+				return *_iter;
+			}
+
+			/* ++, +=, + */
+
+			reverse_iterator& operator++(void)
+			{
+				--_iter;
+				return *this;
+			};
+
+			reverse_iterator operator++(int)
+			{
+				Iter tmp = _iter--;
+			
+				return reverse_iterator(tmp);
+			}
+			reverse_iterator operator+(typename ft::iterator_traits<Iter>::difference_type n)
+			{
+				return reverse_iterator(_iter - n);
+			}
+			reverse_iterator operator+=(typename ft::iterator_traits<Iter>::difference_type n)
+			{
+				_iter -= n;
+				return *this;
+			}
+
+			/* --, -=, - */
+
+			reverse_iterator& operator--(void) { ++_iter; return *this; };
+			reverse_iterator operator--(int) { return reverse_iterator(_iter++); };
+			reverse_iterator operator-(typename ft::iterator_traits<Iter>::difference_type n)
+			{
+				return reverse_iterator(_iter + n);
+			}
+			reverse_iterator operator-=(typename ft::iterator_traits<Iter>::difference_type n)
+			{
+				_iter += n;
+				return *this;
+			}
+
+			/* logical operators - basically <, <=, >, >= are doing the opposite of what they're normally doing */
+			bool operator!=(const reverse_iterator& rhs) { return _iter != rhs._iter; }
+			bool operator==(const reverse_iterator& rhs) { return _iter != rhs._iter; }
+			bool operator>=(const reverse_iterator& rhs) { return _iter <= rhs._iter; }
+			bool operator<=(const reverse_iterator& rhs) { return _iter >= rhs._iter; }
+			bool operator>(const reverse_iterator& rhs) { return _iter < rhs._iter; }
+			bool operator<(const reverse_iterator& rhs) { return _iter > rhs._iter; }
 	};
 }
 

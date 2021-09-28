@@ -44,7 +44,9 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "iterator == operator", test_vector_iterator_equality_operator);
 	tester.registerTest(vectorSuiteName, "compare const and non-const iterator", test_vector_iterator_const_compare_to_non_const);
 
-	tester.registerTest(vectorSuiteName, "reverse iterator loop", test_vector_reverse_iterator_loop);
+	tester.registerTest(vectorSuiteName, "reverse iterator loop read", test_vector_reverse_iterator_loop);
+	tester.registerTest(vectorSuiteName, "reverse iterator loop write", test_vector_reviter_write);
+	tester.registerTest(vectorSuiteName, "reverse iterator to const_reverse_iterator", test_vector_reviter_to_const_reviter);
 
 	tester.registerTest(vectorSuiteName, "capacity()", test_vector_capacity);
 	tester.registerTest(vectorSuiteName, "reserve(n) (n > capacity())", test_vector_greater_capacity_reservation);
