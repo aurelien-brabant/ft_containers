@@ -21,7 +21,6 @@ namespace ft
 		Iter _iter;
 
 		public:
-
 			typedef          Iter                                          iterator_type;
 			typedef typename ft::iterator_traits<Iter>::difference_type    difference_type;
 			typedef typename ft::iterator_traits<Iter>::value_type         value_type;
@@ -101,16 +100,13 @@ namespace ft
 			typedef T &				reference;
 			typedef Category		iterator_category;
 
-			iterator(T * p): _p(p)
-			{
-			}
+			iterator(void): _p() {}
 
-			iterator(const iterator & rhs)
-			{
-				*this = rhs;
-			}
+			explicit iterator(pointer p): _p(p) {}
 
-			iterator & operator=(iterator const & rhs)
+			iterator(const iterator& rhs) { *this = rhs; }
+
+			iterator & operator=(const iterator& rhs)
 			{
 				if (this != &rhs) {
 					_p = rhs._p;
@@ -119,21 +115,16 @@ namespace ft
 				return *this;
 			}
 
-			// allow conversion to const_iterator
+			/* allow conversion from iterator to const_iterator */
+
 			operator iterator<const T, Category, true>() const
 			{
 				return iterator<const T, Category, true>(_p);
 			}
 
-			reference operator[](int i)
-			{
-				return _p[i];
-			}
+			reference operator[](int i) { return _p[i]; }
 
-			pointer operator->(void)
-			{
-				return _p;
-			}
+			pointer operator->(void) { return _p; }
 
 			iterator& operator++()
 			{
@@ -174,7 +165,7 @@ namespace ft
 				return *_p;
 			}
 
-			const T& operator*(void) const
+		    reference operator*(void) const
 			{
 				return  *_p;
 			}
@@ -192,7 +183,7 @@ namespace ft
 
 			iterator operator+(difference_type const n)
 			{
-				return operator+=(n);
+				return iterator(_p + n);
 			}
 
 			iterator & operator-=(difference_type const n)
@@ -206,28 +197,26 @@ namespace ft
 				return *this;
 			}
 
-			iterator operator-(difference_type const n)
+			iterator operator-(difference_type const n) const
 			{
-				return operator-=(n);
+				return iterator(_p - n);
 			}
 
-			difference_type operator-(const iterator<T, Category, false> & rhs)
+			/* Difference between const and non-const iterators should be allowed */
+
+			difference_type operator-(const iterator<T, Category, false> & rhs) const
 			{
-				return _p - rhs._p;
+				return _p - &(*rhs);
 			}
 
-			/**
-			 * operator* is used on rhs to get the internal pointer as rhs
-			 * is not of the same type than *this in that case.
-			 */
-			difference_type operator-(const iterator<const T, Category, true> & rhs)
+			difference_type operator-(const iterator<const T, Category, true> & rhs) const
 			{
 				return _p - &(*rhs);
 			}
 
 			// COMPARISON OPERATORS
 			
-			// compare iterator to an iterator of the exact same type
+			// compare *this with iterator
 
 			bool operator==(iterator<T, Category, false> rhs) const { return _p == &(*rhs); }
 			bool operator!=(iterator<T, Category, false> rhs) const { return _p != &(*rhs); }
@@ -235,6 +224,8 @@ namespace ft
 			bool operator>=(iterator<T, Category, false> rhs) const { return _p >= &(*rhs); }
 			bool operator<(iterator<T, Category, false> rhs) const { return _p < &(*rhs); }
 			bool operator>(iterator<T, Category, false> rhs) const { return _p > &(*rhs); }
+
+			// compare *this with const_iterator
 
 			bool operator==(iterator<const T, Category, true> rhs) const { return _p == &(*rhs); }
 			bool operator!=(iterator<const T, Category, true> rhs) const { return _p != &(*rhs); }
