@@ -19,7 +19,11 @@ int	main(int argc, char **argv)
 
 	double difference = longestTime / shortestTime;
 
-	printf("ft \033[1m%6.2f\033[0mx %s\033[0m", difference, longestTime == ftTime ? "\033[0;31mSLOWER" : "\033[0;32mFASTER");
+	if (longestTime - shortestTime < 1) {
+		printf("\033[0;33m%-17s\033[0m", "N/A");
+	} else {
+		printf("ft \033[1m%6.2f\033[0mx %s\033[0m", difference, longestTime == ftTime ? "\033[0;31mSLOWER" : "\033[0;32mFASTER");
+	}
 
 	return 0;
 }
