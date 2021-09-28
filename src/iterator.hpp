@@ -192,6 +192,11 @@ namespace ft
 				return reverse_iterator<ft::iterator<const T, Category, true> >(_iter);
 			}
 
+			iterator_type base(void) const
+			{
+				return _iter;
+			}
+
 			/* operator* */
 
 			typename Iter::value_type& operator*()
@@ -239,7 +244,9 @@ namespace ft
 
 			/* logical operators - basically <, <=, >, >= are doing the opposite of what they're normally doing */
 			bool operator!=(const reverse_iterator& rhs) { return _iter != rhs._iter; }
-			bool operator==(const reverse_iterator& rhs) { return _iter != rhs._iter; }
+			
+			template <typename T, typename Category>
+			bool operator==(const reverse_iterator<ft::iterator<const T, Category, true> > rhs) const { return base() == rhs.base(); }
 			bool operator>=(const reverse_iterator& rhs) { return _iter <= rhs._iter; }
 			bool operator<=(const reverse_iterator& rhs) { return _iter >= rhs._iter; }
 			bool operator>(const reverse_iterator& rhs) { return _iter < rhs._iter; }

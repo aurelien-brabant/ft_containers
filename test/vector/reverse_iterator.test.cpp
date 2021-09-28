@@ -56,3 +56,27 @@ int test_vector_reviter_to_const_reviter(Tester& tester)
 
 	return 0;
 }
+
+int test_vector_reviter_to_const_operations(Tester& tester)
+{
+	vector<int> v(10);
+	
+	vector<int>::reverse_iterator rit = v.rbegin();
+	vector<int>::const_reverse_iterator crit = v.rbegin();
+
+	assert_expr(rit == crit);
+	/*
+	assert_expr(rit <= crit);
+	assert_expr(rit >= crit);
+	assert_expr(!(rit < crit));
+	assert_expr(!(rit > crit));
+
+	assert_expr(crit == rit);
+	assert_expr(crit <= rit);
+	assert_expr(crit >= rit);
+	assert_expr(!(crit < rit));
+	assert_expr(!(crit > rit));
+	*/
+
+	return 0;
+}
