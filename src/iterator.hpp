@@ -177,7 +177,7 @@ namespace ft
 			typedef typename ft::iterator_traits<Iter>::iterator_category  iterator_category;
 
 		public:
-			explicit reverse_iterator(Iter iter): _iter(iter) {}
+			explicit reverse_iterator(Iter iter = Iter()): _iter(iter) {}
 
 			template <typename U>
 			reverse_iterator(const reverse_iterator<U>& other): _iter(other.base()) {}
@@ -198,7 +198,7 @@ namespace ft
 
 			typename Iter::value_type& operator*()
 			{
-				return *_iter;
+				return *(_iter - 1);
 			}
 
 			/* ++, +=, + */

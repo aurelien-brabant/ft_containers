@@ -14,6 +14,9 @@ int main(int argc, char **argv)
 
 	Tester tester(*argv);
 
+	tester.registerTest(riterSuiteName, "default CTOR", test_riter_construct_default);
+	tester.registerTest(riterSuiteName, "iterator CTOR", test_riter_construct_from_iterator);
+
 	tester.registerTest(vectorSuiteName, "construct n by value", test_vector_construct_n_by_value);
 	tester.registerTest(vectorSuiteName, "construct n with value", test_vector_construct_n_with_value);
 

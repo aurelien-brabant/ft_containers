@@ -65,4 +65,12 @@ int test_vector_insert_odd(Tester& tester);
 int test_vector_insert_range(Tester& tester);
 int test_vector_insert_empty(Tester& tester);
 
+//////////////////////////////////
+// REVERSE ITERATOR TESTS
+/////////////////////////////////
+
+int test_riter_construct_default(Tester& tester);
+int test_riter_construct_from_iterator(Tester& tester);
+int test_riter_construct_from_iterator_of_another_type(Tester& tester);
+
 # endif
