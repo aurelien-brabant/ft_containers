@@ -17,7 +17,11 @@ int main(int argc, char **argv)
 	tester.registerTest(riterSuiteName, "default CTOR", test_riter_construct_default);
 	tester.registerTest(riterSuiteName, "iterator CTOR", test_riter_construct_from_iterator);
 	tester.registerTest(riterSuiteName, "operator=", test_riter_assign);
-	tester.registerTest(riterSuiteName, "operator+ (difference_type)", test_iter_add_n);
+	tester.registerTest(riterSuiteName, "operator+ (difference_type)", test_riter_add_n);
+	tester.registerTest(riterSuiteName, "operator- (difference_type)", test_riter_sub_n);
+	tester.registerTest(riterSuiteName, "operator++ (pre)", test_riter_pre_increment);
+	tester.registerTest(riterSuiteName, "operator++ (post)", test_riter_post_increment);
+	tester.registerTest(riterSuiteName, "operator-- (pre)", test_riter_pre_decrement);
 
 	tester.registerTest(vectorSuiteName, "construct n by value", test_vector_construct_n_by_value);
 	tester.registerTest(vectorSuiteName, "construct n with value", test_vector_construct_n_with_value);
