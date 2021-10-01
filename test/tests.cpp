@@ -18,7 +18,9 @@ int main(int argc, char **argv)
 	tester.registerTest(riterSuiteName, "iterator CTOR", test_riter_construct_from_iterator);
 	tester.registerTest(riterSuiteName, "operator=", test_riter_assign);
 	tester.registerTest(riterSuiteName, "operator+ (difference_type)", test_riter_add_n);
+	tester.registerTest(riterSuiteName, "operator+= (difference_type)", test_riter_add_n_self);
 	tester.registerTest(riterSuiteName, "operator- (difference_type)", test_riter_sub_n);
+	tester.registerTest(riterSuiteName, "operator-= (difference_type)", test_riter_sub_n_self);
 	tester.registerTest(riterSuiteName, "operator++ (pre)", test_riter_pre_increment);
 	tester.registerTest(riterSuiteName, "operator++ (post)", test_riter_post_increment);
 	tester.registerTest(riterSuiteName, "operator-- (pre)", test_riter_pre_decrement);

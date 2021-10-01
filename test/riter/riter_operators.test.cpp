@@ -15,6 +15,21 @@ int test_riter_add_n(Tester& tester)
 	return 0;
 }
 
+int test_riter_add_n_self(Tester& tester)
+{
+	const std::vector<int> v(42);
+	std::vector<int>::difference_type n = 21;
+
+	std::vector<int>::const_iterator cit = v.end();
+	reverse_iterator<std::vector<int>::const_iterator> crit(cit);
+
+	crit += n;
+
+	assert_expr(crit.base() == cit - n);
+
+	return 0;
+}
+
 int test_riter_sub_n(Tester& tester)
 {
 	const std::vector<int> v(42);
@@ -24,6 +39,21 @@ int test_riter_sub_n(Tester& tester)
 	reverse_iterator<std::vector<int>::const_iterator> crit(cit);
 
 	crit = crit - n;
+
+	assert_expr(crit.base() == cit + n);
+
+	return 0;
+}
+
+int test_riter_sub_n_self(Tester& tester)
+{
+	const std::vector<int> v(42);
+	std::vector<int>::difference_type n = 21;
+
+	std::vector<int>::const_iterator cit = v.begin();
+	reverse_iterator<std::vector<int>::const_iterator> crit(cit);
+
+	crit -= n;
 
 	assert_expr(crit.base() == cit + n);
 
