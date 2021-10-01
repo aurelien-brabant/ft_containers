@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	tester.registerTest(riterSuiteName, "operator++ (pre)", test_riter_pre_increment);
 	tester.registerTest(riterSuiteName, "operator++ (post)", test_riter_post_increment);
 	tester.registerTest(riterSuiteName, "operator-- (pre)", test_riter_pre_decrement);
+	tester.registerTest(riterSuiteName, "operator-- (post)", test_riter_post_decrement);
 	tester.registerTest(riterSuiteName, "operator- (iterators)", test_riter_sub_riter);
 	tester.registerTest(riterSuiteName, "operator>", test_riter_gt);
 	tester.registerTest(riterSuiteName, "operator>=", test_riter_gte);
