@@ -71,6 +71,7 @@ int test_vector_insert_empty(Tester& tester);
 
 int test_riter_construct_default(Tester& tester);
 int test_riter_construct_from_iterator(Tester& tester);
-int test_riter_construct_from_iterator_of_another_type(Tester& tester);
+int test_riter_assign(Tester& tester);
+int test_iter_add_n(Tester& tester);
 
 # endif

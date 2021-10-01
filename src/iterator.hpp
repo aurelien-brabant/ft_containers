@@ -196,7 +196,7 @@ namespace ft
 
 			/* operator* */
 
-			typename Iter::value_type& operator*()
+			typename Iter::value_type& operator*() const
 			{
 				return *(_iter - 1);
 			}

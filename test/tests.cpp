@@ -16,6 +16,8 @@ int main(int argc, char **argv)
 
 	tester.registerTest(riterSuiteName, "default CTOR", test_riter_construct_default);
 	tester.registerTest(riterSuiteName, "iterator CTOR", test_riter_construct_from_iterator);
+	tester.registerTest(riterSuiteName, "operator=", test_riter_assign);
+	tester.registerTest(riterSuiteName, "operator+ (difference_type)", test_iter_add_n);
 
 	tester.registerTest(vectorSuiteName, "construct n by value", test_vector_construct_n_by_value);
 	tester.registerTest(vectorSuiteName, "construct n with value", test_vector_construct_n_with_value);
