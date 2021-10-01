@@ -1,8 +1,8 @@
 #include <stdexcept>
 #include <iostream>
-#include "Tester.hpp"
+#include "castorno/Tester.hpp"
 #include "vector.hpp"
-#include "assert.hpp"
+#include "castorno/assert.hpp"
 #include "tests.hpp"
 
 int main(int argc, char **argv)

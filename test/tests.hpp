@@ -1,6 +1,6 @@
 #ifndef TESTS_HPP
 # define TESTS_HPP
-# include "Tester.hpp"
+# include "castorno/Tester.hpp"
 
 /////////////////////////////////////////////////
 // VECTOR
