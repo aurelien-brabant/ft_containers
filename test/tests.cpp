@@ -25,6 +25,12 @@ int main(int argc, char **argv)
 	tester.registerTest(riterSuiteName, "operator++ (post)", test_riter_post_increment);
 	tester.registerTest(riterSuiteName, "operator-- (pre)", test_riter_pre_decrement);
 	tester.registerTest(riterSuiteName, "operator- (iterators)", test_riter_sub_riter);
+	tester.registerTest(riterSuiteName, "operator>", test_riter_gt);
+	tester.registerTest(riterSuiteName, "operator>=", test_riter_gte);
+	tester.registerTest(riterSuiteName, "operator<", test_riter_lt);
+	tester.registerTest(riterSuiteName, "operator<=", test_riter_lte);
+	tester.registerTest(riterSuiteName, "operator==", test_riter_eq);
+	tester.registerTest(riterSuiteName, "operator!=", test_riter_neq);
 
 	tester.registerTest(vectorSuiteName, "construct n by value", test_vector_construct_n_by_value);
 	tester.registerTest(vectorSuiteName, "construct n with value", test_vector_construct_n_with_value);

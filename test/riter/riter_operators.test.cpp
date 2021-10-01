@@ -123,3 +123,73 @@ int test_riter_sub_riter(Tester& tester)
 	
 	return 0;
 }
+
+int test_riter_gt(Tester& tester)
+{
+	std::vector<int> v(21);
+
+	reverse_iterator<std::vector<int>::iterator> rbegin(v.end()), rend(v.begin());
+
+	assert_expr(rend > rbegin);
+
+	return 0;
+}
+
+int test_riter_gte(Tester& tester)
+{
+	std::vector<int> v(21);
+
+	reverse_iterator<std::vector<int>::iterator> rbegin(v.end()), rend(v.begin());
+
+	assert_expr(rend >= rbegin);
+	assert_expr(rend >= rend);
+
+	return 0;
+}
+
+int test_riter_lt(Tester& tester)
+{
+	std::vector<int> v(21);
+
+	reverse_iterator<std::vector<int>::iterator> rbegin(v.end()), rend(v.begin());
+
+	assert_expr(rbegin < rend);
+
+	return 0;
+}
+
+int test_riter_lte(Tester& tester)
+{
+	std::vector<int> v(21);
+
+	reverse_iterator<std::vector<int>::iterator> rbegin(v.end()), rend(v.begin());
+
+	assert_expr(rbegin <= rend);
+	assert_expr(rbegin <= rbegin);
+
+	return 0;
+}
+
+int test_riter_eq(Tester& tester)
+{
+	std::vector<int> v(21), v2(42);
+
+	reverse_iterator<std::vector<int>::iterator> rend(v.begin()), rend2(v2.begin());
+
+	assert_expr(rend == rend && rend2 == rend2);
+	assert_expr_not(rend2 == rend);
+
+	return 0;
+}
+
+int test_riter_neq(Tester& tester)
+{
+	std::vector<int> v(21), v2(42);
+
+	reverse_iterator<std::vector<int>::iterator> rend(v.begin()), rend2(v2.begin());
+
+	assert_expr(rend != rend2);
+	assert_expr_not(rend != rend);
+
+	return 0;
+}

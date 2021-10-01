@@ -80,5 +80,11 @@ int test_riter_pre_decrement(Tester& tester);
 int test_riter_add_n_self(Tester& tester);
 int test_riter_sub_n_self(Tester& tester);
 int test_riter_sub_riter(Tester& tester);
+int test_riter_gt(Tester& tester);
+int test_riter_gte(Tester& tester);
+int test_riter_lt(Tester& tester);
+int test_riter_lte(Tester& tester);
+int test_riter_eq(Tester& tester);
+int test_riter_neq(Tester& tester);
 
 # endif
