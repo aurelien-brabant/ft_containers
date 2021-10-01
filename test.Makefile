@@ -1,9 +1,8 @@
 CASTORNO_PATH	:= test/castorno
 CASTORNO		:= test/castorno/libcastorno.a
-FILTER_OUT = $(foreach v,$(2),$(if $(findstring $(1),$(v)),,$(v)))
 
 CC			:= g++
-CPP_FLAGS	:= -g -Wall -Wextra -Werror -I$(CASTORNO_PATH) -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
+CPP_FLAGS	:= -g -Wall -Wextra -Werror -I$(CASTORNO_PATH)/include -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
 LD			:= $(CC)
 LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno
 RM			:= rm -rf
@@ -29,10 +28,19 @@ fclean: clean
 
 re: fclean all
 
+ifeq ($(FT_CONTAINER), std)
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
+	@$(CC) $(CPP_FLAGS) -c $< -o $@
+	@printf "CC\t$<\n"
+endif
+
+ifeq ($(FT_CONTAINER), ft)
 $(OBJ_DIR)/%.o: %.cpp $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPP_FLAGS) -c $< -o $@
 	@printf "CC\t$<\n"
+endif
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
