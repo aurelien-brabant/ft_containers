@@ -111,3 +111,15 @@ int test_riter_post_decrement(Tester& tester)
 
 	return 0;
 }
+
+int test_riter_sub_riter(Tester& tester)
+{
+	std::vector<int> v(21);
+	reverse_iterator<std::vector<int>::iterator> rbegin(v.end()), rend(v.begin());
+
+	std::vector<int>::difference_type n = rend - rbegin;
+
+	p_assert_eq(n, static_cast<std::vector<int>::difference_type>(v.size()));
+	
+	return 0;
+}

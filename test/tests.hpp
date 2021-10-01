@@ -79,5 +79,6 @@ int test_riter_post_increment(Tester& tester);
 int test_riter_pre_decrement(Tester& tester);
 int test_riter_add_n_self(Tester& tester);
 int test_riter_sub_n_self(Tester& tester);
+int test_riter_sub_riter(Tester& tester);
 
 # endif
