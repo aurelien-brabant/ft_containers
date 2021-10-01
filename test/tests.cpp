@@ -81,11 +81,5 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "insert in empty vector", test_vector_insert_empty);
 	tester.registerTest(vectorSuiteName, "insert range", test_vector_insert_range);
 
-	try {
-		tester.runAllSuites();
-	} catch (std::exception &e) {
-		std::cerr << e.what() << "\n";
-	}
-
-	return 0;
+	return tester.runAllSuites() ? 0 : 1;
 }

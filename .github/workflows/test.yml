@@ -1,0 +1,14 @@
+name: build
+on:
+  push:
+    branches:
+      - master
+jobs:
+    test-containers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: make
+      - run: ./std
+      - run: ./ft
+
