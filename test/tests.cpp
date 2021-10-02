@@ -90,5 +90,8 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "insert in empty vector", test_vector_insert_empty);
 	tester.registerTest(vectorSuiteName, "insert range", test_vector_insert_range);
 
+	tester.registerTest(vectorSuiteName, "assign fill", test_vector_assign);
+	tester.registerTest(vectorSuiteName, "assign range", test_vector_iterator_assign);
+
 	return tester.runAllSuites() ? 0 : 1;
 }

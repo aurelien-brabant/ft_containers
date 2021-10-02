@@ -65,6 +65,9 @@ int test_vector_insert_odd(Tester& tester);
 int test_vector_insert_range(Tester& tester);
 int test_vector_insert_empty(Tester& tester);
 
+int test_vector_assign(Tester& tester);
+int test_vector_iterator_assign(Tester& tester);
+
 //////////////////////////////////
 // REVERSE ITERATOR TESTS
 /////////////////////////////////

@@ -61,7 +61,7 @@ namespace ft
 				return *this;
 			}
 
-			iterator& operator++(int)
+			iterator operator++(int)
 			{
 				iterator it(*this);
 
