@@ -1,3 +1,5 @@
+# ifndef TYPE_TRAITS_HPP
+# define TYPE_TRAITS_HPP
 #include <stdint.h>
 
 namespace ft
@@ -49,3 +51,5 @@ namespace ft
 	template <> struct is_integral<unsigned long long>: public true_type {};
 	template <> struct is_integral<unsigned short>: public true_type {};
 }
+
+#endif

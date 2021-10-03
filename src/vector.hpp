@@ -4,7 +4,9 @@
 # include <iostream>
 # include <stdexcept>
 # include <iostream>
+# include <cstdlib>
 # include "iterator.hpp"
+# include "type_traits.hpp"
 
 namespace ft
 {
@@ -56,12 +58,7 @@ namespace ft
 					_allocator.construct(_data + i, value);
 				}
 			}
-
-			/**
-			 * Construct a vector from another one, by coping rhs's elements into the constructed one.
-			 * Only the actually occupied memory is constructed.
-			 */
-
+			
 			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
 				for (size_type i = 0; i != size(); ++i) {
@@ -72,41 +69,76 @@ namespace ft
 			reference operator=(const_reference rhs)
 			{
 				if (this != &rhs) {
-					/* Copy elements from rhs to *this up to its capacity */
-					for (size_type i = 0; i != capacity() && i != rhs.size(); ++i) {
-						_data[i] = rhs._data[i];
-					}
-
-					/* if *this has less elements than rhs, that means we could not copy everything, due to a lack of capacity */
-					if (size() < rhs.size()) {
-						if (capacity() < rhs.size()) {
-							reserve(rhs.size() * 2);
-						}
-						for (size_type i = size(); i != rhs.size(); ++i) {
-							_allocator.construct(_data + i, rhs._data[i]);
-						}
-					}
-
-					_length = rhs._length;
+					assign(rhs.begin(), rhs.end());
 				}
 
 				return *this;
 			}
-
-			// DTOR
 
 			~vector(void)
 			{
 				_allocator.deallocate(_data, _capacity);
 			}
 
-			// Getters
-			
 			allocator_type get_allocator(void) const
 			{
 				return _allocator;
 			}
 			
+			template <typename InputIt>
+			void assign(
+					InputIt begin,
+					InputIt end,
+					typename ft::enable_if<!ft::is_integral<InputIt>::value>::type* p = 0)
+			{
+				(void)p;
+
+				size_type count = end - begin;
+
+				if (count > capacity()) {
+					reserve(count * vectorGrowthFactor);
+				}
+
+				for (size_type i = 0; i < count; ++i) {
+					if (i < size()) {
+						_data[i] = *begin++;
+					} else {
+						_allocator.construct(_data + i, *begin++);
+					}
+				}
+
+				/* Destroy excess of element in case there is */
+				for (size_type i = count; i < size(); ++i) {
+					_allocator.destroy(_data + i);
+				}
+
+				_length = count;
+			}
+			
+			void assign(size_type count, T const & value)
+			{
+				if (count > capacity()) {
+					reserve(count * vectorGrowthFactor);
+				}
+
+				for (size_type i = 0; i != count; ++i) {
+					if (i < size()) {
+						_data[i] = value;
+					} else {
+						_allocator.construct(_data + i, value);
+					}
+				}
+
+				_length = count;
+			}
+			
+			// capacity {{{
+
+			bool empty(void) const
+			{
+				return size() == 0;
+			}
+
 			size_type size(void) const
 			{
 				return _length;
@@ -120,11 +152,6 @@ namespace ft
 			size_type max_size(void) const
 			{
 				return _allocator.max_size();
-			}
-
-			bool empty(void) const
-			{
-				return size() == 0;
 			}
 
 			/**
@@ -153,18 +180,12 @@ namespace ft
 				_allocator.deallocate(_data, _capacity);
 				_data = newData;
 				_capacity = newCapacity;
-			}	
-
-			void push_back(value_type const & value)
-			{
-				if (_length == _capacity) {
-					reserve(capacity() * vectorGrowthFactor);
-				}
-
-				_allocator.construct(_data + _length++, value);
 			}
 
-			// element access
+			// }}}
+
+			// element access {{{
+			
 			value_type & operator[](size_type index)
 			{
 				return _data[index];
@@ -189,30 +210,14 @@ namespace ft
 				return *(end() - 1);
 			}
 
-			// assign
-			// TODO: fix template overload issue. assign(size_type, T const &) tries
-			// to use the template which is definitely not to be expected.
-
-			template <typename InputIt>
-			void assign(InputIt begin, InputIt end)
+			pointer data(void)
 			{
-				_length = 0;
-				
-				while (begin != end) {
-					push_back(*begin++);
-				}
-			}
-			
-			void assign(size_type count, T const & value)
-			{
-				_length = 0;
-
-				for (size_type i = 0; i != count; ++i) {
-					push_back(value);
-				}
+				return _data;
 			}
 
-			// ITERATORS
+			// }}}
+
+			// iterators {{{
 			
 			iterator begin(void)
 			{
@@ -242,8 +247,6 @@ namespace ft
 				return tmp;
 			}
 
-			// reverse iterators
-			
 			reverse_iterator rbegin()
 			{
 				return reverse_iterator(end());
@@ -264,7 +267,9 @@ namespace ft
 				return const_reverse_iterator(begin());
 			}
 
-			// MANIPULATORS
+			// }}}
+
+			// modifiers {{{
 			
 			void clear(void)
 			{
@@ -309,28 +314,35 @@ namespace ft
 				return this->begin() + ipos;
 			}
 
-
 			/**
 			 * Insert value before pos, triggering a resize if size() + 1 >= capacity().
 			 * push_back is used to push a new element in the vector and resize it if
 			 * necessary, as this overload only adds one element to the vector.
 			 */
 
-			iterator insert(iterator pos, T const & value)
+			void insert(iterator pos, T const & value)
 			{
 				size_type ipos = pos - begin();
+				
+				push_back(value);
 
-				push_back(T());
-
-				for (size_type i = end() - begin(); i > ipos;) {
+				for (size_type i = end() - begin(); i > ipos + 1;) {
 					--i;
 					_data[i] = _data[i - 1];
 				}
 				
 				_data[ipos] = value;
-
-				return begin() + ipos;
 			}
+
+			void push_back(const value_type& value)
+			{
+				if (size() == capacity()) {
+					reserve(capacity() * vectorGrowthFactor);
+				}
+				_allocator.construct(_data + _length++, value);
+			}
+
+			// }}}
 	};
 }
 

@@ -91,7 +91,11 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "insert range", test_vector_insert_range);
 
 	tester.registerTest(vectorSuiteName, "assign fill", test_vector_assign);
+	tester.registerTest(vectorSuiteName, "assign less", test_vector_assign_less);
+	tester.registerTest(vectorSuiteName, "assign more", test_vector_assign_more);
 	tester.registerTest(vectorSuiteName, "assign range", test_vector_iterator_assign);
+
+	tester.registerTest(vectorSuiteName, "data()", test_vector_data);
 
 	return tester.runAllSuites() ? 0 : 1;
 }
