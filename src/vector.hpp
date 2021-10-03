@@ -342,6 +342,21 @@ namespace ft
 				_allocator.construct(_data + _length++, value);
 			}
 
+			iterator erase(iterator pos)
+			{
+				_allocator.destroy(&(*pos));
+
+				iterator it(pos);
+				while (it != end() - 1) {
+					it[0] = it[1];
+					++it;
+				}
+
+				--_length;
+
+				return pos;
+			}
+
 			// }}}
 	};
 }

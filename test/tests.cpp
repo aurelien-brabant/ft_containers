@@ -97,5 +97,7 @@ int main(int argc, char **argv)
 
 	tester.registerTest(vectorSuiteName, "data()", test_vector_data);
 
+	tester.registerTest(vectorSuiteName, "erase one", test_vector_erase_one);
+
 	return tester.runAllSuites() ? 0 : 1;
 }
