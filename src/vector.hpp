@@ -357,6 +357,23 @@ namespace ft
 				return pos;
 			}
 
+			iterator erase(iterator first, iterator last)
+			{
+				difference_type n = last - first;
+
+				while (first != end()) {
+					if (first < end() - n) {
+						first[0] = first[n];
+					} else {
+						_allocator.destroy(&(*first));
+					}
+					++first;
+				}
+
+				_length -= n;
+				return last - n;
+			}
+
 			// }}}
 	};
 }

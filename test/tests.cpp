@@ -98,6 +98,9 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "data()", test_vector_data);
 
 	tester.registerTest(vectorSuiteName, "erase one", test_vector_erase_one);
+	tester.registerTest(vectorSuiteName, "erase range", test_vector_erase_range);
+	tester.registerTest(vectorSuiteName, "erase empty range", test_vector_erase_empty_range);
+	tester.registerTest(vectorSuiteName, "erase range all elements", test_vector_erase_range_all);
 
 	return tester.runAllSuites() ? 0 : 1;
 }

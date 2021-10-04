@@ -73,6 +73,9 @@ int test_vector_iterator_assign(Tester& tester);
 int test_vector_data(Tester& tester);
 
 int test_vector_erase_one(Tester& tester);
+int test_vector_erase_range(Tester& tester);
+int test_vector_erase_empty_range(Tester& tester);
+int test_vector_erase_range_all(Tester& tester);
 
 //////////////////////////////////
 // REVERSE ITERATOR TESTS
