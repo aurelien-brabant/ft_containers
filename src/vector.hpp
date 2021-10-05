@@ -5,6 +5,7 @@
 # include <stdexcept>
 # include <iostream>
 # include <cstdlib>
+# include "algorithm.hpp"
 # include "iterator.hpp"
 # include "type_traits.hpp"
 
@@ -376,6 +377,31 @@ namespace ft
 
 			// }}}
 	};
+
+	template<typename T, typename Alloc>
+	bool operator==(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
+	{
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	}
+
+	template<typename T, typename Alloc>
+	bool operator!=(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
+	{
+		return !operator==(lhs, rhs);
+	}
+
+	template<typename T, typename Alloc>
+	bool operator<(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
+	{
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	}
+
+	template<typename T, typename Alloc>
+	bool operator>(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
+	{
+		return !ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()) && !ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	}
+
 }
 
 #endif
