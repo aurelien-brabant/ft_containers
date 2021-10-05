@@ -11,6 +11,7 @@ int main(int argc, char **argv)
 	(void)argc;
 
 	const std::string lcSuiteName("lexicographical compare");
+	const std::string equalSuiteName("equal (ranges)");
 	const std::string riterSuiteName("reverse iterator");
 	const std::string vectorSuiteName("vector");
 
@@ -34,6 +35,20 @@ int main(int argc, char **argv)
 	tester.registerTest(lcSuiteName, "(cmp) first2 empty", test_lc_cmp_first2_empty);
 	tester.registerTest(lcSuiteName, "(cmp) both empty ranges", test_lc_cmp_both_empty);
 	tester.registerTest(lcSuiteName, "(cmp) perf test, first1 less than first2", test_lc_cmp_perf_differ_at_last_element);
+	
+	tester.registerTest(equalSuiteName, "equal ranges", test_equal);
+	tester.registerTest(equalSuiteName, "unequal ranges (first elem)", test_unequal_first_element);
+	tester.registerTest(equalSuiteName, "unequal ranges (last elem)", test_unequal_last_element);
+	tester.registerTest(equalSuiteName, "equal ranges first1 smaller", test_equal_first1_smaller);
+	tester.registerTest(equalSuiteName, "equal subrange", test_equal_subrange);
+	tester.registerTest(equalSuiteName, "perf test, unequal at midrange", test_perf_unequal_at_mid);
+
+	tester.registerTest(equalSuiteName, "(pred) equal ranges", test_pred_equal);
+	tester.registerTest(equalSuiteName, "(pred) unequal ranges (first elem)", test_pred_unequal_first_element);
+	tester.registerTest(equalSuiteName, "(pred) unequal ranges (last elem)", test_pred_unequal_last_element);
+	tester.registerTest(equalSuiteName, "(pred) equal ranges first1 smaller", test_pred_equal_first1_smaller);
+	tester.registerTest(equalSuiteName, "(pred) equal subrange", test_pred_equal_subrange);
+	tester.registerTest(equalSuiteName, "(pred) perf test, unequal at midrange", test_pred_perf_unequal_at_mid);
 
 	tester.registerTest(riterSuiteName, "default CTOR", test_riter_construct_default);
 	tester.registerTest(riterSuiteName, "iterator CTOR", test_riter_construct_from_iterator);

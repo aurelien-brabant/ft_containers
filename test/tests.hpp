@@ -27,6 +27,24 @@ int test_lc_cmp_ranges_equal(Tester& tester);
 int test_lc_cmp_perf_differ_at_last_element(Tester& tester);
 
 /////////////////////////////////////////////////
+// equal (ranges)
+////////////////////////////////////////////////
+
+int test_equal(Tester& tester);
+int test_unequal_first_element(Tester& tester);
+int test_unequal_last_element(Tester& tester);
+int test_equal_first1_smaller(Tester& tester);
+int test_equal_subrange(Tester& tester);
+int test_perf_unequal_at_mid(Tester& tester);
+
+int test_pred_equal(Tester& tester);
+int test_pred_unequal_first_element(Tester& tester);
+int test_pred_unequal_last_element(Tester& tester);
+int test_pred_equal_first1_smaller(Tester& tester);
+int test_pred_equal_subrange(Tester& tester);
+int test_pred_perf_unequal_at_mid(Tester& tester);
+
+/////////////////////////////////////////////////
 // VECTOR
 ////////////////////////////////////////////////
 
