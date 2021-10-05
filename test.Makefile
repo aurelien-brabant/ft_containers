@@ -7,9 +7,8 @@ LD			:= $(CC)
 LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno
 RM			:= rm -rf
 
-HEADERS		:= $(addprefix ./src/, vector.hpp map.hpp stack.hpp iterator.hpp)
+HEADERS		:= $(wildcard src/*.hpp)
 SRCS		:= test/tests.cpp $(wildcard test/*/*test.cpp)
-
 
 OBJ_DIR     := .obj/$(FT_CONTAINER)
 OBJS		:= $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))

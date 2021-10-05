@@ -3,6 +3,30 @@
 # include "castorno/Tester.hpp"
 
 /////////////////////////////////////////////////
+// Lexicographical compare
+////////////////////////////////////////////////
+
+int test_lc_first1_less_than_first2(Tester& tester);
+int test_lc_first1_greater_than_first2(Tester& tester);
+int test_lc_first1_prefix_of_first2(Tester& tester);
+int test_lc_first2_prefix_of_first1(Tester& tester);
+int test_lc_first1_empty(Tester& tester);
+int test_lc_first2_empty(Tester& tester);
+int test_lc_both_empty(Tester& tester);
+int test_lc_ranges_equal(Tester& tester);
+int test_lc_perf_differ_at_last_element(Tester& tester);
+
+int test_lc_cmp_first1_less_than_first2(Tester& tester);
+int test_lc_cmp_first1_greater_than_first2(Tester& tester);
+int test_lc_cmp_first1_prefix_of_first2(Tester& tester);
+int test_lc_cmp_first2_prefix_of_first1(Tester& tester);
+int test_lc_cmp_first1_empty(Tester& tester);
+int test_lc_cmp_first2_empty(Tester& tester);
+int test_lc_cmp_both_empty(Tester& tester);
+int test_lc_cmp_ranges_equal(Tester& tester);
+int test_lc_cmp_perf_differ_at_last_element(Tester& tester);
+
+/////////////////////////////////////////////////
 // VECTOR
 ////////////////////////////////////////////////
 

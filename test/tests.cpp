@@ -10,10 +10,30 @@ int main(int argc, char **argv)
 {
 	(void)argc;
 
+	const std::string lcSuiteName("lexicographical compare");
 	const std::string riterSuiteName("reverse iterator");
 	const std::string vectorSuiteName("vector");
 
 	Tester tester(*argv);
+
+	tester.registerTest(lcSuiteName, "first1 less than first2", test_lc_first1_less_than_first2);
+	tester.registerTest(lcSuiteName, "first1 greater than first2", test_lc_first1_greater_than_first2);
+	tester.registerTest(lcSuiteName, "first1 prefix of first2", test_lc_first1_prefix_of_first2);
+	tester.registerTest(lcSuiteName, "first2 prefix of first1", test_lc_first2_prefix_of_first1);
+	tester.registerTest(lcSuiteName, "equal ranges", test_lc_ranges_equal);
+	tester.registerTest(lcSuiteName, "first1 empty", test_lc_first1_empty);
+	tester.registerTest(lcSuiteName, "first2 empty", test_lc_first2_empty);
+	tester.registerTest(lcSuiteName, "both empty ranges", test_lc_both_empty);
+	tester.registerTest(lcSuiteName, "perf test, first1 less than first2", test_lc_perf_differ_at_last_element);
+	tester.registerTest(lcSuiteName, "(cmp) first1 less than first2", test_lc_cmp_first1_less_than_first2);
+	tester.registerTest(lcSuiteName, "(cmp) first1 greater than first2", test_lc_cmp_first1_greater_than_first2);
+	tester.registerTest(lcSuiteName, "(cmp) first1 prefix of first2", test_lc_cmp_first1_prefix_of_first2);
+	tester.registerTest(lcSuiteName, "(cmp) first2 prefix of first1", test_lc_cmp_first2_prefix_of_first1);
+	tester.registerTest(lcSuiteName, "(cmp) equal ranges", test_lc_cmp_ranges_equal);
+	tester.registerTest(lcSuiteName, "(cmp) first1 empty", test_lc_cmp_first1_empty);
+	tester.registerTest(lcSuiteName, "(cmp) first2 empty", test_lc_cmp_first2_empty);
+	tester.registerTest(lcSuiteName, "(cmp) both empty ranges", test_lc_cmp_both_empty);
+	tester.registerTest(lcSuiteName, "(cmp) perf test, first1 less than first2", test_lc_cmp_perf_differ_at_last_element);
 
 	tester.registerTest(riterSuiteName, "default CTOR", test_riter_construct_default);
 	tester.registerTest(riterSuiteName, "iterator CTOR", test_riter_construct_from_iterator);
