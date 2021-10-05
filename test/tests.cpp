@@ -137,5 +137,9 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "erase empty range", test_vector_erase_empty_range);
 	tester.registerTest(vectorSuiteName, "erase range all elements", test_vector_erase_range_all);
 
+	tester.registerTest(vectorSuiteName, "operator==", test_vector_eq_operator);
+	tester.registerTest(vectorSuiteName, "operator!=", test_vector_uneq_operator);
+	tester.registerTest(vectorSuiteName, "operator>", test_vector_gt_operator);
+
 	return tester.runAllSuites() ? 0 : 1;
 }
