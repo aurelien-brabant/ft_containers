@@ -16,6 +16,15 @@ int test_vector_at_valid(Tester& tester)
 	return 0;
 }
 
+int test_vector_at_const_overload(Tester& tester)
+{
+	const vector<int> v(1);
+
+	p_assert_eq(v.at(0), int());
+	
+	return 0;
+}
+
 int test_vector_at_throws(Tester& tester)
 {
 	vector<long> v, v2(10);

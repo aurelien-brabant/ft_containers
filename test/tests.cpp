@@ -84,6 +84,7 @@ int main(int argc, char **argv)
 
 	tester.registerTest(vectorSuiteName, "valid at()", test_vector_at_valid);
 	tester.registerTest(vectorSuiteName, "throwing at()", test_vector_at_throws);
+	tester.registerTest(vectorSuiteName, "at const overload", test_vector_at_const_overload);
 
 	tester.registerTest(vectorSuiteName, "iterator read loop", test_vector_iterator_read_loop);
 	tester.registerTest(vectorSuiteName, "iterator write loop", test_vector_iterator_read_write_loop);

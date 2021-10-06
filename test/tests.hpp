@@ -57,6 +57,7 @@ int test_vector_subscript(Tester& tester);
 
 int test_vector_at_valid(Tester& tester);
 int test_vector_at_throws(Tester& tester);
+int test_vector_at_const_overload(Tester& tester);
 
 // vector<T>::iterator
 

@@ -189,12 +189,26 @@ namespace ft
 
 			// element access {{{
 			
-			value_type & operator[](size_type index)
+			value_type& operator[](size_type index)
 			{
 				return _data[index];
 			}
 
-			value_type & at(size_type index)
+			const value_type& operator[](size_type index) const
+			{
+				return _data[index];
+			}
+
+			value_type& at(size_type index)
+			{
+				if (index >= size()) {
+					throw std::out_of_range("vector: index out of range");
+				}
+
+				return operator[](index);
+			}
+
+			const value_type& at(size_type index) const
 			{
 				if (index >= size()) {
 					throw std::out_of_range("vector: index out of range");
