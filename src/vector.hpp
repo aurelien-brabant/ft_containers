@@ -337,7 +337,7 @@ namespace ft
 			 * necessary, as this overload only adds one element to the vector.
 			 */
 
-			void insert(iterator pos, T const & value)
+			iterator insert(iterator pos, T const & value)
 			{
 				size_type ipos = pos - begin();
 				
@@ -349,6 +349,8 @@ namespace ft
 				}
 				
 				_data[ipos] = value;
+
+				return iterator(_data + ipos);
 			}
 
 			void push_back(const value_type& value)
