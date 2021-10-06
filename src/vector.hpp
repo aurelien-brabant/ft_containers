@@ -361,6 +361,14 @@ namespace ft
 				_allocator.construct(_data + _length++, value);
 			}
 
+			// "Calling pop_back on an empty container results in undefined behavior."
+			// From https://en.cppreference.com/w/cpp/container/vector/pop_back
+
+			void pop_back(void)
+			{
+				_allocator.destroy(_data[--_length]);
+			}
+
 			iterator erase(iterator pos)
 			{
 				_allocator.destroy(&(*pos));
