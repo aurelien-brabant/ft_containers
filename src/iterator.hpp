@@ -15,6 +15,9 @@ namespace ft
 		typedef typename Iter::iterator_category	iterator_category;
 	};
 
+	// normal iterator - random access {{{
+	
+	// TODO: use SFINAE to filter available operators depending on iterator's category
 	template <typename T, typename Category, bool IsConst = false>
 	class iterator
 	{
@@ -163,6 +166,10 @@ namespace ft
 			bool operator>(iterator<const T, Category, true> rhs) const { return _p > &(*rhs); }
 	};
 
+	// }}}
+
+	// reverse iterator {{{
+
 	template <class Iter>
 	class reverse_iterator
 	{
@@ -196,9 +203,24 @@ namespace ft
 
 			/* operator* */
 
-			typename Iter::value_type& operator*() const
+			const value_type& operator*() const
 			{
 				return *(_iter - 1);
+			}
+
+			value_type& operator*(void)
+			{
+				return *(_iter - 1);
+			}
+
+			const value_type& operator[](size_t i) const
+			{
+				return operator[](i);
+			}
+
+			value_type& operator[](size_t i)
+			{
+				return *(_iter - i - 1);
 			}
 
 			/* ++, +=, + */
@@ -245,7 +267,11 @@ namespace ft
 			}
 	};
 
+	// }}}
+
 	/* reverse_iterator non-members */
+
+	// non-member logical operators {{{
 
 	template <typename Iter1, typename Iter2>
 	bool operator==(const ft::reverse_iterator<Iter1>& lhs, const ft::reverse_iterator<Iter2>& rhs) { return lhs.base() == rhs.base(); }
@@ -265,11 +291,17 @@ namespace ft
 	template <typename Iter1, typename Iter2>
 	bool operator<(ft::reverse_iterator<Iter1>& lhs, ft::reverse_iterator<Iter2>& rhs) { return lhs.base() > rhs.base(); }
 
+	// }}}
+
+	// other non-member {{{
+
 	template <typename Iter>
 	reverse_iterator<Iter> operator+(const ft::reverse_iterator<Iter>& lhs, typename Iter::difference_type n) { return reverse_iterator<Iter>(lhs.base() - n); }
 
 	template <typename Iter>
 	typename reverse_iterator<Iter>::difference_type operator-(const ft::reverse_iterator<Iter>& lhs, const ft::reverse_iterator<Iter>& rhs) { return rhs.base() - lhs.base(); }
+
+	// }}}
 }
 
 #endif
