@@ -71,6 +71,7 @@ int main(int argc, char **argv)
 
 	tester.registerTest(vectorSuiteName, "construct n by value", test_vector_construct_n_by_value);
 	tester.registerTest(vectorSuiteName, "construct n with value", test_vector_construct_n_with_value);
+	tester.registerTest(vectorSuiteName, "construct with range", test_vector_range_constructor);
 
 	tester.registerTest(vectorSuiteName, "copy constructor", test_vector_copy_constructor);
 

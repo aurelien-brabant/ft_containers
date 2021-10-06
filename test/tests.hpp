@@ -50,6 +50,7 @@ int test_pred_perf_unequal_at_mid(Tester& tester);
 
 int test_vector_construct_n_by_value(Tester& tester);
 int test_vector_construct_n_with_value(Tester& tester);
+int test_vector_range_constructor(Tester& tester);
 
 int	test_vector_size(Tester& tester);
 
