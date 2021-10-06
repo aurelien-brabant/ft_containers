@@ -231,18 +231,28 @@ namespace ft
 
 				return operator[](index);
 			}
-
-			value_type & front(void)
+			
+			value_type& front(void)
 			{
 				return *begin();
 			}
 
-			value_type & back(void)
+			const value_type& front(void) const
+			{
+				return *begin();
+			}
+
+			const value_type& back(void) const
 			{
 				return *(end() - 1);
 			}
 
-			pointer data(void)
+			value_type& back(void)
+			{
+				return *(end() - 1);
+			}
+
+			pointer data(void) const
 			{
 				return _data;
 			}
@@ -381,7 +391,7 @@ namespace ft
 
 			void pop_back(void)
 			{
-				_allocator.destroy(_data[--_length]);
+				_allocator.destroy(_data + --_length);
 			}
 
 			void resize(size_type count, T value = T())

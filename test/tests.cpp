@@ -147,5 +147,7 @@ int main(int argc, char **argv)
 
 	tester.registerTest(vectorSuiteName, "swap (member and std:: specialization)", test_vector_swap);
 
+	tester.registerTest(vectorSuiteName, "pop_back()", test_vector_pop_back);
+
 	return tester.runAllSuites() ? 0 : 1;
 }
