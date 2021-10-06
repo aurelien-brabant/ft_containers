@@ -144,5 +144,7 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "operator<", test_vector_lt_operator);
 	tester.registerTest(vectorSuiteName, "operator<=", test_vector_lte_operator);
 
+	tester.registerTest(vectorSuiteName, "swap (member and std:: specialization)", test_vector_swap);
+
 	return tester.runAllSuites() ? 0 : 1;
 }

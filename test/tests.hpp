@@ -126,6 +126,8 @@ int test_vector_gte_operator(Tester& tester);
 int test_vector_lt_operator(Tester& tester);
 int test_vector_lte_operator(Tester& tester);
 
+int test_vector_swap(Tester& tester);
+
 //////////////////////////////////
 // REVERSE ITERATOR TESTS
 /////////////////////////////////

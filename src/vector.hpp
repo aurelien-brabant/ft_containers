@@ -5,6 +5,7 @@
 # include <stdexcept>
 # include <iostream>
 # include <cstdlib>
+# include <algorithm>
 # include "algorithm.hpp"
 # include "iterator.hpp"
 # include "type_traits.hpp"
@@ -376,7 +377,24 @@ namespace ft
 				return last - n;
 			}
 
+			
+			void swap(vector& other)
+			{
+				T* data_tmp = _data;
+				size_type tmp_len = _length;
+				size_type tmp_cap = _capacity;
+
+				_data = other._data;
+				_length = other._length;
+				_capacity = other._capacity;
+
+				other._data = data_tmp;
+				other._length = tmp_len;
+				other._capacity = tmp_cap;
+			}
+			
 			// }}}
+
 	};
 
 	// vector non-members logical operators {{{
@@ -418,6 +436,20 @@ namespace ft
 	}
 
 	// }}}
+
+}
+
+namespace std
+{
+	// algorithm specialization {{{
+	
+	template <typename T, typename Alloc>
+	void swap(ft::vector<T, Alloc>& lhs, ft::vector<T, Alloc>& rhs)
+	{
+		lhs.swap(rhs);
+	}
+	
+	/// }}}
 }
 
 #endif
