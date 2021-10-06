@@ -61,6 +61,20 @@ namespace ft
 				}
 			}
 
+			template <typename InputIt>
+			vector(
+				InputIt first,
+				InputIt last,
+				const Allocator& alloc = Allocator(),
+				typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* t = 0
+			): _allocator(alloc), _capacity((last - first) * 2), _data(_allocator.allocate(_capacity)), _length(last - first)
+			{
+				(void)t;
+
+				for (size_type i = 0; i != size(); ++i) {
+					_allocator.construct(_data + i, first[i]);
+				}
+			}
 			
 			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
