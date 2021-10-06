@@ -122,6 +122,9 @@ int test_vector_erase_range_all(Tester& tester);
 int test_vector_eq_operator(Tester& tester);
 int test_vector_uneq_operator(Tester& tester);
 int test_vector_gt_operator(Tester& tester);
+int test_vector_gte_operator(Tester& tester);
+int test_vector_lt_operator(Tester& tester);
+int test_vector_lte_operator(Tester& tester);
 
 //////////////////////////////////
 // REVERSE ITERATOR TESTS

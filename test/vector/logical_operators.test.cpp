@@ -54,3 +54,77 @@ int test_vector_gt_operator(Tester& tester)
 
 	return 0;
 }
+
+int test_vector_gte_operator(Tester& tester)
+{
+	vector<int> v1, v2;
+
+	assert_expr(v1 >= v2 == true);
+
+	v1.push_back(42);
+
+	assert_expr(v1 >= v2 == true);
+	assert_expr(v2 >= v1 == false);
+
+	v2.push_back(84);
+
+	assert_expr(v2 >= v1 == true);
+	assert_expr(v1 >= v2 == false);
+
+	v2[0] = 42;
+
+	assert_expr(v1 >= v2 == true);
+	assert_expr(v2 >= v1 == true);
+
+	return 0;
+}
+
+int test_vector_lt_operator(Tester& tester)
+{
+	vector<int> v1, v2;
+
+	assert_expr(v1 < v2 == false);
+	assert_expr(v2 < v1 == false);
+
+	v1.push_back(42);
+	
+	assert_expr(v2 < v1 == true);
+	assert_expr(v1 < v2 == false);
+
+	v2.push_back(84);
+
+	assert_expr(v1 < v2 == true);
+	assert_expr(v2 < v1 == false);
+
+	v2[0] = 42;
+
+	assert_expr(v1 < v2 == false);
+	assert_expr(v2 < v1 == false);
+
+	return 0;
+}
+
+int test_vector_lte_operator(Tester& tester)
+{
+	vector<int> v1, v2;
+
+	assert_expr(v1 <= v2 == true);
+	assert_expr(v2 <= v1 == true);
+
+	v1.push_back(42);
+
+	assert_expr(v1 <= v2 == false);
+	assert_expr(v2 <= v1 == true);
+
+	v2.push_back(84);
+
+	assert_expr(v1 <= v2 == true);
+	assert_expr(v2 <= v1 == false);
+
+	v2[0] = 42;
+
+	assert_expr(v1 <= v2 == true);
+	assert_expr(v2 <= v1 == true);
+
+	return 0;
+}

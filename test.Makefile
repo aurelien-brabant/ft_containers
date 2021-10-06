@@ -31,14 +31,14 @@ ifeq ($(FT_CONTAINER), std)
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPP_FLAGS) -c $< -o $@
-	@printf "CC\t$(notdir $<)\n"
+	@printf "CC\t$@\n"
 endif
 
 ifeq ($(FT_CONTAINER), ft)
 $(OBJ_DIR)/%.o: %.cpp $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPP_FLAGS) -c $< -o $@
-	@printf "CC\t$(notdir $<)\n"
+	@printf "CC\t$@\n"
 endif
 
 $(OBJ_DIR):

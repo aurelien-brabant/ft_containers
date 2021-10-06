@@ -140,6 +140,9 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "operator==", test_vector_eq_operator);
 	tester.registerTest(vectorSuiteName, "operator!=", test_vector_uneq_operator);
 	tester.registerTest(vectorSuiteName, "operator>", test_vector_gt_operator);
+	tester.registerTest(vectorSuiteName, "operator>=", test_vector_gte_operator);
+	tester.registerTest(vectorSuiteName, "operator<", test_vector_lt_operator);
+	tester.registerTest(vectorSuiteName, "operator<=", test_vector_lte_operator);
 
 	return tester.runAllSuites() ? 0 : 1;
 }
