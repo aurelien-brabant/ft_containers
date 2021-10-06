@@ -60,6 +60,7 @@ namespace ft
 					_allocator.construct(_data + i, value);
 				}
 			}
+
 			
 			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
@@ -367,6 +368,23 @@ namespace ft
 			void pop_back(void)
 			{
 				_allocator.destroy(_data[--_length]);
+			}
+
+			void resize(size_type count, T value = T())
+			{
+				if (size() > count) {
+					for (size_type i = count; i != size(); ++i) {
+						_allocator.destroy(_data + i);
+					}
+				} else if (count > size()) {
+					if (count > capacity()) {
+						reserve(count * 2);
+					}
+					for (size_type i = size(); i != count; ++i) {
+						_allocator.construct(_data + i, value);
+					}
+				}
+				_length = count;
 			}
 
 			iterator erase(iterator pos)
