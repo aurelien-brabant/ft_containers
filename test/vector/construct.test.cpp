@@ -48,6 +48,8 @@ int test_vector_range_constructor(Tester& tester)
 
 	vector<string> v(range.begin(), range.end());
 
+	assert_expr(v.size() == static_cast<vector<string>::size_type>(range.end() - range.begin()));
+
 	for (vector<string>::size_type i = 0; i != v.size(); ++i) {
 		oss << i;
 		p_assert_eq(v[i], oss.str());
