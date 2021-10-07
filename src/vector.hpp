@@ -325,32 +325,43 @@ namespace ft
 				_length = 0;
 			}
 
+			/**
+			 * [1, 4, 8, 4, 7, 2, 0, 0 ]
+			 *
+			 *
+			 */
+
 			void insert(iterator pos, size_type count, const T& value)
 			{
+				// The position of pos expressed as an index, thus independant of iterator invalidation.
 				size_type ipos = pos - begin();
-
-				if (size() > 0 && ipos == size()) --ipos;
 
 				if (count == 0) {
 					return ;
 				}
 
+				// reserve more space if required
 				if (size() + count > capacity()) {
-					resize((size() + count) * vectorGrowthFactor);
+					reserve((size() + count) * vectorGrowthFactor);
 				}
-				
-				// shift elements to the right, starting at insertion point
-				for (size_type i = size(); i != ipos;) {
-					--i;
-					if (i + count >= size()) {
-						_allocator.construct(_data + i + count, _data[i]);
-					} else {
-						_data[i + count] = _data[i];
-					}
-				}
-				_data[ipos + count] = _data[ipos];
 
-				// actual insertion
+				// Shift n elements to the right, where n equates to std::distance(end - pos)
+				// Do not attempt to shift if vector is empty or if insertion is performed at
+				// the back.
+
+				if (size() > 0 && ipos != size()) {
+					for (size_type i = size() - 1; i > ipos; --i) {
+						if (i + count >= size()) {
+							_allocator.construct(_data + i + count, _data[i]);
+						} else {
+							_data[i + count] = _data[i];
+						}
+					}
+					_data[ipos + count] = _data[ipos];
+				}
+
+				// actually insert the elements
+
 				for (size_type i = ipos; i != ipos + count; ++i) {
 					if (i >= size()) {
 						_allocator.construct(_data + i, value);
@@ -379,8 +390,6 @@ namespace ft
 				size_type n = end - begin;
 				size_type ipos = pos - this->begin();
 
-				if (size() > 0 && ipos == size()) --ipos;
-
 				if (n == 0) {
 					return pos;
 				}
@@ -389,15 +398,16 @@ namespace ft
 					reserve((n + size()) * vectorGrowthFactor);
 				}
 
-				for (size_type i = size(); i != ipos;) {
-					--i;
-					if (i + n >= size()) {
-						_allocator.construct(_data + i + n, _data[i]);
-					} else {
-						_data[i + n] = _data[i];
+				if (size() > 0 && ipos != size()) {
+					for (size_type i = size() - 1; i > ipos; --i) {
+						if (i + n >= size()) {
+							_allocator.construct(_data + i + n, _data[i]);
+						} else {
+							_data[i + n] = _data[i];
+						}
 					}
+					_data[ipos + n] = _data[ipos];
 				}
-				_data[ipos + n] = _data[ipos];
 
 				for (size_type i = ipos; i != ipos + n; ++i, ++begin) {
 					if (i >= size()) {

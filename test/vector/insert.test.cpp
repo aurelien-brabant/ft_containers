@@ -125,8 +125,6 @@ int test_vector_insert_empty(Tester& tester)
 	return 0;
 }
 
-// Not many tests for that one, as the logic is exactly the same than the range version.
-
 int test_vector_insert_many(Tester& tester)
 {
 	size_t baseN = 424242, ipos = baseN / 2, count = 42;
@@ -142,3 +140,27 @@ int test_vector_insert_many(Tester& tester)
 
 	return 0;
 }
+
+int test_vector_insert_many_back(Tester& tester)
+{
+	vector<int> v;
+
+	for (int i = 0; i != 10; ++i) {
+		v.push_back(i);
+	}
+
+	v.insert(v.end(), 5, 42);
+
+	if (v.size() != 15) {
+		tester.error << "size(): got " << v.size() << " while expecting " << 15;
+		return 1;
+	}
+
+	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+		p_assert_eq(v[i], i >= 10 ? 42 : static_cast<int>(i));
+	}
+
+	return 0;
+}
+
+

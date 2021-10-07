@@ -128,6 +128,7 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "insert in empty vector", test_vector_insert_empty);
 	tester.registerTest(vectorSuiteName, "insert range", test_vector_insert_range);
 	tester.registerTest(vectorSuiteName, "insert many", test_vector_insert_many);
+	tester.registerTest(vectorSuiteName, "insert many back", test_vector_insert_many_back);
 
 	tester.registerTest(vectorSuiteName, "assign fill", test_vector_assign);
 	tester.registerTest(vectorSuiteName, "assign less", test_vector_assign_less);
