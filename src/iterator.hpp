@@ -101,7 +101,7 @@ namespace ft
 				return  *_p;
 			}
 
-			iterator & operator+=(difference_type const n) 
+			iterator & operator+=(difference_type n) 
 			{
 				if (n < 0) {
 					_p -= n;
@@ -112,12 +112,12 @@ namespace ft
 				return *this;
 			}
 
-			iterator operator+(difference_type const n)
+			iterator operator+(difference_type n) const
 			{
 				return iterator(_p + n);
 			}
 
-			iterator & operator-=(difference_type const n)
+			iterator & operator-=(difference_type n)
 			{
 				if (n < 0) {
 					_p += n;
@@ -128,7 +128,7 @@ namespace ft
 				return *this;
 			}
 
-			iterator operator-(difference_type const n) const
+			iterator operator-(difference_type n) const
 			{
 				return iterator(_p - n);
 			}
@@ -148,15 +148,13 @@ namespace ft
 			// COMPARISON OPERATORS
 			
 			// compare *this with iterator
-
+			
 			bool operator==(iterator<T, Category, false> rhs) const { return _p == &(*rhs); }
 			bool operator!=(iterator<T, Category, false> rhs) const { return _p != &(*rhs); }
 			bool operator<=(iterator<T, Category, false> rhs) const { return _p <= &(*rhs); }
 			bool operator>=(iterator<T, Category, false> rhs) const { return _p >= &(*rhs); }
 			bool operator<(iterator<T, Category, false> rhs) const { return _p < &(*rhs); }
 			bool operator>(iterator<T, Category, false> rhs) const { return _p > &(*rhs); }
-
-			// compare *this with const_iterator
 
 			bool operator==(iterator<const T, Category, true> rhs) const { return _p == &(*rhs); }
 			bool operator!=(iterator<const T, Category, true> rhs) const { return _p != &(*rhs); }
@@ -165,6 +163,35 @@ namespace ft
 			bool operator<(iterator<const T, Category, true> rhs) const { return _p < &(*rhs); }
 			bool operator>(iterator<const T, Category, true> rhs) const { return _p > &(*rhs); }
 	};
+
+	template <typename T, typename Category, bool IsConst>
+	iterator<T, Category, IsConst> operator+(
+			typename iterator<T, Category, IsConst>::difference_type lhs,
+			const iterator<T, Category, IsConst>& rhs
+		)
+	{
+		return iterator<T, Category, IsConst>(rhs + lhs);
+	}
+
+	/*
+	template <typename T, typename Category, bool IsConst, bool IsConst2>
+	bool operator==(const iterator<const T, Category, IsConst>& lhs, const iterator<const T, Category, IsConst2>& rhs) { return &(*lhs) == &(*rhs); }
+
+	template <typename T, typename Category, bool IsConst, bool IsConst2>
+	bool operator!=(const iterator<const T, Category, IsConst>& lhs, const iterator<T, Category, IsConst2>& rhs) { return &(*lhs) != &(*rhs); }
+	
+	template <typename T, typename Category, bool IsConst, bool IsConst2>
+	bool operator>=(const iterator<const T, Category, IsConst>& lhs, const iterator<T, Category, IsConst2>& rhs) { return &(*lhs) >= &(*rhs); }
+
+	template <typename T, typename Category, bool IsConst, bool IsConst2>
+	bool operator<=(const iterator<const T, Category, IsConst>& lhs, const iterator<T, Category, IsConst2>& rhs) { return &(*lhs) <= &(*rhs); }
+
+	template <typename T, typename Category, bool IsConst, bool IsConst2>
+	bool operator>(const iterator<const T, Category, IsConst>& lhs, const iterator<T, Category, IsConst2>& rhs) { return &(*lhs) > &(*rhs); }
+
+	template <typename T, typename Category, bool IsConst, bool IsConst2>
+	bool operator<(const iterator<const T, Category, IsConst>& lhs, const iterator<T, Category, IsConst2>& rhs) { return &(*lhs) < &(*rhs); }
+	*/
 
 	// }}}
 
