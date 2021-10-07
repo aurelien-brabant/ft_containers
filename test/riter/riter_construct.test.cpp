@@ -20,7 +20,7 @@ int test_riter_construct_from_iterator(Tester& tester)
 	reverse_iterator<std::vector<int>::iterator> rbegin(v.end()), rend(v.begin());
 
 	int i = 42;
-	while (*rbegin != *rend) {
+	while (rbegin != rend) {
 		p_assert_eq(*rbegin++, --i);
 	}
 

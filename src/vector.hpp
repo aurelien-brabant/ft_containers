@@ -78,6 +78,8 @@ namespace ft
 			
 			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
+				std::cerr << "COPY CONSTRUCTOR" << std::endl;
+
 				for (size_type i = 0; i != size(); ++i) {
 					_allocator.construct(_data + i, rhs._data[i]);
 				}
@@ -85,6 +87,8 @@ namespace ft
 
 			reference operator=(const_reference rhs)
 			{
+				std::cerr << "Make use of operator=" << std::endl;
+
 				if (this != &rhs) {
 					assign(rhs.begin(), rhs.end());
 				}
@@ -358,9 +362,11 @@ namespace ft
 			iterator insert(
 					iterator pos,
 					InputIt begin,
-					InputIt end
+					InputIt end,
+					typename ft::enable_if<!ft::is_integral<InputIt>::value>::type* ignore = 0
 				)
 			{
+				(void)ignore;
 				size_type n = end - begin;
 				size_type ipos = pos - this->begin();
 

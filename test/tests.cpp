@@ -110,6 +110,7 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "reserve(n) (n <= capacity())", test_vector_smaller_capacity_reservation);
 
 	tester.registerTest(vectorSuiteName, "push_back()", test_vector_push_back);
+	tester.registerTest(vectorSuiteName, "copy CTOR then push_back()", test_vector_copy_then_push_back);
 
 	tester.registerTest(vectorSuiteName, "empty()", test_vector_empty);
 	

@@ -87,6 +87,7 @@ int test_vector_greater_capacity_reservation(Tester& tester);
 int test_vector_smaller_capacity_reservation(Tester& tester);
 
 int test_vector_push_back(Tester& tester);
+int test_vector_copy_then_push_back(Tester& tester);
 
 int test_vector_copy_constructor(Tester& tester);
 int test_vector_assignment_operator_grow(Tester& tester);
