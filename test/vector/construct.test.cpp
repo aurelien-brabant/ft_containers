@@ -44,8 +44,6 @@ int test_vector_range_constructor(Tester& tester)
 		oss.str("");
 	}
 
-	std::cout << "range[0] " << range[0] << "\n";
-
 	vector<string> v(range.begin(), range.end());
 
 	assert_expr(v.size() == static_cast<vector<string>::size_type>(range.end() - range.begin()));
