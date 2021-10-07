@@ -124,3 +124,21 @@ int test_vector_insert_empty(Tester& tester)
 
 	return 0;
 }
+
+// Not many tests for that one, as the logic is exactly the same than the range version.
+
+int test_vector_insert_many(Tester& tester)
+{
+	size_t baseN = 424242, ipos = baseN / 2, count = 42;
+	vector<int> v(baseN, 42);
+
+	v.insert(v.begin() + ipos, count, 21);
+
+	assert_expr(v.size() == baseN + count);
+
+	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+		p_assert_eq(v[i], i >= ipos && i < ipos + count ? 21 : 42);
+	}
+
+	return 0;
+}

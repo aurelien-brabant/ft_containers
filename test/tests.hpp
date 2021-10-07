@@ -108,6 +108,7 @@ int test_vector_insert_back(Tester& tester);
 int test_vector_insert_odd(Tester& tester);
 int test_vector_insert_range(Tester& tester);
 int test_vector_insert_empty(Tester& tester);
+int test_vector_insert_many(Tester& tester);
 
 int test_vector_assign(Tester& tester);
 int test_vector_assign_less(Tester& tester);

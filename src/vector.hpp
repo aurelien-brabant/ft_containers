@@ -318,13 +318,48 @@ namespace ft
 				_length = 0;
 			}
 
+			void insert(iterator pos, size_type count, const T& value)
+			{
+				size_type ipos = pos - begin();
+
+				if (size() + count > capacity()) {
+					resize((size() + count) * vectorGrowthFactor);
+				}
+				
+				// shift elements to the right, starting at insertion point
+				for (size_type i = size(); i != ipos;) {
+					--i;
+					if (i + count >= size()) {
+						_allocator.construct(_data + i + count, _data[i]);
+					} else {
+						_data[i + count] = _data[i];
+					}
+				}
+				_data[ipos + count] = _data[ipos];
+
+				// actual insertion
+				for (size_type i = ipos; i != ipos + count; ++i) {
+					if (i >= size()) {
+						_allocator.construct(_data + i, value);
+					} else {
+						_data[i] = value;
+					}
+				}
+
+				_length += count;
+			}
+
 			/**
 			 * Insert a range of items delimited by two input iterators.
 			 * Resize is triggered if (size() + end - begin) > capacity().
 			 */
 
 			template <class InputIt>
-			iterator insert(iterator pos, InputIt begin, InputIt end)
+			iterator insert(
+					iterator pos,
+					InputIt begin,
+					InputIt end
+				)
 			{
 				size_type n = end - begin;
 				size_type ipos = pos - this->begin();
