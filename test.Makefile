@@ -2,9 +2,10 @@ CASTORNO_PATH	:= test/castorno
 CASTORNO		:= test/castorno/libcastorno.a
 
 CC			:= clang++
-CPP_FLAGS	:= -g -Wall -Wextra -Werror -I$(CASTORNO_PATH)/include -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
+FSAN_FLAGS  := -fsanitize=address -fno-omit-frame-pointer
+CPP_FLAGS	:=  $(FSAN_FLAGS) -Wall -Wextra -Werror -I$(CASTORNO_PATH)/include -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
 LD			:= $(CC)
-LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno
+LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno $(FSAN_FLAGS)
 RM			:= rm -rf
 
 HEADERS		:= $(wildcard src/*.hpp)
