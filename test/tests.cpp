@@ -150,5 +150,9 @@ int main(int argc, char **argv)
 
 	tester.registerTest(vectorSuiteName, "pop_back()", test_vector_pop_back);
 
+	tester.registerTest(vectorSuiteName, "resize (n > size())", test_vector_resize_greater);
+	tester.registerTest(vectorSuiteName, "resize (n < size())", test_vector_resize_smaller);
+	tester.registerTest(vectorSuiteName, "resize (n == size())", test_vector_resize_same);
+
 	return tester.runAllSuites() ? 0 : 1;
 }

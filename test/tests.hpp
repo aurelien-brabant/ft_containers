@@ -132,6 +132,10 @@ int test_vector_swap(Tester& tester);
 
 int test_vector_pop_back(Tester& tester);
 
+int test_vector_resize_greater(Tester& tester);
+int test_vector_resize_smaller(Tester& tester);
+int test_vector_resize_same(Tester& tester);
+
 //////////////////////////////////
 // REVERSE ITERATOR TESTS
 /////////////////////////////////
