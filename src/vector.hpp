@@ -54,7 +54,11 @@ namespace ft
 				size_type count,
 				T const & value = T(),
 				Allocator const & alloc = Allocator()
-			): _allocator(alloc), _capacity(count * 2), _data(_allocator.allocate(_capacity)), _length(count)
+			):
+				_allocator(alloc),
+				_capacity((count > 0 ? count : vectorBaseCapacity / 2) * 2),
+				_data(_allocator.allocate(_capacity)),
+				_length(count)
 			{
 				for (size_type i = 0; i != _length; ++i) {
 					_allocator.construct(_data + i, value);
@@ -67,7 +71,10 @@ namespace ft
 				InputIt last,
 				const Allocator& alloc = Allocator(),
 				typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* t = 0
-			): _allocator(alloc), _capacity((last - first) * 2), _data(_allocator.allocate(_capacity)), _length(last - first)
+			):
+				_allocator(alloc),
+				_capacity(((last - first) > 0 ? (last - first) : vectorBaseCapacity / 2) * 2),
+				_data(_allocator.allocate(_capacity)), _length(last - first)
 			{
 				(void)t;
 
@@ -78,8 +85,6 @@ namespace ft
 			
 			vector(const_reference rhs): _allocator(Allocator()), _capacity(rhs.size() * 2), _data(_allocator.allocate(_capacity)), _length(rhs.size())
 			{
-				std::cerr << "COPY CONSTRUCTOR" << std::endl;
-
 				for (size_type i = 0; i != size(); ++i) {
 					_allocator.construct(_data + i, rhs._data[i]);
 				}
@@ -87,8 +92,6 @@ namespace ft
 
 			reference operator=(const_reference rhs)
 			{
-				std::cerr << "Make use of operator=" << std::endl;
-
 				if (this != &rhs) {
 					assign(rhs.begin(), rhs.end());
 				}
@@ -326,6 +329,12 @@ namespace ft
 			{
 				size_type ipos = pos - begin();
 
+				if (size() > 0 && ipos == size()) --ipos;
+
+				if (count == 0) {
+					return ;
+				}
+
 				if (size() + count > capacity()) {
 					resize((size() + count) * vectorGrowthFactor);
 				}
@@ -369,6 +378,12 @@ namespace ft
 				(void)ignore;
 				size_type n = end - begin;
 				size_type ipos = pos - this->begin();
+
+				if (size() > 0 && ipos == size()) --ipos;
+
+				if (n == 0) {
+					return pos;
+				}
 
 				if (n + size() > capacity()) {
 					reserve((n + size()) * vectorGrowthFactor);
@@ -422,7 +437,11 @@ namespace ft
 			void push_back(const value_type& value)
 			{
 				if (size() == capacity()) {
-					reserve(capacity() * vectorGrowthFactor);
+					if (capacity() > 0) {
+						reserve(capacity() * vectorGrowthFactor);
+					} else {
+						reserve(vectorBaseCapacity);
+					}
 				}
 				_allocator.construct(_data + _length++, value);
 			}
