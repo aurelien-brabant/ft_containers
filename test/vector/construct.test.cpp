@@ -2,6 +2,7 @@
 #include <sstream>
 #include <cstring>
 #include <cstdlib>
+#include <list>
 #include "vector_testing.hpp"
 
 using std::string;
@@ -53,6 +54,28 @@ int test_vector_range_constructor(Tester& tester)
 		p_assert_eq(v[i], oss.str());
 		oss.str("");
 		free((void *)range[i]);
+	}
+
+	return 0;
+}
+
+// std::list iterators are bidirectional only.
+// This should work and compile.
+
+int test_vector_range_with_bidirectional_it(Tester& tester)
+{
+	std::list<short> l;
+
+	for (short i = 0; i != 42; ++i) {
+		l.push_back(i);
+	}
+
+	vector<int> v(l.begin(), l.end());
+
+	assert_expr(v.size() == l.size());
+
+	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+		p_assert_eq(v[i], static_cast<int>(i));
 	}
 
 	return 0;

@@ -5,6 +5,7 @@
 
 namespace ft
 {
+	// iterator traits {{{
 	template <class Iter>
 	struct iterator_traits
 	{
@@ -14,6 +15,26 @@ namespace ft
 		typedef typename Iter::reference			reference;
 		typedef typename Iter::iterator_category	iterator_category;
 	};
+	// }}}
+
+	// distance {{{
+	
+	/* This is a very naive implementation of distance, not taking benefit of iterator tags */
+
+	template <typename InputIt>
+	typename iterator_traits<InputIt>::difference_type distance(
+		InputIt first,
+		InputIt last
+	)
+	{
+		typename iterator_traits<InputIt>::difference_type n = 0;
+
+		while (first++ != last) ++n;
+
+		return n;
+	}
+
+	// }}}
 
 	// normal iterator - random access {{{
 	
@@ -294,10 +315,6 @@ namespace ft
 			}
 	};
 
-	// }}}
-
-	/* reverse_iterator non-members */
-
 	// non-member logical operators {{{
 
 	template <typename Iter1, typename Iter2>
@@ -329,6 +346,9 @@ namespace ft
 	typename reverse_iterator<Iter>::difference_type operator-(const ft::reverse_iterator<Iter>& lhs, const ft::reverse_iterator<Iter>& rhs) { return rhs.base() - lhs.base(); }
 
 	// }}}
+
+	// }}}
+
 }
 
 #endif

@@ -72,14 +72,15 @@ namespace ft
 				const Allocator& alloc = Allocator(),
 				typename ft::enable_if<!ft::is_integral<InputIt>::value >::type* t = 0
 			):
+				// TODO avoid to use ft::distance multiple times: use it own time only instead.
 				_allocator(alloc),
-				_capacity(((last - first) > 0 ? (last - first) : vectorBaseCapacity / 2) * 2),
-				_data(_allocator.allocate(_capacity)), _length(last - first)
+				_capacity((ft::distance(first, last) > 0 ? ft::distance(first, last) : vectorBaseCapacity / 2) * 2),
+				_data(_allocator.allocate(_capacity)), _length(ft::distance(first, last))
 			{
 				(void)t;
 
-				for (size_type i = 0; i != size(); ++i) {
-					_allocator.construct(_data + i, first[i]);
+				for (size_type i = 0; i != size(); ++i, ++first) {
+					_allocator.construct(_data + i, *first);
 				}
 			}
 			
@@ -118,7 +119,7 @@ namespace ft
 			{
 				(void)p;
 
-				size_type count = end - begin;
+				size_type count = ft::distance(begin, end);
 
 				if (count > capacity()) {
 					reserve(count * vectorGrowthFactor);
@@ -390,7 +391,7 @@ namespace ft
 				)
 			{
 				(void)ignore;
-				size_type n = end - begin;
+				size_type n = ft::distance(begin, end);
 				size_type ipos = pos - this->begin();
 
 				if (n == 0) {
