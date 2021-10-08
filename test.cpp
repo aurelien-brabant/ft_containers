@@ -1,14 +1,17 @@
 #include "vector.hpp"
 #include <vector>
 #include <iterator>
+#include "algorithm.hpp"
 
 using ft::vector;
 
 int main(void)
 {
-	vector<int> v(42);
+	ft::vector<int> v(1);
 
-	vector<int>::const_reverse_iterator crit = ft::reverse_iterator<vector<int>::iterator>(v.begin());
+	ft::vector<int>::const_iterator cit = v.begin();
+
+	*cit = 42;
 
 	return 0;
 }

@@ -50,6 +50,12 @@ namespace ft
 	template <> struct is_integral<unsigned long>: public true_type {};
 	template <> struct is_integral<unsigned long long>: public true_type {};
 	template <> struct is_integral<unsigned short>: public true_type {};
+
+	template <typename T, typename U>
+	struct is_same : public false_type {};
+
+	template <typename T>
+	struct is_same<T, T>: public true_type {};
 }
 
 #endif
