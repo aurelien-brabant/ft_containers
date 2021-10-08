@@ -350,14 +350,17 @@ namespace ft
 				// the back.
 
 				if (size() > 0 && ipos != size()) {
-					for (size_type i = size() - 1; i > ipos; --i) {
+					for (size_type i = size() - 1; i >= ipos;) {
 						if (i + count >= size()) {
 							_allocator.construct(_data + i + count, _data[i]);
 						} else {
 							_data[i + count] = _data[i];
 						}
+
+						if (i-- == ipos) {
+							break ;
+						}
 					}
-					_data[ipos + count] = _data[ipos];
 				}
 
 				// actually insert the elements
@@ -399,14 +402,18 @@ namespace ft
 				}
 
 				if (size() > 0 && ipos != size()) {
-					for (size_type i = size() - 1; i > ipos; --i) {
+					for (size_type i = size() - 1; i >= ipos;) {
+
 						if (i + n >= size()) {
 							_allocator.construct(_data + i + n, _data[i]);
 						} else {
 							_data[i + n] = _data[i];
 						}
+
+						if (i-- == ipos) {
+							break ;
+						}
 					}
-					_data[ipos + n] = _data[ipos];
 				}
 
 				for (size_type i = ipos; i != ipos + n; ++i, ++begin) {
