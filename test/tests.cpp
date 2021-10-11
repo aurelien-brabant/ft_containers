@@ -14,6 +14,7 @@ int main(int argc, char **argv)
 	const std::string equalSuiteName("equal (ranges)");
 	const std::string riterSuiteName("reverse iterator");
 	const std::string vectorSuiteName("vector");
+	const std::string stackSuiteName("stack");
 
 	Tester tester(*argv);
 
@@ -157,6 +158,9 @@ int main(int argc, char **argv)
 	tester.registerTest(vectorSuiteName, "resize (n > size())", test_vector_resize_greater);
 	tester.registerTest(vectorSuiteName, "resize (n < size())", test_vector_resize_smaller);
 	tester.registerTest(vectorSuiteName, "resize (n == size())", test_vector_resize_same);
+
+	tester.registerTest(stackSuiteName, "default constructor" , test_stack_default_ctor);
+	tester.registerTest(stackSuiteName, "copy constructor" , test_stack_copy_ctor);
 
 	return tester.runAllSuites() ? 0 : 1;
 }

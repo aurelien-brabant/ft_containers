@@ -163,4 +163,8 @@ int test_riter_lte(Tester& tester);
 int test_riter_eq(Tester& tester);
 int test_riter_neq(Tester& tester);
 
+
+int test_stack_default_ctor(Tester& tester);
+int test_stack_copy_ctor(Tester& tester);
+
 # endif
