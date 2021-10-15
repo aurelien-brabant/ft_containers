@@ -3,8 +3,9 @@
 #include "castorno/Tester.hpp"
 #include "vector.hpp"
 #include "castorno/assert.hpp"
-#include "tests.hpp"
 #include "type_traits.hpp"
+#include "utility.hpp"
+#include "tests.hpp"
 
 int main(int argc, char **argv)
 {
