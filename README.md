@@ -7,7 +7,7 @@
 - [x] enable_if
 - [x] lexicographical_compare
 - [x] equal
-- [ ] pair
+- [x] pair
 - [x] vector
 - [ ] map
 - [x] stack
