@@ -8,10 +8,9 @@
 - [x] lexicographical_compare
 - [x] equal
 - [ ] pair
-- [ ] make_pair
-- [ ] vector
+- [x] vector
 - [ ] map
-- [ ] stack
+- [x] stack
 
 ## Testing
 
