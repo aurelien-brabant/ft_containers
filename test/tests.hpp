@@ -310,4 +310,13 @@ test_pair_operator_gt(Tester& tester);
 int
 test_pair_operator_gte(Tester& tester);
 
+/////////////////////////////////////////////////
+// map
+////////////////////////////////////////////////
+
+int
+test_map_default_ctor(Tester& tester);
+int
+test_map_custom_comp_ctor(Tester& tester);
+
 #endif

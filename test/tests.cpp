@@ -1,6 +1,7 @@
 #include "tests.hpp"
 #include "castorno/Tester.hpp"
 #include "castorno/assert.hpp"
+#include "map.hpp"
 #include "type_traits.hpp"
 #include "utility.hpp"
 #include "vector.hpp"
@@ -18,6 +19,7 @@ main(int argc, char** argv)
     const std::string vectorSuiteName("vector");
     const std::string stackSuiteName("stack");
     const std::string pairSuiteName("pair");
+    const std::string mapSuiteName("map");
 
     Tester tester(*argv);
 
@@ -303,6 +305,10 @@ main(int argc, char** argv)
     tester.registerTest(pairSuiteName, "operator<=", test_pair_operator_lte);
     tester.registerTest(pairSuiteName, "operator>", test_pair_operator_gt);
     tester.registerTest(pairSuiteName, "operator>=", test_pair_operator_gte);
+
+    tester.registerTest(mapSuiteName, "default CTOR", test_map_default_ctor);
+    tester.registerTest(
+      mapSuiteName, "custom cmp CTOR", test_map_custom_comp_ctor);
 
     return tester.runAllSuites() ? 0 : 1;
 }
