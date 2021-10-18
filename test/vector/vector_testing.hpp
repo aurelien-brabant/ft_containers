@@ -1,9 +1,9 @@
 #ifndef VECTOR_TESTING_HPP
-# define VECTOR_TESTING_HPP
-# include <vector>
-# include "vector.hpp"
-# include "castorno/Tester.hpp"
-# include "castorno/assert.hpp"
+#define VECTOR_TESTING_HPP
+#include "castorno/Tester.hpp"
+#include "castorno/assert.hpp"
+#include "vector.hpp"
+#include <vector>
 
 using FT_CONTAINER::vector;
 

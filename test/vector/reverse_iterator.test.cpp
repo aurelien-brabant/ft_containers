@@ -2,79 +2,87 @@
 
 const size_t rangeSize = 424242;
 
-int test_vector_reverse_iterator_loop(Tester& tester)
+int
+test_vector_reverse_iterator_loop(Tester& tester)
 {
-	vector<int> v(rangeSize);
+    vector<int> v(rangeSize);
 
-	for (size_t i = 0; i != rangeSize; ++i) {
-		v[i] = static_cast<int>(i);
-	}
+    for (size_t i = 0; i != rangeSize; ++i) {
+        v[i] = static_cast<int>(i);
+    }
 
-	size_t n = rangeSize;
-	
-	for (vector<int>::reverse_iterator rit = v.rbegin(); rit != v.rend(); ++rit) {
-		p_assert_eq(*rit, static_cast<int>(--n));
-	}
+    size_t n = rangeSize;
 
-	return 0;
+    for (vector<int>::reverse_iterator rit = v.rbegin(); rit != v.rend();
+         ++rit) {
+        p_assert_eq(*rit, static_cast<int>(--n));
+    }
+
+    return 0;
 }
 
-int test_vector_reviter_write(Tester& tester)
+int
+test_vector_reviter_write(Tester& tester)
 {
-	vector<int> v;
+    vector<int> v;
 
-	for (size_t i = 0; i != rangeSize; ++i) {
-		v.push_back(i);
-	}
+    for (size_t i = 0; i != rangeSize; ++i) {
+        v.push_back(i);
+    }
 
-	for (vector<int>::reverse_iterator rit = v.rbegin(); rit != v.rend(); ++rit) {
-		*rit *= 2;
-	}
+    for (vector<int>::reverse_iterator rit = v.rbegin(); rit != v.rend();
+         ++rit) {
+        *rit *= 2;
+    }
 
-	for (vector<int>::size_type i = 0; i != v.size(); ++i) {
-		p_assert_eq(v[i], static_cast<int>(i * 2));
-	}
+    for (vector<int>::size_type i = 0; i != v.size(); ++i) {
+        p_assert_eq(v[i], static_cast<int>(i * 2));
+    }
 
-	return 0;
+    return 0;
 }
 
 /* ensures reverse_iterator can be converted to const_reverse_iterator */
 
-int test_vector_reviter_to_const_reviter(Tester& tester)
+int
+test_vector_reviter_to_const_reviter(Tester& tester)
 {
-	vector<int> v;
+    vector<int> v;
 
-	for (size_t i = 0; i != rangeSize; ++i) {
-		v.push_back(i);
-	}
+    for (size_t i = 0; i != rangeSize; ++i) {
+        v.push_back(i);
+    }
 
-	size_t i = 0;
-	for (vector<int>::const_reverse_iterator crit = v.rbegin(); crit != v.rend(); ++crit) {
-		p_assert_eq(v[i], static_cast<int>(i));
-		++i;
-	}
+    size_t i = 0;
+    for (vector<int>::const_reverse_iterator crit = v.rbegin();
+         crit != v.rend();
+         ++crit) {
+        p_assert_eq(v[i], static_cast<int>(i));
+        ++i;
+    }
 
-	return 0;
+    return 0;
 }
 
-int test_vector_reviter_to_const_operations(Tester& tester)
+int
+test_vector_reviter_to_const_operations(Tester& tester)
 {
-	vector<int> v(10);
-	
-	vector<int>::reverse_iterator rit = v.rbegin();
-	vector<int>::const_reverse_iterator crit = v.rbegin();
+    vector<int> v(10);
 
-	assert_expr(rit == crit);
-	assert_expr(rit <= crit);
-	assert_expr(rit >= crit);
-	assert_expr(!(rit < crit));
-	assert_expr(!(rit > crit));
+    vector<int>::reverse_iterator rit = v.rbegin();
+    vector<int>::const_reverse_iterator crit = v.rbegin();
 
-	assert_expr(crit == rit);
-	assert_expr(crit <= rit);
-	assert_expr(crit >= rit);
-	assert_expr(!(crit < rit));
-	assert_expr(!(crit > rit));
+    assert_expr(rit == crit);
+    assert_expr(rit <= crit);
+    assert_expr(rit >= crit);
+    assert_expr(!(rit < crit));
+    assert_expr(!(rit > crit));
 
-	return 0;
+    assert_expr(crit == rit);
+    assert_expr(crit <= rit);
+    assert_expr(crit >= rit);
+    assert_expr(!(crit < rit));
+    assert_expr(!(crit > rit));
+
+    return 0;
 }
