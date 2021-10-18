@@ -52,6 +52,7 @@ class map
     }
 
     class value_compare
+      : public std::binary_function<value_type, value_type, bool>
     {
       protected:
         Compare comp;
