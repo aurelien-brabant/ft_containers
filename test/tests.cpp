@@ -309,6 +309,9 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName, "default CTOR", test_map_default_ctor);
     tester.registerTest(
       mapSuiteName, "custom cmp CTOR", test_map_custom_comp_ctor);
+    tester.registerTest(mapSuiteName, "map insert one", test_map_insert_one);
+    tester.registerTest(mapSuiteName, "map insert range", test_map_insert_range);
+    tester.registerTest(mapSuiteName, "map find one", test_map_find);
 
     return tester.runAllSuites() ? 0 : 1;
 }

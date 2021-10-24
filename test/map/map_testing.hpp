@@ -6,3 +6,4 @@
 
 using FT_CONTAINER::map;
 using FT_CONTAINER::pair;
+using FT_CONTAINER::make_pair;

@@ -319,4 +319,13 @@ test_map_default_ctor(Tester& tester);
 int
 test_map_custom_comp_ctor(Tester& tester);
 
+int
+test_map_insert_one(Tester& tester);
+
+int
+test_map_insert_range(Tester& tester);
+
+int
+test_map_find(Tester& tester);
+
 #endif
