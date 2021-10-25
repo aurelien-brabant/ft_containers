@@ -1,7 +1,7 @@
 #! /bin/bash
 
-./ft > /dev/null
-./std > /dev/null
+./ft $@ > /dev/null
+./std $@ > /dev/null
 
 cc misc/compare_time.c -o compare_time
 
