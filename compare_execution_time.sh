@@ -11,7 +11,7 @@ testNames=()
 
 while read -r p; do
 	testNames+=("$p")
-done < ./.castorno/tests.txt
+done < ./.castorno/std.testname.txt
 
 while read p; do
 	ftTimes+=($p)

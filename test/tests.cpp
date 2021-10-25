@@ -309,17 +309,26 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName, "default CTOR", test_map_default_ctor);
     tester.registerTest(
       mapSuiteName, "custom cmp CTOR", test_map_custom_comp_ctor);
-    tester.registerTest(mapSuiteName, "map insert one", test_map_insert_one);
+    tester.registerTest(mapSuiteName, "insert one", test_map_insert_one);
     tester.registerTest(
-      mapSuiteName, "map insert one std::string", test_map_insert_one_string);
+      mapSuiteName, "insert one std::string", test_map_insert_one_string);
+    tester.registerTest(mapSuiteName, "insert range", test_map_insert_range);
+    tester.registerTest(mapSuiteName, "find one", test_map_find);
+    tester.registerTest(mapSuiteName, "erase one", test_map_erase_one);
     tester.registerTest(
-      mapSuiteName, "map insert range", test_map_insert_range);
-    tester.registerTest(mapSuiteName, "map find one", test_map_find);
-    tester.registerTest(mapSuiteName, "map erase one", test_map_erase_one);
+      mapSuiteName, "erase one alt", test_map_erase_one_alternate);
     tester.registerTest(
-      mapSuiteName, "map erase one alt", test_map_erase_one_alternate);
-    tester.registerTest(
-      mapSuiteName, "map erase iterator", test_map_erase_iterator);
+      mapSuiteName, "erase iterator", test_map_erase_iterator);
+
+    if (argc > 1) {
+        bool ret = true;
+
+        for (int i = 1; i != argc; ++i) {
+            ret = tester.runSuite(argv[i]);
+        }
+
+        return ret;
+    }
 
     return tester.runAllSuites() ? 0 : 1;
 }
