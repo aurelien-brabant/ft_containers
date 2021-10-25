@@ -106,19 +106,22 @@ class map
     {
         value_type p;
 
-        p.first = key;
-        p.second = typename value_type::second_type();
-        return _data.find(p);
+        return _data.find(make_pair(key, typename value_type::second_type()));
     }
 
     const_iterator find(const Key& key) const
     {
         value_type p;
 
-        p.first = key;
-        p.second = typename value_type::second_type();
-        return _data.find(p);
+        return _data.find(make_pair(key, typename value_type::second_type()));
     }
+
+    size_t erase(const Key& key)
+    {
+        return _data.erase(make_pair(key, typename value_type::second_type()));
+    }
+
+    void erase(iterator pos) { _data.erase(pos); }
 
     iterator begin(void) { return _data.begin(); }
 
