@@ -319,6 +319,7 @@ main(int argc, char** argv)
       mapSuiteName, "erase one alt", test_map_erase_one_alternate);
     tester.registerTest(
       mapSuiteName, "erase iterator", test_map_erase_iterator);
+    tester.registerTest(mapSuiteName, "clear", test_map_clear);
 
     if (argc > 1) {
         bool ret = true;

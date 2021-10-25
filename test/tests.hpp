@@ -341,4 +341,7 @@ test_map_erase_iterator(Tester& tester);
 int
 test_map_insert_one_string(Tester& tester);
 
+int
+test_map_clear(Tester& tester);
+
 #endif

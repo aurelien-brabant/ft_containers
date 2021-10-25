@@ -593,8 +593,9 @@ class AVLTree
             _destroy(root->right);
         }
 
-        _nodeAllocator.destroy(root);
-        _nodeAllocator.deallocate(root, 1);
+        if (root != _begin && root != _end) {
+            deallocateNode(root);
+        }
     }
 
     // rotations {{{
@@ -789,9 +790,9 @@ class AVLTree
 
     ~AVLTree(void)
     {
-        if (_root) {
-            _destroy(_root);
-        }
+        _destroy(_root);
+        deallocateNode(_begin);
+        deallocateNode(_end);
     }
 
     size_t size(void) const { return _size; }
@@ -935,6 +936,16 @@ class AVLTree
             std::swap(_end, rhs._end);
             std::swap(_size, rhs._size);
         }
+    }
+
+    void clear(void)
+    {
+        _destroy(_root);
+        _root = _begin;
+        _begin->parent = 0;
+        _begin->right = _end;
+        _end->parent = _begin;
+        _size = 0;
     }
 };
 

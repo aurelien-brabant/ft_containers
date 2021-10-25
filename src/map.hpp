@@ -126,6 +126,8 @@ class map
     iterator begin(void) { return _data.begin(); }
 
     iterator end(void) { return _data.end(); }
+
+    void clear(void) { _data.clear(); }
 };
 
 /* END OF namespace ft */
