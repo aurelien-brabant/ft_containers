@@ -316,6 +316,7 @@ test_pair_operator_gte(Tester& tester);
 
 int
 test_map_default_ctor(Tester& tester);
+
 int
 test_map_custom_comp_ctor(Tester& tester);
 
@@ -327,5 +328,17 @@ test_map_insert_range(Tester& tester);
 
 int
 test_map_find(Tester& tester);
+
+int
+test_map_erase_one(Tester& tester);
+
+int
+test_map_erase_one_alternate(Tester& tester);
+
+int
+test_map_erase_iterator(Tester& tester);
+
+int
+test_map_insert_one_string(Tester& tester);
 
 #endif
