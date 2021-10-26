@@ -118,6 +118,8 @@ class map
         return _data.find(make_pair(key, typename value_type::second_type()));
     }
 
+    mapped_type& operator[](const Key& key) { return find(key)->second; }
+
     iterator lower_bound(const Key& key)
     {
         return _data.lower_bound(

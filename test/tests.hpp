@@ -201,5 +201,7 @@ TEST(test_map_copy_cleared);
 TEST(test_map_swap);
 TEST(test_map_size);
 TEST(test_map_size_empty);
+TEST(test_map_subscript_ro);
+TEST(test_map_subscript_rw);
 
 #endif

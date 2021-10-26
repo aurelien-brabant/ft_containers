@@ -374,6 +374,9 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName, "size()", test_map_size);
     tester.registerTest(
       mapSuiteName, "size() on empty map", test_map_size_empty);
+    tester.registerTest(mapSuiteName, "operator[] read", test_map_subscript_ro);
+    tester.registerTest(
+      mapSuiteName, "operator[] read/write", test_map_subscript_rw);
 
     if (argc > 1) {
         bool ret = true;
