@@ -2,7 +2,7 @@
 #include <string>
 
 int
-pair_test_default_ctor(Tester& tester)
+test_pair_default_ctor(Tester& tester)
 {
     pair<int, std::string> p;
 
@@ -13,7 +13,7 @@ pair_test_default_ctor(Tester& tester)
 }
 
 int
-pair_test_key_value_ctor(Tester& tester)
+test_pair_key_value_ctor(Tester& tester)
 {
     pair<std::string, int> p("42", 42);
 
@@ -24,7 +24,7 @@ pair_test_key_value_ctor(Tester& tester)
 }
 
 int
-pair_test_copy_ctor(Tester& tester)
+test_pair_copy_ctor(Tester& tester)
 {
     pair<std::string, int> p("42", 42), p2(p);
 
@@ -35,7 +35,7 @@ pair_test_copy_ctor(Tester& tester)
 }
 
 int
-pair_test_assignment_operator(Tester& tester)
+test_pair_assignment_operator(Tester& tester)
 {
     pair<std::string, int> p("42", 42), p2("21", 21);
 

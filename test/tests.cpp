@@ -292,12 +292,12 @@ main(int argc, char** argv)
     tester.registerTest(
       stackSuiteName, "copy constructor", test_stack_copy_ctor);
 
-    tester.registerTest(pairSuiteName, "default CTOR", pair_test_default_ctor);
+    tester.registerTest(pairSuiteName, "default CTOR", test_pair_default_ctor);
     tester.registerTest(
-      pairSuiteName, "key value CTOR", pair_test_key_value_ctor);
-    tester.registerTest(pairSuiteName, "copy CTOR", pair_test_copy_ctor);
+      pairSuiteName, "key value CTOR", test_pair_key_value_ctor);
+    tester.registerTest(pairSuiteName, "copy CTOR", test_pair_copy_ctor);
     tester.registerTest(
-      pairSuiteName, "assignment operator", pair_test_assignment_operator);
+      pairSuiteName, "assignment operator", test_pair_assignment_operator);
     tester.registerTest(pairSuiteName, "make_pair", test_make_pair);
     tester.registerTest(pairSuiteName, "operator==", test_pair_operator_eq);
     tester.registerTest(pairSuiteName, "operator!=", test_pair_operator_neq);
@@ -309,6 +309,10 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName, "default CTOR", test_map_default_ctor);
     tester.registerTest(
       mapSuiteName, "custom cmp CTOR", test_map_custom_comp_ctor);
+    tester.registerTest(
+      mapSuiteName, "copy assignment", test_map_assignment_operator);
+    tester.registerTest(mapSuiteName, "copy CTOR", test_map_copy_constructor);
+    tester.registerTest(mapSuiteName, "copy cleared", test_map_copy_cleared);
     tester.registerTest(mapSuiteName, "insert one", test_map_insert_one);
     tester.registerTest(
       mapSuiteName, "insert one std::string", test_map_insert_one_string);
