@@ -116,6 +116,30 @@ class map
         return _data.find(make_pair(key, typename value_type::second_type()));
     }
 
+    iterator lower_bound(const Key& key)
+    {
+        return _data.lower_bound(
+          make_pair(key, typename value_type::second_type()));
+    }
+
+    const_iterator lower_bound(const Key& key) const
+    {
+        return _data.lower_bound(
+          make_pair(key, typename value_type::second_type()));
+    }
+
+    iterator upper_bound(const Key& key)
+    {
+        return _data.upper_bound(
+          make_pair(key, typename value_type::second_type()));
+    }
+
+    const_iterator upper_bound(const Key& key) const
+    {
+        return _data.upper_bound(
+          make_pair(key, typename value_type::second_type()));
+    }
+
     size_t erase(const Key& key)
     {
         return _data.erase(make_pair(key, typename value_type::second_type()));
@@ -125,7 +149,11 @@ class map
 
     iterator begin(void) { return _data.begin(); }
 
+    const_iterator begin(void) const { return _data.end(); }
+
     iterator end(void) { return _data.end(); }
+
+    const_iterator end(void) const { return _data.end(); }
 
     void clear(void) { _data.clear(); }
 };
