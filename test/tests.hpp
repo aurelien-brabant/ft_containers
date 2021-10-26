@@ -364,5 +364,11 @@ int
 test_map_upper_bound_const_overload(Tester& tester);
 int
 test_map_upper_bound_const_overload(Tester& tester);
+int
+test_map_equal_range_begin_to_end(Tester& tester);
+int
+test_map_equal_range_perf_not_found(Tester& tester);
+int
+test_map_equal_range_const_overload(Tester& tester);
 
 #endif

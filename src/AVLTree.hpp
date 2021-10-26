@@ -1,4 +1,5 @@
 #pragma once
+#include "utility.hpp"
 #include <algorithm>
 #include <functional>
 #include <iostream>
@@ -6,7 +7,6 @@
 #include <memory>
 #include <stdexcept>
 #include <stdint.h>
-#include <utility>
 
 template<typename T,
          typename Compare = std::less<T>,
@@ -795,17 +795,17 @@ class AVLTree
 
     size_t size(void) const { return _size; }
 
-    std::pair<iterator, bool> insert(const T& value)
+    ft::pair<iterator, bool> insert(const T& value)
     {
         Node* inserted = 0;
 
         try {
             _root = _insert(value, _root, inserted);
         } catch (std::runtime_error& e) {
-            return std::make_pair(iterator(inserted), false);
+            return ft::make_pair(iterator(inserted), false);
         }
 
-        return std::make_pair(iterator(inserted), true);
+        return ft::make_pair(iterator(inserted), true);
     }
 
     // hint is not used
@@ -907,15 +907,15 @@ class AVLTree
         return p ? const_iterator(p) : end();
     }
 
-    std::pair<iterator, iterator> equal_range(const_reference value)
+    ft::pair<iterator, iterator> equal_range(const_reference value)
     {
-        return std::make_pair(lower_bound(value), upper_bound(value));
+        return ft::make_pair(lower_bound(value), upper_bound(value));
     }
 
-    std::pair<const_iterator, const_iterator> equal_range(
+    ft::pair<const_iterator, const_iterator> equal_range(
       const_reference value) const
     {
-        return std::make_pair(lower_bound(value), upper_bound(value));
+        return ft::make_pair(lower_bound(value), upper_bound(value));
     }
 
     std::ostream& printInOrder(std::ostream& os = std::cout) const

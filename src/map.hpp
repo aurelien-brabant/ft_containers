@@ -91,7 +91,7 @@ class map
 
     size_type size(void) { return _data.size(); }
 
-    std::pair<iterator, bool> insert(const value_type& value)
+    ft::pair<iterator, bool> insert(const value_type& value)
     {
         return _data.insert(value);
     }
@@ -137,6 +137,18 @@ class map
     const_iterator upper_bound(const Key& key) const
     {
         return _data.upper_bound(
+          make_pair(key, typename value_type::second_type()));
+    }
+
+    ft::pair<iterator, iterator> equal_range(const Key& key)
+    {
+        return _data.equal_range(
+          make_pair(key, typename value_type::second_type()));
+    }
+
+    ft::pair<const_iterator, const_iterator> equal_range(const Key& key) const
+    {
+        return _data.equal_range(
           make_pair(key, typename value_type::second_type()));
     }
 

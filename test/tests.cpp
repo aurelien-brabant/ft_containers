@@ -357,6 +357,15 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName,
                         "upper bound const overload",
                         test_map_upper_bound_const_overload);
+    tester.registerTest(mapSuiteName,
+                        "equal_range begin to end",
+                        test_map_equal_range_begin_to_end);
+    tester.registerTest(mapSuiteName,
+                        "equal range perf not found",
+                        test_map_equal_range_perf_not_found);
+    tester.registerTest(mapSuiteName,
+                        "equal range const overload",
+                        test_map_equal_range_const_overload);
 
     if (argc > 1) {
         bool ret = true;
