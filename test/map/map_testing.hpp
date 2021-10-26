@@ -4,6 +4,6 @@
 #include "map.hpp"
 #include <map>
 
+using FT_CONTAINER::make_pair;
 using FT_CONTAINER::map;
 using FT_CONTAINER::pair;
-using FT_CONTAINER::make_pair;

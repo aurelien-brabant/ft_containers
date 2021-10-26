@@ -316,32 +316,53 @@ test_pair_operator_gte(Tester& tester);
 
 int
 test_map_default_ctor(Tester& tester);
-
 int
 test_map_custom_comp_ctor(Tester& tester);
-
 int
 test_map_insert_one(Tester& tester);
-
 int
 test_map_insert_range(Tester& tester);
-
 int
 test_map_find(Tester& tester);
-
 int
 test_map_erase_one(Tester& tester);
-
 int
 test_map_erase_one_alternate(Tester& tester);
-
 int
 test_map_erase_iterator(Tester& tester);
-
 int
 test_map_insert_one_string(Tester& tester);
-
 int
 test_map_clear(Tester& tester);
+int
+test_map_iterator_decrement_end(Tester& tester);
+int
+test_map_iterator_decrement_reverse_loop(Tester& tester);
+int
+test_map_iterator_prefix_increment(Tester& tester);
+int
+test_map_iterator_postfix_increment(Tester& tester);
+int
+test_map_iterator_to_const_iterator(Tester& tester);
+int
+test_map_lower_bound_one_match_only(Tester& tester);
+int
+test_map_lower_bound_find_smallest(Tester& tester);
+int
+test_map_lower_bound_not_found(Tester& tester);
+int
+test_map_lower_bound_const_overload(Tester& tester);
+int
+test_map_lower_bound_const_overload(Tester& tester);
+int
+test_map_upper_bound_one_match_only(Tester& tester);
+int
+test_map_upper_bound_find_smallest(Tester& tester);
+int
+test_map_upper_bound_not_found(Tester& tester);
+int
+test_map_upper_bound_const_overload(Tester& tester);
+int
+test_map_upper_bound_const_overload(Tester& tester);
 
 #endif

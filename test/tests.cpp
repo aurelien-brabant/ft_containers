@@ -320,6 +320,43 @@ main(int argc, char** argv)
     tester.registerTest(
       mapSuiteName, "erase iterator", test_map_erase_iterator);
     tester.registerTest(mapSuiteName, "clear", test_map_clear);
+    tester.registerTest(mapSuiteName,
+                        "iterator prefix decrement end",
+                        test_map_iterator_decrement_end);
+    tester.registerTest(mapSuiteName,
+                        "iterator prefix decrement reverse loop",
+                        test_map_iterator_decrement_reverse_loop);
+    tester.registerTest(mapSuiteName,
+                        "iterator prefix increment",
+                        test_map_iterator_prefix_increment);
+    tester.registerTest(mapSuiteName,
+                        "iterator postfix increment",
+                        test_map_iterator_postfix_increment);
+    tester.registerTest(mapSuiteName,
+                        "iterator to const_iterator",
+                        test_map_iterator_to_const_iterator);
+    tester.registerTest(mapSuiteName,
+                        "lower_bound one match only",
+                        test_map_lower_bound_one_match_only);
+    tester.registerTest(mapSuiteName,
+                        "lower bound smallest match",
+                        test_map_lower_bound_find_smallest);
+    tester.registerTest(
+      mapSuiteName, "lower bound not found", test_map_lower_bound_not_found);
+    tester.registerTest(mapSuiteName,
+                        "lower bound const overload",
+                        test_map_lower_bound_const_overload);
+    tester.registerTest(mapSuiteName,
+                        "upper_bound one match only",
+                        test_map_upper_bound_one_match_only);
+    tester.registerTest(mapSuiteName,
+                        "upper bound smallest match",
+                        test_map_upper_bound_find_smallest);
+    tester.registerTest(
+      mapSuiteName, "upper bound not found", test_map_upper_bound_not_found);
+    tester.registerTest(mapSuiteName,
+                        "upper bound const overload",
+                        test_map_upper_bound_const_overload);
 
     if (argc > 1) {
         bool ret = true;
