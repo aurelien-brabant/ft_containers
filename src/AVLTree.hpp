@@ -777,6 +777,10 @@ class AVLTree
     AVLTree& operator=(const AVLTree& rhs)
     {
         if (this != &rhs) {
+            _destroy(_root);
+            deallocateNode(_begin);
+            deallocateNode(_end);
+
             _root = _copyRecursively(rhs._root);
             _end = _findInOrderPredecessor(_root);
             _begin = _findInOrderSuccessor(_root);

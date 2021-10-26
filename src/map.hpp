@@ -87,6 +87,8 @@ class map
             _compare = rhs._compare;
             _data = rhs._data;
         }
+
+        return *this;
     }
 
     size_type size(void) { return _data.size(); }
