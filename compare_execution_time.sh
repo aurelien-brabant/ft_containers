@@ -1,6 +1,8 @@
 #! /bin/bash
 
+printf "Running 'ft' executable...\r"
 ./ft $@ > /dev/null
+printf "Running 'std' executable...\r"
 ./std $@ > /dev/null
 
 cc misc/compare_time.c -o compare_time
