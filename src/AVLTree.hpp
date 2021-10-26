@@ -61,28 +61,28 @@ class AVLTree
 
     typedef typename Allocator::template rebind<Node>::other NodeAllocator;
 
-    NodeAllocator _nodeAllocator;
-
-    Node* allocateNode(const_reference value,
-                       Node* parent,
-                       Node* left = 0,
-                       Node* right = 0,
-                       unsigned height = 1)
+    static Node* allocateNode(const_reference value,
+                              Node* parent,
+                              Node* left = 0,
+                              Node* right = 0,
+                              unsigned height = 1)
     {
+        static NodeAllocator _alloc;
 
-        Node* node = _nodeAllocator.allocate(1);
-        _nodeAllocator.construct(node,
-                                 Node(value, parent, left, right, height));
+        Node* node = _alloc.allocate(1);
+        _alloc.construct(node, Node(value, parent, left, right, height));
 
         // Node* node = new Node(value, parent, left, right);
 
         return node;
     }
 
-    void deallocateNode(Node* p)
+    static void deallocateNode(Node* p)
     {
-        _nodeAllocator.destroy(p);
-        _nodeAllocator.deallocate(p, 1);
+        static NodeAllocator _alloc;
+
+        _alloc.destroy(p);
+        _alloc.deallocate(p, 1);
     }
 
     // }}}
@@ -246,7 +246,7 @@ class AVLTree
 
     // algorithms {{{
 
-    Node* _copyRecursively(Node* p, Node* parent = 0)
+    Node* _copyRecursively(Node* p, Node* parent = 0) const
     {
         if (!p) {
             return 0;
@@ -277,7 +277,7 @@ class AVLTree
     }
 
     // lookup - recursive find algorithm {{{
-    Node* _findNodeRecursively(Node* root, const_reference value)
+    Node* _findNodeRecursively(Node* root, const_reference value) const
     {
         if (!root || root == _begin || root == _end) {
             return 0;
@@ -295,7 +295,7 @@ class AVLTree
 
     Node* _findLowerBoundRecursively(Node* root,
                                      const_reference value,
-                                     Node* last = 0)
+                                     Node* last = 0) const
     {
         if (!root || root == _begin || root == _end) {
             return last;
@@ -310,7 +310,7 @@ class AVLTree
 
     Node* _findUpperBoundRecursively(Node* root,
                                      const_reference value,
-                                     Node* last = 0)
+                                     Node* last = 0) const
     {
         if (!root || root == _begin || root == _end) {
             return last;
@@ -757,15 +757,14 @@ class AVLTree
     }
 
   private:
-    bool _equals(const_reference lhs, const_reference rhs)
+    bool _equals(const_reference lhs, const_reference rhs) const
     {
         return !_comparator(lhs, rhs) && !_comparator(rhs, lhs);
     }
 
   public:
     AVLTree(void)
-      : _nodeAllocator(NodeAllocator())
-      , _size(0)
+      : _size(0)
     {
         _begin = allocateNode(T(), 0, 0, 0, 0);
         _end = allocateNode(T(), _begin, 0, 0, 0);
@@ -781,7 +780,6 @@ class AVLTree
             _root = _copyRecursively(rhs._root);
             _end = _findInOrderPredecessor(_root);
             _begin = _findInOrderSuccessor(_root);
-            _nodeAllocator = rhs._nodeAllocator;
             _size = rhs._size;
         }
 
