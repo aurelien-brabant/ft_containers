@@ -199,5 +199,7 @@ TEST(test_map_assignment_operator);
 TEST(test_map_copy_constructor);
 TEST(test_map_copy_cleared);
 TEST(test_map_swap);
+TEST(test_map_size);
+TEST(test_map_size_empty);
 
 #endif

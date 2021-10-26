@@ -371,6 +371,9 @@ main(int argc, char** argv)
                         "equal range const overload",
                         test_map_equal_range_const_overload);
     tester.registerTest(mapSuiteName, "swap", test_map_swap);
+    tester.registerTest(mapSuiteName, "size()", test_map_size);
+    tester.registerTest(
+      mapSuiteName, "size() on empty map", test_map_size_empty);
 
     if (argc > 1) {
         bool ret = true;
