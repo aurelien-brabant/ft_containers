@@ -1006,10 +1006,3 @@ operator>=(AVLTree<T>& lhs, AVLTree<T>& rhs)
 {
     return !(lhs < rhs);
 }
-
-template<typename T>
-void
-swap(AVLTree<T>& lhs, AVLTree<T>& rhs)
-{
-    lhs.swap(rhs);
-}

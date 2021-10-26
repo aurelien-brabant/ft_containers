@@ -170,7 +170,24 @@ class map
     const_iterator end(void) const { return _data.end(); }
 
     void clear(void) { _data.clear(); }
-};
 
-/* END OF namespace ft */
+    void swap(map& rhs)
+    {
+        if (this != &rhs) {
+            _data.swap(rhs._data);
+        }
+    }
+};
+}
+
+namespace std {
+
+template<typename Key, typename T, typename Compare, typename Allocator>
+void
+swap(ft::map<Key, T, Compare, Allocator>& lhs,
+     ft::map<Key, T, Compare, Allocator>& rhs)
+{
+    lhs.swap(rhs);
+}
+
 }

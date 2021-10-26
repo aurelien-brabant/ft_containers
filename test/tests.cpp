@@ -370,6 +370,7 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName,
                         "equal range const overload",
                         test_map_equal_range_const_overload);
+    tester.registerTest(mapSuiteName, "swap", test_map_swap);
 
     if (argc > 1) {
         bool ret = true;

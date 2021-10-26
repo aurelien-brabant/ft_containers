@@ -198,5 +198,6 @@ TEST(test_map_equal_range_const_overload);
 TEST(test_map_assignment_operator);
 TEST(test_map_copy_constructor);
 TEST(test_map_copy_cleared);
+TEST(test_map_swap);
 
 #endif
