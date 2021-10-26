@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <functional>
 #include <memory>
+#include <stdexcept>
 
 namespace ft {
 
@@ -119,6 +120,28 @@ class map
     }
 
     mapped_type& operator[](const Key& key) { return find(key)->second; }
+
+    mapped_type& at(const Key& key)
+    {
+        iterator it = find(key);
+
+        if (it == end()) {
+            throw std::out_of_range("map::at - index out of range");
+        }
+
+        return it->second;
+    }
+
+    const mapped_type& at(const Key& key) const
+    {
+        const_iterator cit = find(key);
+
+        if (cit == end()) {
+            throw std::out_of_range("map::at - index out of range");
+        }
+
+        return cit->second;
+    }
 
     iterator lower_bound(const Key& key)
     {

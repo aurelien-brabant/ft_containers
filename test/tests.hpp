@@ -203,5 +203,9 @@ TEST(test_map_size);
 TEST(test_map_size_empty);
 TEST(test_map_subscript_ro);
 TEST(test_map_subscript_rw);
+TEST(test_map_at_ro);
+TEST(test_map_at_rw);
+TEST(test_map_at_out_of_range);
+TEST(test_map_at_const_overload);
 
 #endif

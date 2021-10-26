@@ -377,6 +377,12 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName, "operator[] read", test_map_subscript_ro);
     tester.registerTest(
       mapSuiteName, "operator[] read/write", test_map_subscript_rw);
+    tester.registerTest(mapSuiteName, "at() read", test_map_at_ro);
+    tester.registerTest(mapSuiteName, "at() read/write", test_map_at_rw);
+    tester.registerTest(
+      mapSuiteName, "at() out of range", test_map_at_out_of_range);
+    tester.registerTest(
+      mapSuiteName, "at() const overload", test_map_at_const_overload);
 
     if (argc > 1) {
         bool ret = true;
