@@ -1,4 +1,5 @@
 #pragma once
+#include "iterator.hpp"
 #include "utility.hpp"
 #include <algorithm>
 #include <functional>
@@ -57,6 +58,53 @@ class AVLTree
         }
 
         bool isLeaf(void) const { return !left && !right; }
+
+        void swap(Node& rhs)
+        {
+            Node *leftTmp = left, *rightTmp = right;
+            // this gets rhs's attributes
+
+            left = rhs.left == this ? &rhs : rhs.left;
+            right = rhs.right == this ? &rhs : rhs.right;
+            if (left) {
+                left->parent = this;
+            }
+            if (right) {
+                right->parent = this;
+            }
+
+            rhs.left = leftTmp == &rhs ? this : leftTmp;
+            rhs.right = rightTmp == &rhs ? this : rightTmp;
+            if (leftTmp) {
+                leftTmp->parent = &rhs;
+            }
+            if (rightTmp) {
+                rightTmp->parent = &rhs;
+            }
+
+            Node* parentTmp = parent;
+
+            parent = rhs.parent == this ? &rhs : rhs.parent;
+            if (parent) {
+                if (parent->left == &rhs) {
+                    parent->left = this;
+                } else if (parent->right == &rhs) {
+                    parent->right = this;
+                }
+            }
+
+            rhs.parent = parentTmp;
+            if (rhs.parent) {
+                if (rhs.parent->left == this) {
+                    rhs.parent->left = &rhs;
+                } else if (parent->right == this) {
+                    rhs.parent->right = &rhs;
+                }
+            }
+
+            std::swap(height, rhs.height);
+            std::swap(value, rhs.value);
+        }
     };
 
     typedef typename Allocator::template rebind<Node>::other NodeAllocator;
@@ -111,7 +159,7 @@ class AVLTree
         TreeIterator(const TreeIterator& other) { *this = other; }
         ~TreeIterator(void) {}
 
-        void* serializedNode(void) { return _current; }
+        void* serializedNode(void) const { return _current; }
 
         // allow conversion from iterator to const_iterator
         operator TreeIterator<const ItT, true>()
@@ -129,8 +177,10 @@ class AVLTree
         }
 
         reference operator*(void) { return _current->value; }
+        const_reference operator*(void) const { return _current->value; }
 
         pointer operator->(void) { return &_current->value; }
+        const T* operator->(void) const { return &_current->value; }
 
         // iterator - bidirectional: pre/post increment/decrement {{{
 
@@ -187,20 +237,20 @@ class AVLTree
 
         // logical operators {{{
 
-        bool operator!=(TreeIterator<ItT, false> rhs)
+        bool operator!=(TreeIterator<ItT, false> rhs) const
         {
             return serializedNode() != rhs.serializedNode();
         }
-        bool operator==(TreeIterator<ItT, false> rhs)
+        bool operator==(TreeIterator<ItT, false> rhs) const
         {
             return serializedNode() == rhs.serializedNode();
         }
 
-        bool operator==(TreeIterator<const ItT, true> rhs)
+        bool operator==(TreeIterator<const ItT, true> rhs) const
         {
             return serializedNode() == rhs.serializedNode();
         }
-        bool operator!=(TreeIterator<const ItT, true> rhs)
+        bool operator!=(TreeIterator<const ItT, true> rhs) const
         {
             return serializedNode() != rhs.serializedNode();
         }
@@ -210,15 +260,15 @@ class AVLTree
 
     typedef TreeIterator<T, false> iterator;
     typedef TreeIterator<const T, true> const_iterator;
-    typedef std::reverse_iterator<iterator> reverse_iterator;
-    typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+    typedef ft::reverse_iterator<iterator> reverse_iterator;
+    typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
     // }}}
 
   private:
     static Node* _findInOrderPredecessor(Node* p)
     {
-        while (p && p->right) {
+        while (p && p->right && p->right) {
             p = p->right;
         }
 
@@ -227,7 +277,7 @@ class AVLTree
 
     static Node* _findInOrderSuccessor(Node* p)
     {
-        while (p && p->left) {
+        while (p && p->left && p->left) {
             p = p->left;
         }
 
@@ -270,7 +320,7 @@ class AVLTree
         else if (root == _end)
             os << "END\n";
         else
-            os << root->value << "\n";
+            os << root->value.first << "\n";
         if (root->right) {
             _printInOrder(os, root->right);
         }
@@ -360,6 +410,8 @@ class AVLTree
             if (root->isLeaf() || (!root->left && root->right == _end) ||
                 (!root->right && root->left == _begin)) {
 
+                // std::cout << root->value.first << " is DELETED!\n";
+
                 // update begin position
                 if (root->left == _begin) {
                     _begin->parent = root->parent;
@@ -368,6 +420,14 @@ class AVLTree
                 } else if (root->right == _end) {
                     _end->parent = root->parent;
                     root->parent->right = _end;
+                } else {
+                    if (root->parent) {
+                        if (root->parent->left == root) {
+                            root->parent->left = 0;
+                        } else {
+                            root->parent->right = 0;
+                        }
+                    }
                 }
 
                 Node* ret = root->isLeaf() ? 0 : (root->left ? _begin : _end);
@@ -382,73 +442,118 @@ class AVLTree
                 (root->right && root->right == _end)) {
                 Node* pred = _findInOrderPredecessor(root->left);
 
-                //   std::cout << "Left swap\n";
+                /*
+                // 1. update root right and left parent links to point to the
+                // predecessor
 
-                if (root->right) {
+                if (root->right && root->right != pred) {
+                    // std::cout << "root->right parent changed";
                     root->right->parent = pred;
                 }
+
+                if (root->left && root->left != pred) {
+                    // std::cout << "root->left parent changed";
+                    root->left->parent = pred;
+                }
+
+                // 2. if the predecessor has a left node (which it may not
+                // have), its parent link must now point to root. NOTE: because
+                // of its nature, a predecessor never has a right child node.
 
                 if (pred->left) {
                     pred->left->parent = root;
                 }
 
-                // swap parents
-                Node* pp = pred->parent;
-                pred->parent = root->parent;
-                root->parent = pp == root ? pred : pp;
+                // 3. swap predecessor and root direct parents.
 
-                // swap right pointers
+                Node* tmp = pred->parent;
+
+                if (pred->parent) {
+                    pred->parent->right = root;
+                }
+
+                pred->parent = root->parent;
+                root->parent = pred;
+
+                // 4. swap right pointers
+
                 pred->right = root->right;
                 root->right = 0;
 
                 // swap left pointers
-                Node* rl = root->left;
+                tmp = pred->left;
+                pred->left = root->left;
                 root->left = pred->left;
-                pred->left = rl == pred ? root : rl;
 
                 root->value = pred->value;
 
                 std::swap(root->height, pred->height);
 
                 std::swap(root, pred);
+                */
+
+                root->swap(*pred);
+                std::swap(root, pred);
+                root->value = pred->value;
+
+                // std::cout << "root " << *root << "\n";
+                // std::cout << "pred " << *pred << "\n";
 
                 root->left = _deleteNodeRecursively(root->left, pred->value);
             }
 
             // Take inorder successor
             else {
-                // std::cout << "right stuff\n";
                 Node* succ = _findInOrderSuccessor(root->right);
 
-                // swap successor with root
-                Node *sp = succ->parent, *rright = root->right;
-                T sval = succ->value;
+                /*
+                // 1. update root right and left parent links to point to the
+                // predecessor
+                if (root->right && root->right != succ) {
+                    root->right->parent = succ;
+                }
 
-                if (root->left) {
+                if (root->left && root->left != succ) {
                     root->left->parent = succ;
                 }
+
+                // 2. if the predecessor has a right node (which it may not
+                // have), its parent link must now point to root. NOTE: because
+                // of its nature, a predecessor never has a right child node.
 
                 if (succ->right) {
                     succ->right->parent = root;
                 }
 
-                // swap parents
-                succ->parent = root->parent;
-                root->parent = sp == root ? succ : sp;
+                // 3. swap predecessor and root direct parents.
 
-                // swap left pointers
+                Node* tmp = succ->parent;
+                if (succ->parent) {
+                    succ->parent->left = root;
+                }
+                succ->parent = root->parent;
+                root->parent = tmp == root ? succ : tmp;
+
+                // 4. swap left pointers
+
                 succ->left = root->left;
-                // succ->parent->left = root;
+                if (succ->left) {
+                    succ->left->parent = succ;
+                }
                 root->left = 0;
 
+                // swap right pointers
+                tmp = root->right;
                 root->right = succ->right;
-                succ->right = rright == succ ? root : rright;
+                succ->right = tmp == succ ? root : tmp;
+                if (succ->right) {
+                    succ->right->parent = succ;
+                }
+                */
 
+                root->swap(*succ);
+                std::swap(root, succ);
                 root->value = succ->value;
-
-                std::swap(succ->height, root->height);
-
-                std::swap(succ, root);
 
                 root->right = _deleteNodeRecursively(root->right, succ->value);
             }
@@ -748,7 +853,7 @@ class AVLTree
 
     friend std::ostream& operator<<(std::ostream& os, const Node& rhs)
     {
-        os << "v=" << rhs.value << ", h=" << rhs.height
+        os << "v=" << rhs.value.first << ", h=" << rhs.height
            << ", l=" << (rhs.left ? "yes" : "no")
            << ", r=" << (rhs.right ? "yes" : "no")
            << ", p=" << (rhs.parent ? "yes" : "no");
@@ -797,7 +902,13 @@ class AVLTree
         deallocateNode(_end);
     }
 
-    size_t size(void) const { return _size; }
+    size_type size(void) const { return _size; }
+
+    size_type max_size(void) const
+    {
+        NodeAllocator alloc;
+        return alloc.max_size();
+    }
 
     ft::pair<iterator, bool> insert(const T& value)
     {
@@ -830,7 +941,7 @@ class AVLTree
     void erase(iterator first, iterator last)
     {
         while (first != last) {
-            erase(first++);
+            erase(*first++);
         }
     }
 
@@ -838,6 +949,7 @@ class AVLTree
 
     size_type erase(const T& value)
     {
+        // std::cout << "erase " << value.first << "\n";
         size_type oldSize = size();
 
         _root = _deleteNodeRecursively(_root, value);
@@ -863,11 +975,21 @@ class AVLTree
 
     iterator end(void) { return iterator(_end); }
 
-    const_iterator end(void) const { return const_iterator(_end); }
+    const_iterator end(void) const { return iterator(_end); }
 
     reverse_iterator rbegin() { return reverse_iterator(end()); }
 
+    const_reverse_iterator rbegin() const
+    {
+        return const_reverse_iterator(end());
+    }
+
     reverse_iterator rend() { return reverse_iterator(begin()); }
+
+    const_reverse_iterator rend() const
+    {
+        return const_reverse_iterator(begin());
+    }
 
     iterator find(const T& value)
     {

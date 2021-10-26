@@ -55,7 +55,7 @@ class map
     Allocator _allocator;
 
   public:
-    size_type max_size(void) { return _allocator.max_size(); }
+    size_type max_size(void) const { return _data.max_size(); }
 
     allocator_type get_allocator() const { return _allocator; }
 
@@ -65,6 +65,9 @@ class map
   public:
     typedef typename InternalBTree::iterator iterator;
     typedef typename InternalBTree::const_iterator const_iterator;
+    typedef typename InternalBTree::reverse_iterator reverse_iterator;
+    typedef
+      typename InternalBTree::const_reverse_iterator const_reverse_iterator;
     InternalBTree _data;
 
     map(void)
@@ -106,11 +109,16 @@ class map
         return *this;
     }
 
-    size_type size(void) { return _data.size(); }
+    size_type size(void) const { return _data.size(); }
 
     ft::pair<iterator, bool> insert(const value_type& value)
     {
         return _data.insert(value);
+    }
+
+    iterator insert(iterator hint, const value_type& value)
+    {
+        return _data.insert(hint, value);
     }
 
     template<typename InputIt>
@@ -123,17 +131,28 @@ class map
     {
         value_type p;
 
-        return _data.find(make_pair(key, typename value_type::second_type()));
+        return _data.find(
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     const_iterator find(const Key& key) const
     {
         value_type p;
 
-        return _data.find(make_pair(key, typename value_type::second_type()));
+        return _data.find(
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
-    mapped_type& operator[](const Key& key) { return find(key)->second; }
+    mapped_type& operator[](const Key& key)
+    {
+        iterator it(find(key));
+
+        return it != end() ? it->second
+                           : (insert(ft::make_pair(
+                                       key, typename value_type::second_type()))
+                                .first)
+                               ->second;
+    }
 
     mapped_type& at(const Key& key)
     {
@@ -157,22 +176,31 @@ class map
         return cit->second;
     }
 
+    size_type count(const Key& key) const
+    {
+        const_iterator it = find(key);
+
+        return it != end();
+    }
+
+    bool empty(void) const { return size() == 0; }
+
     iterator lower_bound(const Key& key)
     {
         return _data.lower_bound(
-          make_pair(key, typename value_type::second_type()));
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     const_iterator lower_bound(const Key& key) const
     {
         return _data.lower_bound(
-          make_pair(key, typename value_type::second_type()));
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     iterator upper_bound(const Key& key)
     {
         return _data.upper_bound(
-          make_pair(key, typename value_type::second_type()));
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     const_iterator upper_bound(const Key& key) const
@@ -184,29 +212,36 @@ class map
     ft::pair<iterator, iterator> equal_range(const Key& key)
     {
         return _data.equal_range(
-          make_pair(key, typename value_type::second_type()));
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     ft::pair<const_iterator, const_iterator> equal_range(const Key& key) const
     {
         return _data.equal_range(
-          make_pair(key, typename value_type::second_type()));
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     size_t erase(const Key& key)
     {
-        return _data.erase(make_pair(key, typename value_type::second_type()));
+        return _data.erase(
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     void erase(iterator pos) { _data.erase(pos); }
 
-    iterator begin(void) { return _data.begin(); }
+    void erase(iterator first, iterator last) { _data.erase(first, last); }
 
-    const_iterator begin(void) const { return _data.end(); }
+    iterator begin(void) { return _data.begin(); }
+    const_iterator begin(void) const { return _data.begin(); }
 
     iterator end(void) { return _data.end(); }
-
     const_iterator end(void) const { return _data.end(); }
+
+    reverse_iterator rbegin(void) { return _data.rbegin(); }
+    const_reverse_iterator rbegin(void) const { return _data.rbegin(); }
+
+    reverse_iterator rend(void) { return _data.rend(); }
+    const_reverse_iterator rend(void) const { return _data.rend(); }
 
     void clear(void) { _data.clear(); }
 
@@ -216,7 +251,44 @@ class map
             _data.swap(rhs._data);
         }
     }
+
+    friend bool operator==(const ft::map<Key, T, Compare, Allocator>& lhs,
+                           const ft::map<Key, T, Compare, Allocator>& rhs)
+    {
+        return lhs._data == rhs._data;
+    }
+
+    friend bool operator!=(const ft::map<Key, T, Compare, Allocator>& lhs,
+                           const ft::map<Key, T, Compare, Allocator>& rhs)
+    {
+        return lhs._data != rhs._data;
+    }
+
+    friend bool operator<(const ft::map<Key, T, Compare, Allocator>& lhs,
+                          const ft::map<Key, T, Compare, Allocator>& rhs)
+    {
+        return lhs._data < rhs._data;
+    }
+
+    friend bool operator>(const ft::map<Key, T, Compare, Allocator>& lhs,
+                          const ft::map<Key, T, Compare, Allocator>& rhs)
+    {
+        return lhs._data > rhs._data;
+    }
+
+    friend bool operator<=(const ft::map<Key, T, Compare, Allocator>& lhs,
+                           const ft::map<Key, T, Compare, Allocator>& rhs)
+    {
+        return lhs._data <= rhs._data;
+    }
+
+    friend bool operator>=(const ft::map<Key, T, Compare, Allocator>& lhs,
+                           const ft::map<Key, T, Compare, Allocator>& rhs)
+    {
+        return lhs._data >= rhs._data;
+    }
 };
+
 }
 
 namespace std {

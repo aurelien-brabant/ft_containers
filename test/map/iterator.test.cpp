@@ -92,3 +92,24 @@ test_map_iterator_to_const_iterator(Tester& tester)
 
     return 0;
 }
+
+TEST(test_map_iterator_const_instance)
+{
+    map<unsigned, unsigned> m;
+    unsigned baseN = 100000;
+
+    for (unsigned i = 0; i != baseN; ++i) {
+        m.insert(FT_CONTAINER::make_pair(i, i));
+    }
+
+    const map<unsigned, unsigned> cm(m);
+
+    size_t i = 0;
+    for (map<unsigned, unsigned>::const_iterator cit = cm.begin();
+         cit != cm.end();) {
+        p_assert_eq((cit++)->first, i++);
+    }
+    p_assert_eq(i, baseN);
+
+    return 0;
+}

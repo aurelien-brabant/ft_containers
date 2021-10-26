@@ -183,6 +183,7 @@ TEST(test_map_iterator_decrement_reverse_loop);
 TEST(test_map_iterator_prefix_increment);
 TEST(test_map_iterator_postfix_increment);
 TEST(test_map_iterator_to_const_iterator);
+TEST(test_map_iterator_const_instance);
 TEST(test_map_lower_bound_one_match_only);
 TEST(test_map_lower_bound_find_smallest);
 TEST(test_map_lower_bound_not_found);

@@ -340,6 +340,8 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName,
                         "iterator to const_iterator",
                         test_map_iterator_to_const_iterator);
+    tester.registerTest(
+      mapSuiteName, "iterator on const map", test_map_iterator_const_instance);
     tester.registerTest(mapSuiteName,
                         "lower_bound one match only",
                         test_map_lower_bound_one_match_only);

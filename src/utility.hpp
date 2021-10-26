@@ -22,7 +22,10 @@ class pair
       , second(y)
     {}
 
-    pair(const pair& other) { *this = other; }
+    pair(const pair& other)
+      : first(other.first)
+      , second(other.second)
+    {}
 
     template<typename U1, typename U2>
     pair(const pair<U1, U2>& other)
