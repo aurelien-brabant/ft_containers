@@ -1,8 +1,7 @@
 #include "map_testing.hpp"
 #include <functional>
 
-int
-test_map_default_ctor(Tester& tester)
+TEST(test_map_default_ctor)
 {
     map<std::string, int> m;
 
@@ -19,8 +18,7 @@ test_map_default_ctor(Tester& tester)
     return 0;
 }
 
-int
-test_map_custom_comp_ctor(Tester& tester)
+TEST(test_map_custom_comp_ctor)
 {
     std::greater<std::string> greaterCmp;
     map<std::string, int, std::greater<std::string> > m(greaterCmp);
@@ -37,3 +35,32 @@ test_map_custom_comp_ctor(Tester& tester)
 
     return 0;
 }
+
+TEST(test_map_range_ctor)
+{
+    unsigned baseN = 1000000;
+
+    std::vector<FT_CONTAINER::pair<unsigned, unsigned> > vp;
+
+    for (unsigned i = 0; i != baseN; ++i) {
+        vp.push_back(FT_CONTAINER::make_pair(i, i));
+    }
+
+    // copy what has been put in the vector, except first and last pairs
+    map<unsigned, unsigned> m(vp.begin() + 1, vp.end() - 1);
+
+    unsigned i = 1;
+
+    for (map<unsigned, unsigned>::const_iterator cit = m.begin();
+         cit != m.end();
+         ++cit) {
+        p_assert_eq(cit->first, i);
+        p_assert_eq(cit->second, i);
+        ++i;
+    }
+
+    p_assert_eq(i, baseN - 1);
+
+    return 0;
+}
+

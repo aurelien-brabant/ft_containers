@@ -77,6 +77,20 @@ class map
       , _allocator(alloc)
     {}
 
+    template<typename InputIt>
+    map(InputIt first,
+        InputIt last,
+        const Compare& comp = Compare(),
+        const Allocator& alloc = Allocator())
+      : _compare(comp)
+      , _allocator(alloc)
+    {
+        while (first != last) {
+            _data.insert(*first);
+            ++first;
+        }
+    }
+
     map(const map& other) { *this = other; }
 
     ~map(void) {}

@@ -169,6 +169,7 @@ TEST(test_pair_operator_gte);
 
 TEST(test_map_default_ctor);
 TEST(test_map_custom_comp_ctor);
+TEST(test_map_range_ctor);
 TEST(test_map_insert_one);
 TEST(test_map_insert_range);
 TEST(test_map_find);
