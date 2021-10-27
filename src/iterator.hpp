@@ -323,13 +323,13 @@ class reverse_iterator
 
     value_type& operator[](size_t i) const
     {
-        subscript(
+        return subscript(
           i, ft::is_same<iterator_category, std::random_access_iterator_tag>());
     }
 
     value_type& operator[](size_t i)
     {
-        subscript(
+        return subscript(
           i, ft::is_same<iterator_category, std::random_access_iterator_tag>());
     }
 
