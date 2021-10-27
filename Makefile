@@ -18,12 +18,11 @@ fclean:
 	@make fclean -s -C $(CASTORNO_PATH)
 
 re: fclean all
-	@make re -s -C $(CASTORNO_PATH)
 
 .PHONY: all clean fclean re castorno-check-update
 
 $(CASTORNO_PATH):
-	git clone https://github.com/aurelien-brabant/castorno $(CASTORNO_PATH)
+	@git clone https://github.com/aurelien-brabant/castorno $(CASTORNO_PATH)
 
 $(CASTORNO): $(CASTORNO_PATH)
 	@make re -C $(CASTORNO_PATH)
