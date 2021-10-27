@@ -481,7 +481,13 @@ class vector
 
     // modifiers {{{
 
-    void clear(void) { _length = 0; }
+    void clear(void)
+    {
+        for (size_t i = 0; i != size(); ++i) {
+            _allocator.destroy(_data + i);
+        }
+        _length = 0;
+    }
 
     /**
      * [1, 4, 8, 4, 7, 2, 0, 0 ]

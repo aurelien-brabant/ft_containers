@@ -284,11 +284,35 @@ class AVLTree
         return p;
     }
 
+    bool hasLeft(Node* p) const { return p->left && p != _begin; }
+
+    bool hasRight(Node* p) const { return p->right && p != _end; }
+
+    unsigned _computeNodeHeight(Node* node) const
+    {
+        unsigned hl, hr;
+
+        hl = node->left ? node->left->height : 0;
+        hr = node->right ? node->right->height : 0;
+
+        return hl >= hr ? hl + 1 : hr + 1;
+    }
+
+    // balanceFactor such as { -1, 0, 1 }
+    int8_t _computeBalanceFactor(Node* node)
+    {
+        unsigned hl, hr;
+
+        hl = node->left ? node->left->height : 0;
+        hr = node->right ? node->right->height : 0;
+
+        return hl - hr; /* height of left subtree - height of right subtree */
+    }
+
   private:
     // private attributes {{{
 
-    Node *_begin, *_end, *_root; // keeping track of begin and end of the tree -
-                                 // the value gets updated
+    Node *_begin, *_end, *_root;
     size_t _size;
     Compare _comparator;
 
@@ -382,13 +406,12 @@ class AVLTree
         }
 
         if (_equals(value, root->value)) {
-            // _begin and _end are acting as delimiters, we can't delete them
             if (root == _end || root == _begin) {
                 return root;
             }
 
-            // SPECIAL CASE: last element is deleted: we need to join begin and
-            // end together.
+            /* SPECIAL CASE: last element is deleted: we need to join begin and
+             * end together. */
             if (root->left == _begin && root->right == _end) {
                 deallocateNode(root);
                 _begin->right = _end;
@@ -398,26 +421,24 @@ class AVLTree
                 return _begin;
             }
 
-            // A leaf node is a node which has a NULL pointer as its left and
-            // right child.
-            // We also want to handle two more special cases here:
-            // - When pointer to left child is NULL and right child is the _end
-            // node, we want to update links to keep the end where it should be.
-            // - When pointer to right child is NULL and left child is the
-            // _begin node, we want to update links to keep the _begin where it
-            // should be.
+            /* A leaf node is a node which has a NULL pointer as its left and
+             right child. We also want to handle two more special cases here:
+             - When pointer to left child is NULL and right child is the _end
+             node, we want to update links to keep the end where it should be.
+             - When pointer to right child is NULL and left child is the
+             _begin node, we want to update links to keep the _begin where it
+             should be. */
 
             if (root->isLeaf() || (!root->left && root->right == _end) ||
                 (!root->right && root->left == _begin)) {
 
-                // std::cout << root->value.first << " is DELETED!\n";
-
-                // update begin position
+                /* update begin position */
                 if (root->left == _begin) {
                     _begin->parent = root->parent;
                     root->parent->left = _begin;
-                    // update end position
-                } else if (root->right == _end) {
+                }
+                /* update end position */
+                else if (root->right == _end) {
                     _end->parent = root->parent;
                     root->parent->right = _end;
                 } else {
@@ -437,173 +458,88 @@ class AVLTree
                 return ret;
             }
 
-            // Take inorder predecessor
-            if ((root->left && root->left != _begin) ||
-                (root->right && root->right == _end)) {
-                Node* pred = _findInOrderPredecessor(root->left);
-
-                /*
-                // 1. update root right and left parent links to point to the
-                // predecessor
-
-                if (root->right && root->right != pred) {
-                    // std::cout << "root->right parent changed";
-                    root->right->parent = pred;
-                }
-
-                if (root->left && root->left != pred) {
-                    // std::cout << "root->left parent changed";
-                    root->left->parent = pred;
-                }
-
-                // 2. if the predecessor has a left node (which it may not
-                // have), its parent link must now point to root. NOTE: because
-                // of its nature, a predecessor never has a right child node.
-
-                if (pred->left) {
-                    pred->left->parent = root;
-                }
-
-                // 3. swap predecessor and root direct parents.
-
-                Node* tmp = pred->parent;
-
-                if (pred->parent) {
-                    pred->parent->right = root;
-                }
-
-                pred->parent = root->parent;
-                root->parent = pred;
-
-                // 4. swap right pointers
-
-                pred->right = root->right;
-                root->right = 0;
-
-                // swap left pointers
-                tmp = pred->left;
-                pred->left = root->left;
-                root->left = pred->left;
-
-                root->value = pred->value;
-
-                std::swap(root->height, pred->height);
-
-                std::swap(root, pred);
-                */
-
-                root->swap(*pred);
-                std::swap(root, pred);
-                root->value = pred->value;
-
-                // std::cout << "root " << *root << "\n";
-                // std::cout << "pred " << *pred << "\n";
-
-                root->left = _deleteNodeRecursively(root->left, pred->value);
+            bool leftSide;
+            /* if root has both left and right children, selects the taller
+            subtree. */
+            if (hasLeft(root) && hasRight(root)) {
+                leftSide = root->left->height >= root->right->height;
+                /* otherwise, selects the only available child */
+            } else {
+                leftSide = hasLeft(root);
             }
 
-            // Take inorder successor
-            else {
-                Node* succ = _findInOrderSuccessor(root->right);
+            Node* tmp = leftSide ? _findInOrderPredecessor(root->left)
+                                 : _findInOrderSuccessor(root->right);
 
-                /*
-                // 1. update root right and left parent links to point to the
-                // predecessor
-                if (root->right && root->right != succ) {
-                    root->right->parent = succ;
-                }
+            /* swap root and tmp contents */
+            root->swap(*tmp);
 
-                if (root->left && root->left != succ) {
-                    root->left->parent = succ;
-                }
+            /* swap root and tmp pointers: we want the root pointer to point to
+            the current node that now has the content of tmp */
+            std::swap(root, tmp);
+            root->value = tmp->value;
 
-                // 2. if the predecessor has a right node (which it may not
-                // have), its parent link must now point to root. NOTE: because
-                // of its nature, a predecessor never has a right child node.
-
-                if (succ->right) {
-                    succ->right->parent = root;
-                }
-
-                // 3. swap predecessor and root direct parents.
-
-                Node* tmp = succ->parent;
-                if (succ->parent) {
-                    succ->parent->left = root;
-                }
-                succ->parent = root->parent;
-                root->parent = tmp == root ? succ : tmp;
-
-                // 4. swap left pointers
-
-                succ->left = root->left;
-                if (succ->left) {
-                    succ->left->parent = succ;
-                }
-                root->left = 0;
-
-                // swap right pointers
-                tmp = root->right;
-                root->right = succ->right;
-                succ->right = tmp == succ ? root : tmp;
-                if (succ->right) {
-                    succ->right->parent = succ;
-                }
-                */
-
-                root->swap(*succ);
-                std::swap(root, succ);
-                root->value = succ->value;
-
-                root->right = _deleteNodeRecursively(root->right, succ->value);
+            /* recurse until a leaf node or one of the leafs is _begin or _end
+             */
+            if (leftSide) {
+                root->left = _deleteNodeRecursively(root->left, tmp->value);
+            } else {
+                root->right = _deleteNodeRecursively(root->right, tmp->value);
             }
 
-        } else {
-            // continue to search left...
+        }
+
+        /* value is not found for now, search continues... */
+        else {
+            /* ...left */
             if (_comparator(value, root->value)) {
                 root->left = _deleteNodeRecursively(root->left, value);
-                // ... or right
-            } else {
+            }
+            /* ...right */
+            else {
                 root->right = _deleteNodeRecursively(root->right, value);
             }
         }
 
-        // Ensure tree is still balanced
-        root->height = _computeNodeHeight(root);
+        /* Rebalance tree */
 
+        root->height = _computeNodeHeight(root);
         int8_t bf = _computeBalanceFactor(root), bf2 = 0;
 
-        // we deleted on right hand side, the tree has become unbalanced on the
-        // left hand side
+        /* we deleted on right hand side, the tree has became unbalanced on the
+         * left hand side */
         if (bf == 2) {
             bf2 = _computeBalanceFactor(root->left);
 
-            // L1 rotation
+            /* L1 rotation */
             if (bf2 == 1) {
                 return _LL_rotate(root);
             }
-            // L-1 rotation
+            /* L-1 rotation */
             else if (bf2 == -1) {
                 return _LR_rotate(root);
-                // L0 rotation: L1 or L-1 can be performed.
-            } else if (bf2 == 0) {
+            }
+            /* L0 rotation: L1 or L-1 can be performed */
+            else if (bf2 == 0) {
                 return _LL_rotate(root);
             }
         }
 
-        // we deleted on left hand side, the tree has become unbalanced on the
-        // right hand side
+        /* we deleted on left hand side, the tree has became unbalanced on the
+           right hand side */
         else if (bf == -2) {
             bf2 = _computeBalanceFactor(root->right);
 
+            /* L-1 rotation */
             if (bf2 == 1) {
                 return _RL_rotate(root);
             }
-            // L-1 rotation
+            /* L-1 rotation */
             else if (bf2 == -1) {
                 return _RR_rotate(root);
-                // L0 rotation: L1 or L-1 can be performed.
-            } else if (bf2 == 0) {
+            }
+            /* L0 rotation: L1 or L-1 can be performed */
+            else if (bf2 == 0) {
                 return _RR_rotate(root);
             }
         }
@@ -614,6 +550,7 @@ class AVLTree
     // }}}
 
     // insert - recursive node insertion {{{
+
     Node* _insert(const T& value, Node* root, Node*& inserted, Node* parent = 0)
     {
         if (!root) {
@@ -633,8 +570,8 @@ class AVLTree
               allocateNode(value, parent, _begin, _begin->right);
             _begin->parent = p;
 
-            // if this is the first inserted element, _end's parent must be
-            // updated too.
+            /* if this is the first inserted element, _end's parent must be
+             * updated too */
             if (_begin->right == _end) {
                 _end->parent = p;
                 _begin->right = 0;
@@ -643,27 +580,26 @@ class AVLTree
             return p;
         }
 
-        // value < root->value
         if (_comparator(value, root->value)) {
             root->left = _insert(value, root->left, inserted, root);
-            // value > root->value
         } else if (_comparator(root->value, value)) {
             root->right = _insert(value, root->right, inserted, root);
-            // value == root->value
-            // NOTE: inserting a duplicate is a no-op
-        } else {
+        }
+        /* duplicate is inserted, throw a runtime_error that will be caught by
+           insert */
+        else {
             inserted = root;
             throw std::runtime_error("insert: duplicate value");
         }
 
         root->height = _computeNodeHeight(root);
 
-        // from that line, we'll find out if the tree is balanced or not. In the
-        // latter case, rotations will be required to make it balanced.
+        /* From that line, we'll find out if the tree is balanced or not. In the
+        latter case, rotations will be required to make it balanced. */
 
         int8_t bf = _computeBalanceFactor(root), bf2 = 0;
 
-        // if bf == 2 then we need to balance left side
+        /* if bf == 2 then we need to balance left side */
         if (bf == 2) {
             bf2 = _computeBalanceFactor(root->left);
             if (bf2 == 1) {
@@ -672,7 +608,7 @@ class AVLTree
                 return _LR_rotate(root);
             }
 
-            // if bf == -2 we need to balance right side
+            /* if bf == -2 we need to balance right side */
         } else if (bf == -2) {
             bf2 = _computeBalanceFactor(root->right);
             if (bf2 == 1) {
@@ -683,10 +619,9 @@ class AVLTree
             }
         }
 
-        // end of tree balancing
-
         return root;
     }
+
     // }}}
 
     void _destroy(Node* root)
@@ -824,33 +759,7 @@ class AVLTree
 
     // }}}
 
-    // }}}
-
-    // algorithms - helper functions {{{
-
-    unsigned _computeNodeHeight(Node* node) const
-    {
-        unsigned hl, hr;
-
-        hl = node->left ? node->left->height : 0;
-        hr = node->right ? node->right->height : 0;
-
-        return hl >= hr ? hl + 1 : hr + 1;
-    }
-
-    // balanceFactor such as { -1, 0, 1 }
-    int8_t _computeBalanceFactor(Node* node)
-    {
-        unsigned hl, hr;
-
-        hl = node->left ? node->left->height : 0;
-        hr = node->right ? node->right->height : 0;
-
-        return hl - hr; // height of left subtree - height of right subtree
-    }
-
-    // }}}
-
+#ifdef DEBUG
     friend std::ostream& operator<<(std::ostream& os, const Node& rhs)
     {
         os << "v=" << rhs.value.first << ", h=" << rhs.height
@@ -860,6 +769,7 @@ class AVLTree
 
         return os;
     }
+#endif
 
   private:
     bool _equals(const_reference lhs, const_reference rhs) const
@@ -923,7 +833,7 @@ class AVLTree
         return ft::make_pair(iterator(inserted), true);
     }
 
-    // hint is not used
+    /* hint is not used */
     iterator insert(iterator hint, const value_type& value)
     {
         (void)hint;
@@ -949,7 +859,6 @@ class AVLTree
 
     size_type erase(const T& value)
     {
-        // std::cout << "erase " << value.first << "\n";
         size_type oldSize = size();
 
         _root = _deleteNodeRecursively(_root, value);
