@@ -28,6 +28,7 @@ class map
 
     class value_compare
     {
+      protected:
         Compare comp;
 
       public:
@@ -206,7 +207,7 @@ class map
     const_iterator upper_bound(const Key& key) const
     {
         return _data.upper_bound(
-          make_pair(key, typename value_type::second_type()));
+          ft::make_pair(key, typename value_type::second_type()));
     }
 
     ft::pair<iterator, iterator> equal_range(const Key& key)
