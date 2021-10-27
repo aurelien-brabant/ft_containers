@@ -324,6 +324,11 @@ main(int argc, char** argv)
       mapSuiteName, "erase one alt", test_map_erase_one_alternate);
     tester.registerTest(
       mapSuiteName, "erase iterator", test_map_erase_iterator);
+    tester.registerTest(mapSuiteName,
+                        "erase random iterator ver.",
+                        test_map_erase_random_iterator);
+    tester.registerTest(
+      mapSuiteName, "erase random range ver.", test_map_erase_random_range);
     tester.registerTest(mapSuiteName, "clear", test_map_clear);
     tester.registerTest(mapSuiteName,
                         "iterator prefix decrement end",

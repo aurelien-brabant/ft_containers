@@ -176,6 +176,8 @@ TEST(test_map_find);
 TEST(test_map_erase_one);
 TEST(test_map_erase_one_alternate);
 TEST(test_map_erase_iterator);
+TEST(test_map_erase_random_iterator);
+TEST(test_map_erase_random_range);
 TEST(test_map_insert_one_string);
 TEST(test_map_clear);
 TEST(test_map_iterator_decrement_end);
