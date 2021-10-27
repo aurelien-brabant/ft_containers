@@ -82,6 +82,11 @@ struct is_same : public false_type
 template<typename T>
 struct is_same<T, T> : public true_type
 {};
+
+template<typename T>
+struct is_same<const T, const T> : public true_type
+{};
+
 }
 
 #endif

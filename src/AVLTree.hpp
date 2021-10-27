@@ -1073,16 +1073,18 @@ class AVLTree
     }
 };
 
-template<typename T>
+template<typename T, typename Compare, typename Alloc>
 bool
-operator==(AVLTree<T>& lhs, AVLTree<T>& rhs)
+operator==(const AVLTree<T, Compare, Alloc>& lhs,
+           const AVLTree<T, Compare, Alloc>& rhs)
 {
     if (lhs.size() != rhs.size()) {
         return false;
     }
 
-    for (typename AVLTree<T>::const_iterator first1 = lhs.begin(),
-                                             first2 = rhs.begin();
+    for (typename AVLTree<T, Compare, Alloc>::const_iterator
+           first1 = lhs.begin(),
+           first2 = rhs.begin();
          first1 != lhs.end();
          ++first1, ++first2) {
         if (*first1 != *first2) {
@@ -1093,38 +1095,43 @@ operator==(AVLTree<T>& lhs, AVLTree<T>& rhs)
     return true;
 }
 
-template<typename T>
+template<typename T, typename Compare, typename Alloc>
 bool
-operator!=(AVLTree<T>& lhs, AVLTree<T>& rhs)
+operator!=(const AVLTree<T, Compare, Alloc>& lhs,
+           const AVLTree<T, Compare, Alloc>& rhs)
 {
     return !(lhs == rhs);
 }
 
-template<typename T>
+template<typename T, typename Compare, typename Alloc>
 bool
-operator<(AVLTree<T>& lhs, AVLTree<T>& rhs)
+operator<(const AVLTree<T, Compare, Alloc>& lhs,
+          const AVLTree<T, Compare, Alloc>& rhs)
 {
     return std::lexicographical_compare(
       lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
-template<typename T>
+template<typename T, typename Compare, typename Alloc>
 bool
-operator>(AVLTree<T>& lhs, AVLTree<T>& rhs)
+operator>(const AVLTree<T, Compare, Alloc>& lhs,
+          const AVLTree<T, Compare, Alloc>& rhs)
 {
     return rhs < lhs;
 }
 
-template<typename T>
+template<typename T, typename Compare, typename Alloc>
 bool
-operator<=(AVLTree<T>& lhs, AVLTree<T>& rhs)
+operator<=(const AVLTree<T, Compare, Alloc>& lhs,
+           const AVLTree<T, Compare, Alloc>& rhs)
 {
     return !(lhs > rhs);
 }
 
-template<typename T>
+template<typename T, typename Compare, typename Alloc>
 bool
-operator>=(AVLTree<T>& lhs, AVLTree<T>& rhs)
+operator>=(const AVLTree<T, Compare, Alloc>& lhs,
+           const AVLTree<T, Compare, Alloc>& rhs)
 {
     return !(lhs < rhs);
 }
