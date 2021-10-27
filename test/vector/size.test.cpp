@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_size(Tester& tester)
+TEST(test_vector_size)
 {
     vector<int> v1(5), v2(0), v3(42);
 

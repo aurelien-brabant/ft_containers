@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_pop_back(Tester& tester)
+TEST(test_vector_pop_back)
 {
     vector<int> v(1);
 

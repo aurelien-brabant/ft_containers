@@ -1,7 +1,6 @@
 #include "map_testing.hpp"
 
-int
-test_map_clear(Tester& tester)
+TEST(test_map_clear)
 {
     unsigned baseN = 100000;
     map<unsigned, unsigned> m;

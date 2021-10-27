@@ -1,7 +1,6 @@
 #include "pair_testing.hpp"
 
-int
-test_make_pair(Tester& tester)
+TEST(test_make_pair)
 {
     pair<std::string, std::string> p = make_pair("42", "21");
 

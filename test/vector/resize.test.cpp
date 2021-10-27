@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_resize_greater(Tester& tester)
+TEST(test_vector_resize_greater)
 {
     size_t baseN = 42, resizeN = baseN * 10000;
     vector<int> v;
@@ -22,8 +21,7 @@ test_vector_resize_greater(Tester& tester)
     return 0;
 }
 
-int
-test_vector_resize_smaller(Tester& tester)
+TEST(test_vector_resize_smaller)
 {
     size_t baseN = 424242, resizeN = baseN / 2;
     vector<int> v;
@@ -44,8 +42,7 @@ test_vector_resize_smaller(Tester& tester)
     return 0;
 }
 
-int
-test_vector_resize_same(Tester& tester)
+TEST(test_vector_resize_same)
 {
     size_t baseN = 42, resizeN = baseN;
     vector<int> v;

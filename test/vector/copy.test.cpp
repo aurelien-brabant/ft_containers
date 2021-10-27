@@ -6,8 +6,7 @@ using std::string;
 static const size_t baseN = 424242;
 static const string baseStringValue = "42";
 
-int
-test_vector_copy_constructor(Tester& tester)
+TEST(test_vector_copy_constructor)
 {
     vector<string> v(baseN, baseStringValue), v2(v);
 
@@ -16,8 +15,7 @@ test_vector_copy_constructor(Tester& tester)
     return 0;
 }
 
-int
-test_vector_assignment_operator_grow(Tester& tester)
+TEST(test_vector_assignment_operator_grow)
 {
     const string distinctStringValue = "21";
     vector<string> v(baseN, baseStringValue),
@@ -30,8 +28,7 @@ test_vector_assignment_operator_grow(Tester& tester)
     return 0;
 }
 
-int
-test_vector_assignment_operator_shrink(Tester& tester)
+TEST(test_vector_assignment_operator_shrink)
 {
     const string distinctStringValue = "21";
     vector<string> v(baseN, baseStringValue),
@@ -44,8 +41,7 @@ test_vector_assignment_operator_shrink(Tester& tester)
     return 0;
 }
 
-int
-test_vector_assignement_operator_to_empty(Tester& tester)
+TEST(test_vector_assignement_operator_to_empty)
 {
     vector<string> v(baseN, baseStringValue), v2;
 

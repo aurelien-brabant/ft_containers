@@ -1,6 +1,6 @@
 #include "map_testing.hpp"
 
-int test_map_find(Tester& tester)
+TEST(test_map_find)
 {
     unsigned baseN = 100000;
     map<unsigned, unsigned> m;
@@ -15,6 +15,6 @@ int test_map_find(Tester& tester)
         assert_expr(it != m.end());
         p_assert_eq(it->first, i);
     }
-    
+
     return 0;
 }

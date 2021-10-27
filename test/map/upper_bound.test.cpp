@@ -1,7 +1,6 @@
 #include "map_testing.hpp"
 
-int
-test_map_upper_bound_one_match_only(Tester& tester)
+TEST(test_map_upper_bound_one_match_only)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 100000;
@@ -19,8 +18,7 @@ test_map_upper_bound_one_match_only(Tester& tester)
     return 0;
 }
 
-int
-test_map_upper_bound_find_smallest(Tester& tester)
+TEST(test_map_upper_bound_find_smallest)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 100000;
@@ -38,8 +36,7 @@ test_map_upper_bound_find_smallest(Tester& tester)
     return 0;
 }
 
-int
-test_map_upper_bound_not_found(Tester& tester)
+TEST(test_map_upper_bound_not_found)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 100000;
@@ -55,8 +52,7 @@ test_map_upper_bound_not_found(Tester& tester)
     return 0;
 }
 
-int
-test_map_upper_bound_const_overload(Tester& tester)
+TEST(test_map_upper_bound_const_overload)
 {
     const map<unsigned, unsigned> cm;
 

@@ -3,8 +3,7 @@
 
 using std::string;
 
-int
-test_vector_data(Tester& tester)
+TEST(test_vector_data)
 {
     vector<string> vs(42);
     string* data = vs.data();

@@ -63,4 +63,3 @@ TEST(test_map_range_ctor)
 
     return 0;
 }
-

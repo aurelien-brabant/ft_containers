@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_clear(Tester& tester)
+TEST(test_vector_clear)
 {
     vector<int> v(424242);
 

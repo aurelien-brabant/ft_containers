@@ -1,8 +1,7 @@
 #include "pair_testing.hpp"
 #include <string>
 
-int
-test_pair_default_ctor(Tester& tester)
+TEST(test_pair_default_ctor)
 {
     pair<int, std::string> p;
 
@@ -12,8 +11,7 @@ test_pair_default_ctor(Tester& tester)
     return 0;
 }
 
-int
-test_pair_key_value_ctor(Tester& tester)
+TEST(test_pair_key_value_ctor)
 {
     pair<std::string, int> p("42", 42);
 
@@ -23,8 +21,7 @@ test_pair_key_value_ctor(Tester& tester)
     return 0;
 }
 
-int
-test_pair_copy_ctor(Tester& tester)
+TEST(test_pair_copy_ctor)
 {
     pair<std::string, int> p("42", 42), p2(p);
 
@@ -34,8 +31,7 @@ test_pair_copy_ctor(Tester& tester)
     return 0;
 }
 
-int
-test_pair_assignment_operator(Tester& tester)
+TEST(test_pair_assignment_operator)
 {
     pair<std::string, int> p("42", 42), p2("21", 21);
 

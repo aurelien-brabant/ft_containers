@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_at_valid(Tester& tester)
+TEST(test_vector_at_valid)
 {
     const size_t baseN = 424242;
     vector<long> v(baseN);
@@ -17,8 +16,7 @@ test_vector_at_valid(Tester& tester)
     return 0;
 }
 
-int
-test_vector_at_const_overload(Tester& tester)
+TEST(test_vector_at_const_overload)
 {
     const vector<int> v(1);
 
@@ -27,8 +25,7 @@ test_vector_at_const_overload(Tester& tester)
     return 0;
 }
 
-int
-test_vector_at_throws(Tester& tester)
+TEST(test_vector_at_throws)
 {
     vector<long> v, v2(10);
 

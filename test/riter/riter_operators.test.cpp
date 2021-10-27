@@ -1,7 +1,6 @@
 #include "riter_testing.hpp"
 
-int
-test_riter_add_n(Tester& tester)
+TEST(test_riter_add_n)
 {
     const std::vector<int> v(42);
     std::vector<int>::difference_type n = 21;
@@ -16,8 +15,7 @@ test_riter_add_n(Tester& tester)
     return 0;
 }
 
-int
-test_riter_add_n_self(Tester& tester)
+TEST(test_riter_add_n_self)
 {
     const std::vector<int> v(42);
     std::vector<int>::difference_type n = 21;
@@ -32,8 +30,7 @@ test_riter_add_n_self(Tester& tester)
     return 0;
 }
 
-int
-test_riter_sub_n(Tester& tester)
+TEST(test_riter_sub_n)
 {
     const std::vector<int> v(42);
     std::vector<int>::difference_type n = 21;
@@ -48,8 +45,7 @@ test_riter_sub_n(Tester& tester)
     return 0;
 }
 
-int
-test_riter_sub_n_self(Tester& tester)
+TEST(test_riter_sub_n_self)
 {
     const std::vector<int> v(42);
     std::vector<int>::difference_type n = 21;
@@ -64,8 +60,7 @@ test_riter_sub_n_self(Tester& tester)
     return 0;
 }
 
-int
-test_riter_pre_increment(Tester& tester)
+TEST(test_riter_pre_increment)
 {
     std::vector<int> v(42);
 
@@ -78,8 +73,7 @@ test_riter_pre_increment(Tester& tester)
     return 0;
 }
 
-int
-test_riter_post_increment(Tester& tester)
+TEST(test_riter_post_increment)
 {
     std::vector<int> v(42);
 
@@ -92,8 +86,7 @@ test_riter_post_increment(Tester& tester)
     return 0;
 }
 
-int
-test_riter_pre_decrement(Tester& tester)
+TEST(test_riter_pre_decrement)
 {
     std::vector<int> v(42);
 
@@ -106,8 +99,7 @@ test_riter_pre_decrement(Tester& tester)
     return 0;
 }
 
-int
-test_riter_post_decrement(Tester& tester)
+TEST(test_riter_post_decrement)
 {
     std::vector<int> v(42);
 
@@ -120,8 +112,7 @@ test_riter_post_decrement(Tester& tester)
     return 0;
 }
 
-int
-test_riter_sub_riter(Tester& tester)
+TEST(test_riter_sub_riter)
 {
     std::vector<int> v(21);
     reverse_iterator<std::vector<int>::iterator> rbegin(v.end()),
@@ -134,8 +125,7 @@ test_riter_sub_riter(Tester& tester)
     return 0;
 }
 
-int
-test_riter_gt(Tester& tester)
+TEST(test_riter_gt)
 {
     std::vector<int> v(21);
 
@@ -147,8 +137,7 @@ test_riter_gt(Tester& tester)
     return 0;
 }
 
-int
-test_riter_gte(Tester& tester)
+TEST(test_riter_gte)
 {
     std::vector<int> v(21);
 
@@ -161,8 +150,7 @@ test_riter_gte(Tester& tester)
     return 0;
 }
 
-int
-test_riter_lt(Tester& tester)
+TEST(test_riter_lt)
 {
     std::vector<int> v(21);
 
@@ -174,8 +162,7 @@ test_riter_lt(Tester& tester)
     return 0;
 }
 
-int
-test_riter_lte(Tester& tester)
+TEST(test_riter_lte)
 {
     std::vector<int> v(21);
 
@@ -188,8 +175,7 @@ test_riter_lte(Tester& tester)
     return 0;
 }
 
-int
-test_riter_eq(Tester& tester)
+TEST(test_riter_eq)
 {
     std::vector<int> v(21), v2(42);
 
@@ -202,8 +188,7 @@ test_riter_eq(Tester& tester)
     return 0;
 }
 
-int
-test_riter_neq(Tester& tester)
+TEST(test_riter_neq)
 {
     std::vector<int> v(21), v2(42);
 

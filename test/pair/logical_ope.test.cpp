@@ -1,7 +1,6 @@
 #include "pair_testing.hpp"
 
-int
-test_pair_operator_eq(Tester& tester)
+TEST(test_pair_operator_eq)
 {
     pair<int, int> p1(21, 21), p2(21, 21);
 
@@ -26,8 +25,7 @@ test_pair_operator_eq(Tester& tester)
     return 0;
 }
 
-int
-test_pair_operator_neq(Tester& tester)
+TEST(test_pair_operator_neq)
 {
     pair<int, int> p1(21, 21), p2(21, 21);
 
@@ -52,8 +50,7 @@ test_pair_operator_neq(Tester& tester)
     return 0;
 }
 
-int
-test_pair_operator_lt(Tester& tester)
+TEST(test_pair_operator_lt)
 {
     pair<int, int> p(21, 21), p2(21, 21);
 
@@ -78,8 +75,7 @@ test_pair_operator_lt(Tester& tester)
     return 0;
 }
 
-int
-test_pair_operator_lte(Tester& tester)
+TEST(test_pair_operator_lte)
 {
     pair<int, int> p(21, 21), p2(21, 21);
 
@@ -104,8 +100,7 @@ test_pair_operator_lte(Tester& tester)
     return 0;
 }
 
-int
-test_pair_operator_gt(Tester& tester)
+TEST(test_pair_operator_gt)
 {
     pair<int, int> p(21, 21), p2(21, 21);
 
@@ -130,8 +125,7 @@ test_pair_operator_gt(Tester& tester)
     return 0;
 }
 
-int
-test_pair_operator_gte(Tester& tester)
+TEST(test_pair_operator_gte)
 {
     pair<int, int> p(21, 21), p2(21, 21);
 

@@ -5,8 +5,7 @@
 using std::ostringstream;
 using std::string;
 
-int
-test_vector_assign(Tester& tester)
+TEST(test_vector_assign)
 {
     const size_t baseN = 424242;
 
@@ -21,8 +20,7 @@ test_vector_assign(Tester& tester)
     return 0;
 }
 
-int
-test_vector_assign_less(Tester& tester)
+TEST(test_vector_assign_less)
 {
     vector<int> v(42);
 
@@ -37,8 +35,7 @@ test_vector_assign_less(Tester& tester)
     return 0;
 }
 
-int
-test_vector_assign_more(Tester& tester)
+TEST(test_vector_assign_more)
 {
     vector<int> v(21);
 
@@ -53,8 +50,7 @@ test_vector_assign_more(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_assign(Tester& tester)
+TEST(test_vector_iterator_assign)
 {
     const size_t baseN = 424242;
     vector<string> v(baseN), pool;

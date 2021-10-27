@@ -1,7 +1,6 @@
 #include "riter_testing.hpp"
 
-int
-test_riter_assign(Tester& tester)
+TEST(test_riter_assign)
 {
     std::vector<int> v(10);
 

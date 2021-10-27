@@ -5,8 +5,7 @@ using std::string;
 
 const size_t baseN = 424242, baseValue = 42, distinctValue = 21;
 
-int
-test_vector_iterator_read_loop(Tester& tester)
+TEST(test_vector_iterator_read_loop)
 {
     vector<int> v(baseN);
 
@@ -22,8 +21,7 @@ test_vector_iterator_read_loop(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_read_write_loop(Tester& tester)
+TEST(test_vector_iterator_read_write_loop)
 {
     vector<int> v(baseN, baseValue);
 
@@ -38,8 +36,7 @@ test_vector_iterator_read_write_loop(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_difference(Tester& tester)
+TEST(test_vector_iterator_difference)
 {
     vector<int> v(baseN);
 
@@ -54,8 +51,7 @@ test_vector_iterator_difference(Tester& tester)
  * Implicitly ensure than iterator can be converted to const_iterator
  */
 
-int
-test_vector_const_iterator_read_only(Tester& tester)
+TEST(test_vector_const_iterator_read_only)
 {
     vector<int> vs(baseN, baseValue);
 
@@ -66,8 +62,7 @@ test_vector_const_iterator_read_only(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_subscript(Tester& tester)
+TEST(test_vector_iterator_subscript)
 {
     vector<int> v;
 
@@ -84,8 +79,7 @@ test_vector_iterator_subscript(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_negative_subscript(Tester& tester)
+TEST(test_vector_iterator_negative_subscript)
 {
     vector<int> v;
 
@@ -102,8 +96,7 @@ test_vector_iterator_negative_subscript(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_arrow(Tester& tester)
+TEST(test_vector_iterator_arrow)
 {
     vector<string> vs;
 
@@ -114,8 +107,7 @@ test_vector_iterator_arrow(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_greater_operator(Tester& tester)
+TEST(test_vector_iterator_greater_operator)
 {
     vector<int> v(10);
 
@@ -125,8 +117,7 @@ test_vector_iterator_greater_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_greater_or_equal_operator(Tester& tester)
+TEST(test_vector_iterator_greater_or_equal_operator)
 {
     vector<int> v(10);
 
@@ -137,8 +128,7 @@ test_vector_iterator_greater_or_equal_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_less_operator(Tester& tester)
+TEST(test_vector_iterator_less_operator)
 {
     vector<int> v(10);
 
@@ -148,8 +138,7 @@ test_vector_iterator_less_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_less_or_equal_operator(Tester& tester)
+TEST(test_vector_iterator_less_or_equal_operator)
 {
     vector<int> v(10);
 
@@ -160,8 +149,7 @@ test_vector_iterator_less_or_equal_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_iterator_equality_operator(Tester& tester)
+TEST(test_vector_iterator_equality_operator)
 {
     vector<int> v(10);
 
@@ -173,8 +161,7 @@ test_vector_iterator_equality_operator(Tester& tester)
 
 // May not compile if operations are not implemented carefully.
 
-int
-test_vector_iterator_const_compare_to_non_const(Tester& tester)
+TEST(test_vector_iterator_const_compare_to_non_const)
 {
     vector<int> v;
     vector<int>::iterator it = v.begin();

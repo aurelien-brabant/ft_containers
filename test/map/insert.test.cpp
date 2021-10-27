@@ -1,8 +1,7 @@
 #include "map_testing.hpp"
 #include <fstream>
 
-int
-test_map_insert_one(Tester& tester)
+TEST(test_map_insert_one)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 1000000;
@@ -25,8 +24,7 @@ test_map_insert_one(Tester& tester)
     return 0;
 }
 
-int
-test_map_insert_range(Tester& tester)
+TEST(test_map_insert_range)
 {
     unsigned baseN = 100000;
 
@@ -56,8 +54,7 @@ test_map_insert_range(Tester& tester)
     return 0;
 }
 
-int
-test_map_insert_one_string(Tester& tester)
+TEST(test_map_insert_one_string)
 {
     unsigned baseN = 1000000;
     std::ostringstream oss;

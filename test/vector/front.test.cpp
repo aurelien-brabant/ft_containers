@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_front_value(Tester& tester)
+TEST(test_vector_front_value)
 {
     vector<int> v(424242, 42);
 
@@ -12,8 +11,7 @@ test_vector_front_value(Tester& tester)
     return 0;
 }
 
-int
-test_vector_front_same_than_begin(Tester& tester)
+TEST(test_vector_front_same_than_begin)
 {
     vector<int> v(424242, 42);
 

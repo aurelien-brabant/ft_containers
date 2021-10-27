@@ -5,8 +5,7 @@
 using std::ostringstream;
 using std::string;
 
-int
-test_vector_erase_one(Tester& tester)
+TEST(test_vector_erase_one)
 {
     size_t baseN = 424242;
     vector<int> v;
@@ -37,8 +36,7 @@ test_vector_erase_one(Tester& tester)
     return 0;
 }
 
-int
-test_vector_erase_range(Tester& tester)
+TEST(test_vector_erase_range)
 {
     size_t baseN = 424242, pos1 = baseN / 4, pos2 = baseN / 2;
 
@@ -77,8 +75,7 @@ test_vector_erase_range(Tester& tester)
  * When an empty range is given, the first iterator should not be dereferenced.
  */
 
-int
-test_vector_erase_empty_range(Tester& tester)
+TEST(test_vector_erase_empty_range)
 {
     vector<int> v(42);
 
@@ -93,8 +90,7 @@ test_vector_erase_empty_range(Tester& tester)
     return 0;
 }
 
-int
-test_vector_erase_range_all(Tester& tester)
+TEST(test_vector_erase_range_all)
 {
     vector<int> v(42);
 

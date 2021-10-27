@@ -1,8 +1,7 @@
 #include "vector_testing.hpp"
 #include <algorithm>
 
-int
-test_vector_swap(Tester& tester)
+TEST(test_vector_swap)
 {
     vector<int> v1, v2;
 

@@ -3,8 +3,7 @@
 
 using std::vector;
 
-int
-test_lc_first1_less_than_first2(Tester& tester)
+TEST(test_lc_first1_less_than_first2)
 {
     int r1[] = { 2, 4, 5, 1, 3 };
     int r2[] = { 2, 4, 6, 1, 3 };
@@ -17,8 +16,7 @@ test_lc_first1_less_than_first2(Tester& tester)
     return 0;
 }
 
-int
-test_lc_first1_greater_than_first2(Tester& tester)
+TEST(test_lc_first1_greater_than_first2)
 {
     int r1[] = { 2, 4, 6, 1, 3 };
     int r2[] = { 2, 4, 5, 1, 3 };
@@ -31,8 +29,7 @@ test_lc_first1_greater_than_first2(Tester& tester)
     return 0;
 }
 
-int
-test_lc_ranges_equal(Tester& tester)
+TEST(test_lc_ranges_equal)
 {
     int r1[] = { 2, 4, 6, 1, 3 };
     int r2[] = { 2, 4, 6, 1, 3 };
@@ -45,8 +42,7 @@ test_lc_ranges_equal(Tester& tester)
     return 0;
 }
 
-int
-test_lc_first1_prefix_of_first2(Tester& tester)
+TEST(test_lc_first1_prefix_of_first2)
 {
     int r1[] = { 2, 4, 5, 1, 3 };
     int r2[] = { 2, 4, 5, 1, 3, 1, 8, 3, 15, 12, 42, 23 };
@@ -59,8 +55,7 @@ test_lc_first1_prefix_of_first2(Tester& tester)
     return 0;
 }
 
-int
-test_lc_first2_prefix_of_first1(Tester& tester)
+TEST(test_lc_first2_prefix_of_first1)
 {
     int r1[] = { 2, 4, 5, 1, 3, 1, 8, 3, 15, 12, 42, 23 };
     int r2[] = { 2, 4, 5, 1, 3 };
@@ -73,8 +68,7 @@ test_lc_first2_prefix_of_first1(Tester& tester)
     return 0;
 }
 
-int
-test_lc_first1_empty(Tester& tester)
+TEST(test_lc_first1_empty)
 {
     int* r1 = 0;
     int r2[] = { 2, 4, 5, 1, 3 };
@@ -87,8 +81,7 @@ test_lc_first1_empty(Tester& tester)
     return 0;
 }
 
-int
-test_lc_first2_empty(Tester& tester)
+TEST(test_lc_first2_empty)
 {
     int r1[] = { 2, 4, 5, 1, 3 };
     int* r2 = 0;
@@ -101,8 +94,7 @@ test_lc_first2_empty(Tester& tester)
     return 0;
 }
 
-int
-test_lc_both_empty(Tester& tester)
+TEST(test_lc_both_empty)
 {
     int *r1 = 0, *r2 = 0;
 
@@ -114,8 +106,7 @@ test_lc_both_empty(Tester& tester)
     return 0;
 }
 
-int
-test_lc_perf_differ_at_last_element(Tester& tester)
+TEST(test_lc_perf_differ_at_last_element)
 {
     vector<int> v1, v2;
     const size_t n = 424242;

@@ -1,7 +1,6 @@
 #include "map_testing.hpp"
 
-int
-test_map_iterator_decrement_end(Tester& tester)
+TEST(test_map_iterator_decrement_end)
 {
     map<unsigned, unsigned> m;
 
@@ -16,8 +15,7 @@ test_map_iterator_decrement_end(Tester& tester)
     return 0;
 }
 
-int
-test_map_iterator_decrement_reverse_loop(Tester& tester)
+TEST(test_map_iterator_decrement_reverse_loop)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 100000;
@@ -35,8 +33,7 @@ test_map_iterator_decrement_reverse_loop(Tester& tester)
     return 0;
 }
 
-int
-test_map_iterator_prefix_increment(Tester& tester)
+TEST(test_map_iterator_prefix_increment)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 10;
@@ -55,8 +52,7 @@ test_map_iterator_prefix_increment(Tester& tester)
     return 0;
 }
 
-int
-test_map_iterator_postfix_increment(Tester& tester)
+TEST(test_map_iterator_postfix_increment)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 10;
@@ -73,8 +69,7 @@ test_map_iterator_postfix_increment(Tester& tester)
     return 0;
 }
 
-int
-test_map_iterator_to_const_iterator(Tester& tester)
+TEST(test_map_iterator_to_const_iterator)
 {
     map<unsigned, unsigned> m;
 

@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_push_back(Tester& tester)
+TEST(test_vector_push_back)
 {
     vector<unsigned> v;
 
@@ -16,8 +15,7 @@ test_vector_push_back(Tester& tester)
     return 0;
 }
 
-int
-test_vector_copy_then_push_back(Tester& tester)
+TEST(test_vector_copy_then_push_back)
 {
     vector<int> v(10);
 

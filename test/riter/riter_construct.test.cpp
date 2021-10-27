@@ -1,7 +1,6 @@
 #include "riter_testing.hpp"
 
-int
-test_riter_construct_default(Tester& tester)
+TEST(test_riter_construct_default)
 {
     reverse_iterator<std::vector<int>::iterator> rit;
 
@@ -10,8 +9,7 @@ test_riter_construct_default(Tester& tester)
     return 0;
 }
 
-int
-test_riter_construct_from_iterator(Tester& tester)
+TEST(test_riter_construct_from_iterator)
 {
     std::vector<int> v;
 

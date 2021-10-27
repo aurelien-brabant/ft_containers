@@ -11,8 +11,7 @@ using std::string;
  * time, using a too big baseN may take a while to be processed.
  */
 
-int
-test_vector_insert_front(Tester& tester)
+TEST(test_vector_insert_front)
 {
     const size_t nbToInsert = 4242, baseN = 42;
     string baseStringValue("42");
@@ -38,8 +37,7 @@ test_vector_insert_front(Tester& tester)
     return 0;
 }
 
-int
-test_vector_insert_back(Tester& tester)
+TEST(test_vector_insert_back)
 {
     const size_t nbToInsert = 424242, baseN = 42;
     string baseStringValue = "42";
@@ -65,8 +63,7 @@ test_vector_insert_back(Tester& tester)
     return 0;
 }
 
-int
-test_vector_insert_odd(Tester& tester)
+TEST(test_vector_insert_odd)
 {
     const size_t baseN = 4242;
     string baseStringValue = "42", insertedStringValue = "21";
@@ -87,8 +84,7 @@ test_vector_insert_odd(Tester& tester)
     return 0;
 }
 
-int
-test_vector_insert_range(Tester& tester)
+TEST(test_vector_insert_range)
 {
     const size_t rangeSize = 424242, baseN = 42, insertPos = 3;
     string baseStringValue;
@@ -118,8 +114,7 @@ test_vector_insert_range(Tester& tester)
     return 0;
 }
 
-int
-test_vector_insert_empty(Tester& tester)
+TEST(test_vector_insert_empty)
 {
     vector<int> v;
 
@@ -130,8 +125,7 @@ test_vector_insert_empty(Tester& tester)
     return 0;
 }
 
-int
-test_vector_insert_many(Tester& tester)
+TEST(test_vector_insert_many)
 {
     size_t baseN = 424242, ipos = baseN / 2, count = 42;
     vector<int> v(baseN, 42);
@@ -147,8 +141,7 @@ test_vector_insert_many(Tester& tester)
     return 0;
 }
 
-int
-test_vector_insert_many_back(Tester& tester)
+TEST(test_vector_insert_many_back)
 {
     vector<int> v;
 

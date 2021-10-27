@@ -1,7 +1,6 @@
 #include "stack_testing.hpp"
 
-int
-test_stack_default_ctor(Tester& tester)
+TEST(test_stack_default_ctor)
 {
     stack<int, vector<int> > s;
 
@@ -11,8 +10,7 @@ test_stack_default_ctor(Tester& tester)
     return 0;
 }
 
-int
-test_stack_copy_ctor(Tester& tester)
+TEST(test_stack_copy_ctor)
 {
     vector<int> v;
     size_t baseN = 42;

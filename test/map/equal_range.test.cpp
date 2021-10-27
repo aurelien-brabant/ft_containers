@@ -1,7 +1,6 @@
 #include "map_testing.hpp"
 
-int
-test_map_equal_range_begin_to_end(Tester& tester)
+TEST(test_map_equal_range_begin_to_end)
 {
     map<unsigned, unsigned> m;
 
@@ -18,8 +17,7 @@ test_map_equal_range_begin_to_end(Tester& tester)
     return 0;
 }
 
-int
-test_map_equal_range_perf_not_found(Tester& tester)
+TEST(test_map_equal_range_perf_not_found)
 {
     map<unsigned, unsigned> m;
     unsigned baseN = 1000000;
@@ -38,8 +36,7 @@ test_map_equal_range_perf_not_found(Tester& tester)
     return 0;
 }
 
-int
-test_map_equal_range_const_overload(Tester& tester)
+TEST(test_map_equal_range_const_overload)
 {
     const map<unsigned, unsigned> m;
 

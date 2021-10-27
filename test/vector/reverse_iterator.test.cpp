@@ -2,8 +2,7 @@
 
 const size_t rangeSize = 424242;
 
-int
-test_vector_reverse_iterator_loop(Tester& tester)
+TEST(test_vector_reverse_iterator_loop)
 {
     vector<int> v(rangeSize);
 
@@ -21,8 +20,7 @@ test_vector_reverse_iterator_loop(Tester& tester)
     return 0;
 }
 
-int
-test_vector_reviter_write(Tester& tester)
+TEST(test_vector_reviter_write)
 {
     vector<int> v;
 
@@ -44,8 +42,7 @@ test_vector_reviter_write(Tester& tester)
 
 /* ensures reverse_iterator can be converted to const_reverse_iterator */
 
-int
-test_vector_reviter_to_const_reviter(Tester& tester)
+TEST(test_vector_reviter_to_const_reviter)
 {
     vector<int> v;
 
@@ -64,8 +61,7 @@ test_vector_reviter_to_const_reviter(Tester& tester)
     return 0;
 }
 
-int
-test_vector_reviter_to_const_operations(Tester& tester)
+TEST(test_vector_reviter_to_const_operations)
 {
     vector<int> v(10);
 

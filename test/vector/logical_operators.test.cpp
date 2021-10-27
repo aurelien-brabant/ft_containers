@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_eq_operator(Tester& tester)
+TEST(test_vector_eq_operator)
 {
     vector<int> v1, v2;
 
@@ -19,8 +18,7 @@ test_vector_eq_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_uneq_operator(Tester& tester)
+TEST(test_vector_uneq_operator)
 {
     vector<int> v1, v2;
 
@@ -38,8 +36,7 @@ test_vector_uneq_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_gt_operator(Tester& tester)
+TEST(test_vector_gt_operator)
 {
     vector<int> v1, v2;
 
@@ -58,8 +55,7 @@ test_vector_gt_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_gte_operator(Tester& tester)
+TEST(test_vector_gte_operator)
 {
     vector<int> v1, v2;
 
@@ -83,8 +79,7 @@ test_vector_gte_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_lt_operator(Tester& tester)
+TEST(test_vector_lt_operator)
 {
     vector<int> v1, v2;
 
@@ -109,8 +104,7 @@ test_vector_lt_operator(Tester& tester)
     return 0;
 }
 
-int
-test_vector_lte_operator(Tester& tester)
+TEST(test_vector_lte_operator)
 {
     vector<int> v1, v2;
 

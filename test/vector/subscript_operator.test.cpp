@@ -1,7 +1,6 @@
 #include "vector_testing.hpp"
 
-int
-test_vector_subscript(Tester& tester)
+TEST(test_vector_subscript)
 {
     vector<unsigned> v(10, 42);
 

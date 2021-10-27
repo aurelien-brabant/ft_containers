@@ -9,8 +9,7 @@ int_pred(int n1, int n2)
     return n1 == n2;
 }
 
-int
-test_pred_equal(Tester& tester)
+TEST(test_pred_equal)
 {
     int r1[] = { 1, 2, 8, 4, 3, 1, 7 };
     int r2[] = { 1, 2, 8, 4, 3, 1, 7 };
@@ -23,8 +22,7 @@ test_pred_equal(Tester& tester)
     return 0;
 }
 
-int
-test_pred_unequal_first_element(Tester& tester)
+TEST(test_pred_unequal_first_element)
 {
     int r1[] = { 8, 2, 8, 4, 3, 1, 7 };
     int r2[] = { 1, 2, 8, 4, 3, 1, 7 };
@@ -37,8 +35,7 @@ test_pred_unequal_first_element(Tester& tester)
     return 0;
 }
 
-int
-test_pred_unequal_last_element(Tester& tester)
+TEST(test_pred_unequal_last_element)
 {
     int r1[] = { 1, 2, 8, 4, 3, 1, 9 };
     int r2[] = { 1, 2, 8, 4, 3, 1, 7 };
@@ -51,8 +48,7 @@ test_pred_unequal_last_element(Tester& tester)
     return 0;
 }
 
-int
-test_pred_equal_first1_smaller(Tester& tester)
+TEST(test_pred_equal_first1_smaller)
 {
     int r1[] = { 1, 2, 8, 4, 3, 1 };
     int r2[] = { 1, 2, 8, 4, 3, 1, 7 };
@@ -65,8 +61,7 @@ test_pred_equal_first1_smaller(Tester& tester)
     return 0;
 }
 
-int
-test_pred_equal_subrange(Tester& tester)
+TEST(test_pred_equal_subrange)
 {
     int r1[] = { 1, 2, 8, 4, 3, 1 };
     int r2[] = { 8, 5, 2, 4, 1, 2, 8, 4, 3, 1 };
@@ -78,8 +73,7 @@ test_pred_equal_subrange(Tester& tester)
     return 0;
 }
 
-int
-test_pred_perf_unequal_at_mid(Tester& tester)
+TEST(test_pred_perf_unequal_at_mid)
 {
     vector<int> v1, v2;
     const size_t n = 424242;

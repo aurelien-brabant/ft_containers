@@ -2,8 +2,7 @@
 
 const size_t baseN = 424242;
 
-int
-test_vector_capacity(Tester& tester)
+TEST(test_vector_capacity)
 {
     vector<int> v(baseN);
 
@@ -12,8 +11,7 @@ test_vector_capacity(Tester& tester)
     return 0;
 }
 
-int
-test_vector_greater_capacity_reservation(Tester& tester)
+TEST(test_vector_greater_capacity_reservation)
 {
     vector<int> v(baseN);
 
@@ -28,8 +26,7 @@ test_vector_greater_capacity_reservation(Tester& tester)
  * Smaller or equal new capacity should not alter vector's capacity.
  */
 
-int
-test_vector_smaller_capacity_reservation(Tester& tester)
+TEST(test_vector_smaller_capacity_reservation)
 {
     vector<int> v(baseN);
 

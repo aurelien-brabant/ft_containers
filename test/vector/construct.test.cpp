@@ -8,8 +8,7 @@
 using std::ostringstream;
 using std::string;
 
-int
-test_vector_construct_n_by_value(Tester& tester)
+TEST(test_vector_construct_n_by_value)
 {
     const size_t baseN = 424242;
     vector<string> vs(baseN);
@@ -21,8 +20,7 @@ test_vector_construct_n_by_value(Tester& tester)
     return 0;
 }
 
-int
-test_vector_construct_n_with_value(Tester& tester)
+TEST(test_vector_construct_n_with_value)
 {
     const size_t baseN = 424242;
     const string baseString = "42";
@@ -35,8 +33,7 @@ test_vector_construct_n_with_value(Tester& tester)
     return 0;
 }
 
-int
-test_vector_range_constructor(Tester& tester)
+TEST(test_vector_range_constructor)
 {
     const size_t baseN = 42;
     vector<const char*> range;
@@ -66,8 +63,7 @@ test_vector_range_constructor(Tester& tester)
 // std::list iterators are bidirectional only.
 // This should work and compile.
 
-int
-test_vector_range_with_bidirectional_it(Tester& tester)
+TEST(test_vector_range_with_bidirectional_it)
 {
     std::list<short> l;
 
