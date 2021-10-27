@@ -214,5 +214,11 @@ TEST(test_map_at_const_overload);
 TEST(test_map_empty);
 TEST(test_map_riter_random);
 TEST(test_map_riter_sequence);
+TEST(test_map_eq_op);
+TEST(test_map_neq_op);
+TEST(test_map_gt_op);
+TEST(test_map_lt_op);
+TEST(test_map_gte_op);
+TEST(test_map_lte_op);
 
 #endif

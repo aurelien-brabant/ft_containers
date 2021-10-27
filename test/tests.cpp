@@ -395,6 +395,12 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName, "riter random", test_map_riter_random);
     tester.registerTest(
       mapSuiteName, "riter sequence", test_map_riter_sequence);
+    tester.registerTest(mapSuiteName, "operator==", test_map_eq_op);
+    tester.registerTest(mapSuiteName, "operator!=", test_map_neq_op);
+    tester.registerTest(mapSuiteName, "operator>", test_map_gt_op);
+    tester.registerTest(mapSuiteName, "operator<", test_map_lt_op);
+    tester.registerTest(mapSuiteName, "operator>=", test_map_gte_op);
+    tester.registerTest(mapSuiteName, "operator<=", test_map_lte_op);
 
     if (argc > 1) {
         bool ret = true;
