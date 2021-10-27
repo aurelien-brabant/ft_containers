@@ -144,8 +144,16 @@ TEST(test_riter_lt);
 TEST(test_riter_lte);
 TEST(test_riter_eq);
 TEST(test_riter_neq);
+
+/////////////////////////////////////////////////
+// stack
+////////////////////////////////////////////////
+
 TEST(test_stack_default_ctor);
 TEST(test_stack_copy_ctor);
+TEST(test_stack_push_pop_top);
+TEST(test_stack_empty);
+TEST(test_stack_size);
 
 /////////////////////////////////////////////////
 // pair, make_pair

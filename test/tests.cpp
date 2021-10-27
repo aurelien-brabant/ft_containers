@@ -291,6 +291,10 @@ main(int argc, char** argv)
       stackSuiteName, "default constructor", test_stack_default_ctor);
     tester.registerTest(
       stackSuiteName, "copy constructor", test_stack_copy_ctor);
+    tester.registerTest(
+      stackSuiteName, "push pop top", test_stack_push_pop_top);
+    tester.registerTest(stackSuiteName, "empty()", test_stack_empty);
+    tester.registerTest(stackSuiteName, "size()", test_stack_size);
 
     tester.registerTest(pairSuiteName, "default CTOR", test_pair_default_ctor);
     tester.registerTest(
