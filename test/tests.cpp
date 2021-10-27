@@ -391,6 +391,10 @@ main(int argc, char** argv)
       mapSuiteName, "at() out of range", test_map_at_out_of_range);
     tester.registerTest(
       mapSuiteName, "at() const overload", test_map_at_const_overload);
+    tester.registerTest(mapSuiteName, "empty()", test_map_empty);
+    tester.registerTest(mapSuiteName, "riter random", test_map_riter_random);
+    tester.registerTest(
+      mapSuiteName, "riter sequence", test_map_riter_sequence);
 
     if (argc > 1) {
         bool ret = true;

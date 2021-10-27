@@ -211,5 +211,8 @@ TEST(test_map_at_ro);
 TEST(test_map_at_rw);
 TEST(test_map_at_out_of_range);
 TEST(test_map_at_const_overload);
+TEST(test_map_empty);
+TEST(test_map_riter_random);
+TEST(test_map_riter_sequence);
 
 #endif
