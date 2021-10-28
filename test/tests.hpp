@@ -73,6 +73,8 @@ TEST(test_vector_iterator_less_operator);
 TEST(test_vector_iterator_less_or_equal_operator);
 TEST(test_vector_iterator_equality_operator);
 TEST(test_vector_iterator_const_compare_to_non_const);
+TEST(test_vector_iterator_self_add_operator);
+TEST(test_vector_iterator_self_sub_operator);
 
 // vector<T>::reverse_iterator
 

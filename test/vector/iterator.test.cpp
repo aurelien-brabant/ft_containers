@@ -96,6 +96,42 @@ TEST(test_vector_iterator_negative_subscript)
     return 0;
 }
 
+TEST(test_vector_iterator_self_add_operator)
+{
+    vector<int> v;
+
+    v.push_back(42);
+    v.push_back(21);
+
+    vector<int>::const_iterator cit = v.begin();
+
+    cit += 1;
+    p_assert_eq(*cit, 21);
+
+    cit += -1;
+    p_assert_eq(*cit, 42);
+
+    return 0;
+}
+
+TEST(test_vector_iterator_self_sub_operator)
+{
+    vector<int> v;
+
+    v.push_back(42);
+    v.push_back(21);
+
+    vector<int>::const_iterator cit = --v.end();
+
+    cit -= 1;
+    p_assert_eq(*cit, 42);
+
+    cit -= -1;
+    p_assert_eq(*cit, 21);
+
+    return 0;
+}
+
 TEST(test_vector_iterator_arrow)
 {
     vector<string> vs;

@@ -115,12 +115,7 @@ class vector
 
         VectorIterator& operator+=(difference_type n)
         {
-            if (n < 0) {
-                _p -= n;
-            } else {
-                _p += n;
-            }
-
+            _p += n;
             return *this;
         }
 
@@ -131,12 +126,7 @@ class vector
 
         VectorIterator& operator-=(difference_type n)
         {
-            if (n < 0) {
-                _p += n;
-            } else {
-                _p -= n;
-            }
-
+            _p -= n;
             return *this;
         }
 

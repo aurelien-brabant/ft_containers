@@ -167,6 +167,14 @@ main(int argc, char** argv)
     tester.registerTest(vectorSuiteName,
                         "const_iterator loop",
                         test_vector_const_iterator_read_only);
+
+    tester.registerTest(vectorSuiteName,
+                        "iterator operator+=",
+                        test_vector_iterator_self_add_operator);
+
+    tester.registerTest(vectorSuiteName,
+                        "iterator operator-=",
+                        test_vector_iterator_self_add_operator);
     tester.registerTest(vectorSuiteName,
                         "iterator [n] operator (n >= 0)",
                         test_vector_iterator_subscript);
