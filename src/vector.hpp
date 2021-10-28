@@ -307,7 +307,11 @@ class vector
         return *this;
     }
 
-    ~vector(void) { _allocator.deallocate(_data, _capacity); }
+    ~vector(void)
+    {
+        clear();
+        _allocator.deallocate(_data, _capacity);
+    }
 
     allocator_type get_allocator(void) const { return _allocator; }
 
