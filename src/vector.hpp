@@ -10,10 +10,6 @@
 #include <stdexcept>
 
 namespace ft {
-namespace {
-float static const vectorGrowthFactor = 2.0;
-size_t static const vectorBaseCapacity = 10;
-}
 
 template<class T, class Allocator = std::allocator<T> >
 class vector
@@ -28,6 +24,14 @@ class vector
     typedef typename Allocator::pointer pointer;
     typedef typename Allocator::const_pointer const_pointer;
     typedef std::ptrdiff_t difference_type;
+
+    static size_type _computeNewVectorCap(size_type size)
+    {
+        static float gf = 2.0;
+        static size_type baseCap = 10;
+
+        return size ? size * gf : baseCap;
+    }
 
     // normal iterator - random access {{{
 
@@ -237,7 +241,7 @@ class vector
     // CTORS
     vector(void)
       : _allocator(Allocator())
-      , _capacity(vectorBaseCapacity)
+      , _capacity(_computeNewVectorCap(0))
       , _data(_allocator.allocate(_capacity))
       , _length(0)
     {}
@@ -246,7 +250,7 @@ class vector
                     T const& value = T(),
                     Allocator const& alloc = Allocator())
       : _allocator(alloc)
-      , _capacity((count > 0 ? count : vectorBaseCapacity / 2) * 2)
+      , _capacity(_computeNewVectorCap(count))
       , _data(_allocator.allocate(_capacity))
       , _length(count)
     {
@@ -256,21 +260,15 @@ class vector
     }
 
     template<typename InputIt>
-    vector(
-      InputIt first,
-      InputIt last,
-      const Allocator& alloc = Allocator(),
-      typename ft::enable_if<!ft::is_integral<InputIt>::value>::type* t = 0)
-      : // TODO avoid to use ft::distance multiple times: use it own time only
-        // instead.
-      _allocator(alloc)
-      , _capacity((ft::distance(first, last) > 0 ? ft::distance(first, last)
-                                                 : vectorBaseCapacity / 2) *
-                  2)
+    vector(InputIt first,
+           typename ft::enable_if<!ft::is_integral<InputIt>::value,
+                                  InputIt>::type last,
+           const Allocator& alloc = Allocator())
+      : _allocator(alloc)
+      , _capacity(_computeNewVectorCap(ft::distance(first, last)))
       , _data(_allocator.allocate(_capacity))
       , _length(ft::distance(first, last))
     {
-        (void)t;
 
         for (size_type i = 0; i != size(); ++i, ++first) {
             _allocator.construct(_data + i, *first);
@@ -279,7 +277,7 @@ class vector
 
     vector(const_reference rhs)
       : _allocator(Allocator())
-      , _capacity(rhs.size() * 2)
+      , _capacity(_computeNewVectorCap(rhs.size()))
       , _data(_allocator.allocate(_capacity))
       , _length(rhs.size())
     {
@@ -306,17 +304,14 @@ class vector
     allocator_type get_allocator(void) const { return _allocator; }
 
     template<typename InputIt>
-    void assign(
-      InputIt begin,
-      InputIt end,
-      typename ft::enable_if<!ft::is_integral<InputIt>::value>::type* p = 0)
+    void assign(InputIt begin,
+                typename ft::enable_if<!ft::is_integral<InputIt>::value,
+                                       InputIt>::type end)
     {
-        (void)p;
-
         size_type count = ft::distance(begin, end);
 
         if (count > capacity()) {
-            reserve(count * vectorGrowthFactor);
+            reserve(_computeNewVectorCap(count));
         }
 
         for (size_type i = 0; i < count; ++i) {
@@ -338,7 +333,7 @@ class vector
     void assign(size_type count, T const& value)
     {
         if (count > capacity()) {
-            reserve(count * vectorGrowthFactor);
+            reserve(_computeNewVectorCap(count));
         }
 
         for (size_type i = 0; i != count; ++i) {
@@ -502,7 +497,7 @@ class vector
 
         // reserve more space if required
         if (size() + count > capacity()) {
-            reserve((size() + count) * vectorGrowthFactor);
+            reserve(_computeNewVectorCap(size() + count));
         }
 
         // Shift n elements to the right, where n equates to std::distance(end -
@@ -542,14 +537,11 @@ class vector
      */
 
     template<class InputIt>
-    iterator insert(
-      iterator pos,
-      InputIt begin,
-      InputIt end,
-      typename ft::enable_if<!ft::is_integral<InputIt>::value>::type* ignore =
-        0)
+    iterator insert(iterator pos,
+                    InputIt begin,
+                    typename ft::enable_if<!ft::is_integral<InputIt>::value,
+                                           InputIt>::type end)
     {
-        (void)ignore;
         size_type n = ft::distance(begin, end);
         size_type ipos = pos - this->begin();
 
@@ -558,7 +550,7 @@ class vector
         }
 
         if (n + size() > capacity()) {
-            reserve((n + size()) * vectorGrowthFactor);
+            reserve(_computeNewVectorCap(n + size()));
         }
 
         if (size() > 0 && ipos != size()) {
@@ -614,11 +606,7 @@ class vector
     void push_back(const value_type& value)
     {
         if (size() == capacity()) {
-            if (capacity() > 0) {
-                reserve(capacity() * vectorGrowthFactor);
-            } else {
-                reserve(vectorBaseCapacity);
-            }
+            reserve(_computeNewVectorCap(capacity()));
         }
         _allocator.construct(_data + _length++, value);
     }
@@ -636,7 +624,7 @@ class vector
             }
         } else if (count > size()) {
             if (count > capacity()) {
-                reserve(count * 2);
+                reserve(_computeNewVectorCap(count));
             }
             for (size_type i = size(); i != count; ++i) {
                 _allocator.construct(_data + i, value);
