@@ -392,9 +392,9 @@ class vector
 
         for (size_type i = 0; i != size(); ++i) {
             _allocator.construct(newData + i, _data[i]);
+            _allocator.destroy(_data + i);
         }
 
-        clear();
         _allocator.deallocate(_data, _capacity);
         _data = newData;
         _capacity = newCapacity;
