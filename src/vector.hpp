@@ -679,17 +679,10 @@ class vector
 
     void swap(vector& other)
     {
-        T* data_tmp = _data;
-        size_type tmp_len = _length;
-        size_type tmp_cap = _capacity;
-
-        _data = other._data;
-        _length = other._length;
-        _capacity = other._capacity;
-
-        other._data = data_tmp;
-        other._length = tmp_len;
-        other._capacity = tmp_cap;
+        std::swap(_data, other._data);
+        std::swap(_length, other._length);
+        std::swap(_capacity, other._capacity);
+        std::swap(_allocator, other._allocator);
     }
 
     // }}}
