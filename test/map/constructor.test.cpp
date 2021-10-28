@@ -15,6 +15,8 @@ TEST(test_map_default_ctor)
     assert_expr(m.value_comp()(p1, p2) == true);
     assert_expr(m.value_comp()(p2, p1) == false);
 
+    const map<std::string, int> cm;
+
     return 0;
 }
 

@@ -2,6 +2,7 @@
 #include "algorithm.hpp"
 #include "iterator.hpp"
 #include "utility.hpp"
+#include <algorithm>
 #include <functional>
 #include <iostream>
 #include <iterator>
@@ -109,28 +110,25 @@ class AVLTree
 
     typedef typename Allocator::template rebind<Node>::other NodeAllocator;
 
-    static Node* allocateNode(const_reference value,
-                              Node* parent,
-                              Node* left = 0,
-                              Node* right = 0,
-                              unsigned height = 1)
+    Node* allocateNode(NodeAllocator& alloc,
+                       const_reference value,
+                       Node* parent,
+                       Node* left = 0,
+                       Node* right = 0,
+                       unsigned height = 1) const
     {
-        static NodeAllocator _alloc;
-
-        Node* node = _alloc.allocate(1);
-        _alloc.construct(node, Node(value, parent, left, right, height));
+        Node* node = alloc.allocate(1);
+        alloc.construct(node, Node(value, parent, left, right, height));
 
         // Node* node = new Node(value, parent, left, right);
 
         return node;
     }
 
-    static void deallocateNode(Node* p)
+    void deallocateNode(Node* p)
     {
-        static NodeAllocator _alloc;
-
-        _alloc.destroy(p);
-        _alloc.deallocate(p, 1);
+        _allocator.destroy(p);
+        _allocator.deallocate(p, 1);
     }
 
     // }}}
@@ -312,7 +310,8 @@ class AVLTree
   private:
     // private attributes {{{
 
-    Node *_begin, *_end, *_root;
+    NodeAllocator _allocator;
+    Node *_root, *_begin, *_end;
     size_t _size;
     Compare _comparator;
 
@@ -320,20 +319,23 @@ class AVLTree
 
     // algorithms {{{
 
-    Node* _copyRecursively(Node* p, Node* parent = 0) const
+    Node* _copyRecursively(NodeAllocator& alloc,
+                           Node* p,
+                           Node* parent = 0) const
     {
         if (!p) {
             return 0;
         }
 
-        Node* newNode = allocateNode(p->value, parent, 0, 0, p->height);
+        Node* newNode = allocateNode(alloc, p->value, parent, 0, 0, p->height);
 
-        newNode->left = _copyRecursively(p->left, newNode);
-        newNode->right = _copyRecursively(p->right, newNode);
+        newNode->left = _copyRecursively(alloc, p->left, newNode);
+        newNode->right = _copyRecursively(alloc, p->right, newNode);
 
         return newNode;
     }
 
+#ifdef DEBUG
     void _printInOrder(std::ostream& os, Node* root) const
     {
         if (root->left) {
@@ -349,6 +351,7 @@ class AVLTree
             _printInOrder(os, root->right);
         }
     }
+#endif
 
     // lookup - recursive find algorithm {{{
     Node* _findNodeRecursively(Node* root, const_reference value) const
@@ -367,6 +370,8 @@ class AVLTree
     }
     // }}}
 
+    // lower bound {{{
+
     Node* _findLowerBoundRecursively(Node* root,
                                      const_reference value,
                                      Node* last = 0) const
@@ -382,6 +387,10 @@ class AVLTree
         }
     }
 
+    // }}}
+
+    // upper bound {{{
+
     Node* _findUpperBoundRecursively(Node* root,
                                      const_reference value,
                                      Node* last = 0) const
@@ -396,6 +405,8 @@ class AVLTree
             return _findUpperBoundRecursively(root->left, value, root);
         }
     }
+
+    // }}}
 
     // deletion: - recursive node deletion {{{
 
@@ -555,11 +566,12 @@ class AVLTree
     {
         if (!root) {
             ++_size;
-            return inserted = allocateNode(value, parent);
+            return inserted = allocateNode(_allocator, value, parent);
         }
 
         if (root == _end) {
-            root = inserted = allocateNode(value, parent, 0, root, 1);
+            root = inserted =
+              allocateNode(_allocator, value, parent, 0, root, 1);
             _end->parent = root;
             ++_size;
             return root;
@@ -567,7 +579,7 @@ class AVLTree
 
         if (root == _begin) {
             Node* p = inserted =
-              allocateNode(value, parent, _begin, _begin->right);
+              allocateNode(_allocator, value, parent, _begin, _begin->right);
             _begin->parent = p;
 
             /* if this is the first inserted element, _end's parent must be
@@ -780,32 +792,25 @@ class AVLTree
     }
 
   public:
+    // constructors - destructor {{{
+
     AVLTree(void)
-      : _size(0)
+      : _allocator()
+      , _size(0)
     {
-        _begin = allocateNode(T(), 0, 0, 0, 0);
-        _end = allocateNode(T(), _begin, 0, 0, 0);
+        _begin = allocateNode(_allocator, T(), 0, 0, 0, 0);
+        _end = allocateNode(_allocator, T(), _begin, 0, 0, 0);
         _begin->right = _end;
         _root = _begin;
     }
 
-    AVLTree(const AVLTree& other) { *this = other; }
-
-    AVLTree& operator=(const AVLTree& rhs)
-    {
-        if (this != &rhs) {
-            _destroy(_root);
-            deallocateNode(_begin);
-            deallocateNode(_end);
-
-            _root = _copyRecursively(rhs._root);
-            _end = _findInOrderPredecessor(_root);
-            _begin = _findInOrderSuccessor(_root);
-            _size = rhs._size;
-        }
-
-        return *this;
-    }
+    AVLTree(const AVLTree& other)
+      : _allocator(other._allocator)
+      , _root(_copyRecursively(_allocator, other._root))
+      , _begin(_findInOrderSuccessor(_root))
+      , _end(_findInOrderPredecessor(_root))
+      , _size(other.size())
+    {}
 
     ~AVLTree(void)
     {
@@ -814,13 +819,28 @@ class AVLTree
         deallocateNode(_end);
     }
 
+    // }}}
+
+    AVLTree& operator=(const AVLTree& rhs)
+    {
+        if (this != &rhs) {
+            _destroy(_root);
+            deallocateNode(_begin);
+            deallocateNode(_end);
+
+            _allocator = rhs._allocator;
+            _root = _copyRecursively(_allocator, rhs._root);
+            _end = _findInOrderPredecessor(_root);
+            _begin = _findInOrderSuccessor(_root);
+            _size = rhs._size;
+        }
+
+        return *this;
+    }
+
     size_type size(void) const { return _size; }
 
-    size_type max_size(void) const
-    {
-        NodeAllocator alloc;
-        return alloc.max_size();
-    }
+    size_type max_size(void) const { return _allocator.max_size(); }
 
     ft::pair<iterator, bool> insert(const T& value)
     {
@@ -955,6 +975,7 @@ class AVLTree
         return ft::make_pair(lower_bound(value), upper_bound(value));
     }
 
+#ifdef DEBUG
     std::ostream& printInOrder(std::ostream& os = std::cout) const
     {
         if (_root) {
@@ -962,6 +983,7 @@ class AVLTree
         }
         return os;
     }
+#endif
 
     void swap(AVLTree& rhs)
     {
@@ -1009,7 +1031,7 @@ bool
 operator<(const AVLTree<T, Compare, Alloc>& lhs,
           const AVLTree<T, Compare, Alloc>& rhs)
 {
-    return ft::lexicographical_compare(
+    return std::lexicographical_compare(
       lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 

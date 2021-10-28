@@ -97,7 +97,7 @@ TEST(test_map_iterator_const_instance)
         m.insert(FT_CONTAINER::make_pair(i, i));
     }
 
-    const map<unsigned, unsigned> cm(m);
+    const map<unsigned, unsigned> cm(m), cmd;
 
     size_t i = 0;
     for (map<unsigned, unsigned>::const_iterator cit = cm.begin();
@@ -105,6 +105,13 @@ TEST(test_map_iterator_const_instance)
         p_assert_eq((cit++)->first, i++);
     }
     p_assert_eq(i, baseN);
+
+    i = 0;
+    for (map<unsigned, unsigned>::const_iterator cit = cmd.begin();
+         cit != cmd.end();
+         ++cit)
+        ;
+    p_assert_eq(i, 0);
 
     return 0;
 }

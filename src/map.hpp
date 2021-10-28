@@ -95,7 +95,11 @@ class map
         }
     }
 
-    map(const map& other) { *this = other; }
+    map(const map& other)
+      : _compare(other._compare)
+      , _allocator(other._allocator)
+      , _data(other._data)
+    {}
 
     ~map(void) {}
 
