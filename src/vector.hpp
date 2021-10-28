@@ -394,6 +394,7 @@ class vector
             _allocator.construct(newData + i, _data[i]);
         }
 
+        clear();
         _allocator.deallocate(_data, _capacity);
         _data = newData;
         _capacity = newCapacity;
