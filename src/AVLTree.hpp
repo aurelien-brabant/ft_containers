@@ -1,7 +1,7 @@
 #pragma once
+#include "algorithm.hpp"
 #include "iterator.hpp"
 #include "utility.hpp"
-#include <algorithm>
 #include <functional>
 #include <iostream>
 #include <iterator>
@@ -759,6 +759,8 @@ class AVLTree
 
     // }}}
 
+    // }}}
+
 #ifdef DEBUG
     friend std::ostream& operator<<(std::ostream& os, const Node& rhs)
     {
@@ -991,17 +993,7 @@ operator==(const AVLTree<T, Compare, Alloc>& lhs,
         return false;
     }
 
-    for (typename AVLTree<T, Compare, Alloc>::const_iterator
-           first1 = lhs.begin(),
-           first2 = rhs.begin();
-         first1 != lhs.end();
-         ++first1, ++first2) {
-        if (*first1 != *first2) {
-            return false;
-        }
-    }
-
-    return true;
+    return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 
 template<typename T, typename Compare, typename Alloc>
@@ -1017,7 +1009,7 @@ bool
 operator<(const AVLTree<T, Compare, Alloc>& lhs,
           const AVLTree<T, Compare, Alloc>& rhs)
 {
-    return std::lexicographical_compare(
+    return ft::lexicographical_compare(
       lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
