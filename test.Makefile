@@ -3,7 +3,7 @@ CASTORNO		:= test/castorno/libcastorno.a
 
 CC			:= clang++
 FSAN_FLAGS  := -fsanitize=address -fno-omit-frame-pointer
-CPP_FLAGS	:= -O2 -Wall -Wextra -Werror -I$(CASTORNO_PATH)/include -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
+CPP_FLAGS	:= -Wall -Wextra -Werror -I$(CASTORNO_PATH)/include -I./src -DFT_CONTAINER=$(FT_CONTAINER) -std=c++98
 LD			:= $(CC)
 LD_FLAGS	:= -L$(CASTORNO_PATH) -lcastorno
 RM			:= rm -rf
@@ -39,14 +39,14 @@ ifeq ($(FT_CONTAINER), std)
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPP_FLAGS) -c $< -o $@
-	echo -e '\e[1A\e[K\033[1;33mCC\033[0m\t$@'
+	printf '\e[1A\e[K\033[1;33mCC\033[0m\t$@\n'
 endif
 
 ifeq ($(FT_CONTAINER), ft)
 $(OBJ_DIR)/%.o: %.cpp $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPP_FLAGS) -c -g3 $< -o $@
-	echo -e '\e[1A\e[K\033[1;33mCC\033[0m\t$@'
+	printf '\e[1A\e[K\033[1;33mCC\033[0m\t$@\n'
 endif
 
 $(OBJ_DIR):
