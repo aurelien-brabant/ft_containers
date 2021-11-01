@@ -1,4 +1,5 @@
 #include "map_testing.hpp"
+#include <algorithm>
 
 TEST(test_map_swap)
 {
@@ -51,7 +52,7 @@ TEST(test_map_swap)
 
     p_assert_eq(i, baseN / 2);
 
-    std::swap(m1, m2);
+    swap(m1, m2);
 
     i = 0;
 

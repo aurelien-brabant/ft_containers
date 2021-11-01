@@ -724,19 +724,13 @@ operator<=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 
 // }}}
 
-}
-
-namespace std {
-// algorithm specialization {{{
-
 template<typename T, typename Alloc>
 void
-swap(ft::vector<T, Alloc>& lhs, ft::vector<T, Alloc>& rhs)
+swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
 {
     lhs.swap(rhs);
 }
 
-/// }}}
 }
 
 #endif

@@ -42,7 +42,7 @@ TEST(test_vector_swap)
         assert_expr(cit == old);
     }
 
-    std::swap(v1, v2);
+    swap(v1, v2);
 
     assert_expr(v1.data() == v1_old_data);
     assert_expr(v2.data() == v2_old_data);

@@ -294,10 +294,6 @@ class map
     }
 };
 
-}
-
-namespace std {
-
 template<typename Key, typename T, typename Compare, typename Allocator>
 void
 swap(ft::map<Key, T, Compare, Allocator>& lhs,

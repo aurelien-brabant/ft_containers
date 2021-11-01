@@ -992,6 +992,7 @@ class AVLTree
             std::swap(_begin, rhs._begin);
             std::swap(_end, rhs._end);
             std::swap(_size, rhs._size);
+            std::swap(_allocator, rhs._allocator);
         }
     }
 
