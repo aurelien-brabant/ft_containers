@@ -5,26 +5,26 @@ static bool
 compare_it_rit(Tester& tester, const map<K, V>& m)
 {
     (void)tester;
-    typename map<K, V>::const_iterator cit = --m.end();
+    typename map<K, V>::const_iterator cit = m.end();
     typename map<K, V>::const_reverse_iterator rcit = m.rbegin();
 
     while (rcit != m.rend()) {
+		--cit;
         if (!(rcit->first == cit->first)) {
             return false;
         }
         ++rcit;
-        --cit;
     }
 
     cit = m.begin();
-    rcit = --m.rend();
+    rcit = m.rend();
 
     while (rcit != m.rbegin()) {
+        --rcit;
         if (!(rcit->first == cit->first)) {
             return false;
         }
-        --rcit;
-        ++cit;
+		++cit;
     }
 
     return true;
@@ -56,6 +56,7 @@ TEST(test_map_riter_sequence)
         m[i] = i;
     }
 
+	(void) tester;
     assert_expr(compare_it_rit(tester, m));
 
     return 0;
