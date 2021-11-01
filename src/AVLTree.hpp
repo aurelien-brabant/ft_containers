@@ -798,8 +798,9 @@ class AVLTree
       : _allocator()
       , _size(0)
     {
-        _begin = allocateNode(_allocator, T(), 0, 0, 0, 0);
-        _end = allocateNode(_allocator, T(), _begin, 0, 0, 0);
+        _begin = allocateNode(_allocator, T(), 0);
+        _end = allocateNode(_allocator, T(), _begin);
+        _begin->height = _end->height = 0;
         _begin->right = _end;
         _root = _begin;
     }
