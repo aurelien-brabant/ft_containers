@@ -1,5 +1,4 @@
-#ifndef ITERATOR_TRAITS
-#define ITERATOR_TRAITS
+#pragma once
 #include "type_traits.hpp"
 #include <iostream>
 #include <iterator>
@@ -283,5 +282,3 @@ operator-(const ft::reverse_iterator<Iter1>& lhs,
 
 // }}}
 }
-
-#endif

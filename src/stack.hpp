@@ -1,5 +1,4 @@
-#ifndef STACK_HPP
-#define STACK_HPP
+#pragma once
 #include "vector.hpp"
 
 namespace ft {
@@ -98,5 +97,3 @@ class stack
 };
 
 }
-
-#endif

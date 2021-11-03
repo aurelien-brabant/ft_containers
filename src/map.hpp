@@ -1,3 +1,4 @@
+#pragma once
 #include "AVLTree.hpp"
 #include "utility.hpp"
 #include <cstddef>

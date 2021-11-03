@@ -1,5 +1,4 @@
-#ifndef TYPE_TRAITS_HPP
-#define TYPE_TRAITS_HPP
+#pragma once
 #include <stdint.h>
 
 namespace ft {
@@ -34,6 +33,14 @@ struct is_integral : public false_type
 
 template<typename T>
 struct is_integral<const T> : public is_integral<T>
+{};
+
+template<typename T>
+struct is_integral<volatile T> : public is_integral<T>
+{};
+
+template<typename T>
+struct is_integral<volatile const T> : public is_integral<T>
 {};
 
 template<>
@@ -88,5 +95,3 @@ struct is_same<const T, const T> : public true_type
 {};
 
 }
-
-#endif

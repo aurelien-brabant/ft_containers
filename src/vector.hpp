@@ -1,5 +1,4 @@
-#ifndef VECTOR_HPP
-#define VECTOR_HPP
+#pragma once
 #include "algorithm.hpp"
 #include "iterator.hpp"
 #include "type_traits.hpp"
@@ -732,5 +731,3 @@ swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
 }
 
 }
-
-#endif

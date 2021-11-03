@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_HPP
-#define ALGORITHM_HPP
+#pragma once
 
 namespace ft {
 // lexicographical_compare {{{
@@ -93,5 +92,3 @@ equal(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPredicate pred)
 
 // }}}
 }
-
-#endif
