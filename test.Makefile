@@ -42,14 +42,14 @@ ifeq ($(FT_CONTAINER), std)
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPP_FLAGS) -c $< -o $@
-	printf '\e[1A\e[K\033[1;33mCC\033[0m\t$@\n'
+	printf '\033[1;33mCC\033[0m\t$@\n'
 endif
 
 ifeq ($(FT_CONTAINER), ft)
 $(OBJ_DIR)/%.o: %.cpp $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPP_FLAGS) -c -g3 $< -o $@
-	printf '\e[1A\e[K\033[1;33mCC\033[0m\t$@\n'
+	printf '\033[1;34mCC\033[0m\t$@\n'
 endif
 
 $(OBJ_DIR):
