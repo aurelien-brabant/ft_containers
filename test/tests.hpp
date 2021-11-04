@@ -230,5 +230,7 @@ TEST(test_map_gt_op);
 TEST(test_map_lt_op);
 TEST(test_map_gte_op);
 TEST(test_map_lte_op);
+TEST(test_map_greater_cmp);
+TEST(test_map_equal_cmp);
 
 #endif

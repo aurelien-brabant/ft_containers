@@ -414,6 +414,9 @@ main(int argc, char** argv)
     tester.registerTest(mapSuiteName, "operator>=", test_map_gte_op);
     tester.registerTest(mapSuiteName, "operator<=", test_map_lte_op);
 
+    tester.registerTest(mapSuiteName, "std::greater as comp", test_map_greater_cmp);
+    tester.registerTest(mapSuiteName, "std::equal_to as comp (!)", test_map_equal_cmp);
+
     if (argc > 1) {
         bool ret = true;
 
