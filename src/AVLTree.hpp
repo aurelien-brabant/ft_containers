@@ -11,8 +11,8 @@
 #include <stdint.h>
 
 template<typename T,
-         typename Compare = std::less<T>,
-         typename Allocator = std::allocator<T> >
+         typename Compare,
+         typename Allocator >
 class AVLTree
 {
   public:
