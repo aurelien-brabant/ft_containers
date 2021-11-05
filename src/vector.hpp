@@ -72,8 +72,6 @@ class vector
             return VectorIterator<const ItT, true>(_p);
         }
 
-        reference operator[](int i) { return _p[i]; }
-
         reference operator[](int i) const { return _p[i]; }
 
         pointer operator->(void) { return _p; }
@@ -111,8 +109,6 @@ class vector
         }
 
         // ACCESS
-
-        reference operator*(void) { return *_p; }
 
         reference operator*(void) const { return *_p; }
 
@@ -390,7 +386,7 @@ class vector
 
     value_type& operator[](size_type index) { return _data[index]; }
 
-    const value_type& operator[](size_type index) const { return _data[index]; }
+    value_type& operator[](size_type index) const { return _data[index]; }
 
     value_type& at(size_type index)
     {
