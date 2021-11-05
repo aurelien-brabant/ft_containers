@@ -92,29 +92,8 @@ class reverse_iterator
     const value_type* operator->(void) const { return &operator*(); }
 
     // access
-    value_type& subscript(size_t i, ft::true_type isRandom)
-    {
-        (void)isRandom;
-        return *(current - i - 1);
-    }
 
-    const value_type& subscript(size_t i, ft::true_type isRandom) const
-    {
-        (void)isRandom;
-        return *(current - i - 1);
-    }
-
-    value_type& operator[](size_t i) const
-    {
-        return subscript(
-          i, ft::is_same<iterator_category, std::random_access_iterator_tag>());
-    }
-
-    value_type& operator[](size_t i)
-    {
-        return subscript(
-          i, ft::is_same<iterator_category, std::random_access_iterator_tag>());
-    }
+    value_type& operator[](size_t i) { return *(current - i - 1); }
 
     /* ++, +=, + */
 
@@ -131,29 +110,14 @@ class reverse_iterator
         return reverse_iterator(tmp);
     }
 
-    reverse_iterator add(difference_type n, ft::true_type isRandom) const
-    {
-        (void)isRandom;
-        return reverse_iterator(current - n);
-    }
-
     reverse_iterator operator+(difference_type n) const
     {
-        return add(
-          n, ft::is_same<iterator_category, std::random_access_iterator_tag>());
-    }
-
-    reverse_iterator& selfAdd(difference_type n, ft::true_type isRandom)
-    {
-        (void)isRandom;
-        current -= n;
-        return *this;
+        return reverse_iterator(current - n);
     }
 
     reverse_iterator operator+=(difference_type n)
     {
-        return selfAdd(
-          n, ft::is_same<iterator_category, std::random_access_iterator_tag>());
+        return reverse_iterator(current -= n);
     }
 
     /* --, -=, - */
@@ -166,29 +130,14 @@ class reverse_iterator
 
     reverse_iterator operator--(int) { return reverse_iterator(current++); };
 
-    reverse_iterator minus(difference_type n, ft::true_type isRandom) const
-    {
-        (void)isRandom;
-        return reverse_iterator(current + n);
-    }
-
     reverse_iterator operator-(difference_type n) const
     {
-        return minus(
-          n, ft::is_same<iterator_category, std::random_access_iterator_tag>());
-    }
-
-    reverse_iterator& selfMinus(difference_type n, ft::true_type isRandom)
-    {
-        (void)isRandom;
-        current += n;
-        return *this;
+        return reverse_iterator(current + n);
     }
 
     reverse_iterator operator-=(difference_type n)
     {
-        return selfMinus(
-          n, ft::is_same<iterator_category, std::random_access_iterator_tag>());
+        return reverse_iterator(current += n);
     }
 };
 
